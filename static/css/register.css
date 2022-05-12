@@ -106,7 +106,7 @@ body {
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 480px) {
     .form {
         width: 500px;
         align-items: center;
