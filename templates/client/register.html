@@ -29,19 +29,20 @@
             <form method="post">
                 {%csrf_token%}
                 <label class="lbl">Email</label>
-                <input class="inp" name="email">
+                <input class="inp" type="email" name="email" placeholder="e.g. example@domain.com">
                 <label class="lbl">Phone Number</label>
                 <input class="inp" type="number" name="phone">
                 <label class="lbl">Full Name</label>
-                <input class="inp" name="name">
+                <input class="inp" type="text" name="name" placeholder="e.g. John Doe">
                 <label class="lbl">Password</label>
-                <input class="inp" type="password" name="password" required>
+                <input class="inp" type="password" name="password" placeholder="••••••••">
                 <label class="lbl">Confirm Password</label>
-                <input class="inp" type="password" name="cpassword">
-                <button type="submit" name="register" value="Create account">Register Now</button>
+                <input class="inp" type="password" name="cpassword" placeholder="••••••••">
+                <button type="submit" id="submit_btn" name="register" value="Create account" disabled>Register
+                    Now</button>
                 <!---------------- User Agreement ---------------->
                 <agree>
-                    <input type="checkbox" checked="checked">
+                    <input type="checkbox" id="terms_and_conditions" value="1" onclick="terms_changed(this)">
                     By submitting, I agree to terms and conditions.
                 </agree>
                 <a href="#link">Already have an account? Login</a>
@@ -49,7 +50,7 @@
         </div>
     </div>
 
-    <script src="" async defer></script>
+    <script src="{% static 'js/register.js' %}" async defer></script>
 </body>
 
 </html>
