@@ -1,0 +1,490 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  :root{
+    --font-color: rgba(255, 255, 255);
+    --primary:#ffffff;
+    --accent: #513CD2;
+    --line:#000000;
+    --bg:#F2F2F2;
+    --accentfont: 'Samsung Sharp Sans', sans-serif;
+    
+  }
+  
+  
+  
+  
+  .navbar {
+    display:flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem 3.5rem;
+    font-family: 'Samsung Sharp Sans', sans-serif;
+                                                  
+    font-weight: bold;
+  }
+  
+  
+  .brand-title {
+    font-size: 1.5rem;
+    margin: 0.7rem 0 0 0;
+  }
+  
+  
+  .navbar-links {
+    height: 100%;
+  }
+  
+  .navbar-links ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-links li {
+    list-style: none;
+  }
+  
+  .navbar-links li a {
+    display: block;
+    text-decoration: none;
+    color:var(--line);
+    padding: 1rem;
+  }
+  
+  .navbar-links li a:hover {
+    color: var(--accent);
+  }
+  
+  
+  
+  
+  .toggle-button {
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    margin: 1rem;
+  
+  }
+  
+  .toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--accent);
+    border-radius: 50px;
+  }
+  
+  
+  .register{
+    display:flex;
+    position: relative;
+    justify-content: space-between;
+    padding: 9px 20px;
+    background-color: var(--accent);
+    color: var(--primary)!important;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  .headerbackground{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    background-image: url("/static/images/bg.png");
+    max-width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center ;
+    padding: 40px 20px 40px 20px;
+    position: relative;
+    z-index: 1;
+    min-height: 680px;
+  
+    /* background-color: var(--base);
+    padding: 20px; */
+      
+  }
+  
+  
+  
+  .headline{
+    margin: 8rem 0 0 4rem;
+    color: var(--primary);
+    font-size: 80px;
+    font-family: 'Samsung Sharp Sans', sans-serif;
+    
+                                                  
+  }
+  
+  .mark{
+    position: relative;
+  }
+  
+  .mark::before{
+      content: '';
+      position: absolute;
+      left:0;
+      bottom: 10px;
+      background-color: var(--accent);
+      height: 23px;
+      box-sizing: border-box;
+      width: 236px;
+    z-index: -1;
+  }
+  
+  .headerbackground::before{
+    content:"";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+   
+  
+    background: rgba(0, 0, 0, 0.363);
+    -ms-background: rgba(95, 43, 43, 0.534);
+    -webkit-background: rgba(95, 43, 43, 0.534);
+  
+  }
+  
+  
+  
+  
+  .nav__links li {
+    padding: 0px 20px;
+  }
+  
+  .nav__links li a {
+    transition: all 0.3s ease 0s;
+  }
+  
+  .nav__links li a:hover {
+    color: var(--accent);
+  }
+  
+  
+  .button{
+    display: inline-flex;
+    height: 50px;
+    width: 290px;
+    padding: 0;
+    margin: 2rem 0 0 4rem;
+    background: var(--bg);
+    border-color:var(--accent);
+    border-radius: 60px;
+    overflow: hidden;
+    font-family: serif;
+    font-size: 16px;
+    font-family: 500;
+    cursor: pointer;
+  
+  }
+  
+  .button_text{
+    display: inline-flex;
+    align-items: center;
+    padding: 0 10px;
+    color: var(--accent);
+    height: 100%;
+    font-weight: bold;
+    font-size: 24px;
+    font-family: 'Samsung Sharp Sans', sans-serif;
+                                                  
+  
+  }
+  
+  .button_icon{
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0 0 30px;
+    color: var(--accent);
+    height: 100%;
+  
+  }
+  
+  .button_icon{
+    font-size: 1.5em;
+    background: var(--bg);
+  }
+  
+  
+  /* <----- header ends ------> */
+  
+  .mainfirst{
+    height: auto;
+    background-color: var(--primary);
+  }
+  
+  .intro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+    font-family: var(--accentfont);
+    font-weight: bold;
+    font-size: 40px;
+  }
+  
+  .introdes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0 5rem 0;
+    font-family: var(--accentfont);
+    font-weight: normal;
+    font-size: 30px;
+  }
+  
+  .card-grid{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(350px, 1fr))[auto-fit];
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 0 6rem 20px 6rem;
+    
+  }
+  
+  .card{
+    background: var(--bg);
+    padding: 1rem;
+    border-radius: 10px;
+    max-width: 350px;
+    text-align: center;
+  
+  }
+  
+  
+  .card-header{
+    margin: 1rem;
+  }
+  
+  .card-body{
+    color:var(--line);
+    font-family: 'Samsung Sharp Sans', sans-serif;
+    font-weight: bold;
+    margin: 0 0 1rem 0;
+    font-size: 30px;
+  
+    
+  }
+  
+  
+  
+  .mainsecond{
+    display: flex;
+    height: auto;
+    background: var(--bg);
+    
+  }
+
+  .infographics img{
+    flex:1;
+    height: 35em;
+    margin: 4rem 0 1rem 4rem;
+    
+  }
+
+  .info{
+    margin-right: 20px;
+  }
+  
+
+
+  .infotop{
+    color: var(--line);
+    font-family: var(--accentfont);
+    margin: 9rem 0 2rem 0;
+    font-size: 40px;
+  }
+  
+  .infobottom{
+    color: var(--line);
+    font-family: var(--accentfont);
+    font-weight: normal;
+    margin: 0 8rem 0 0;
+  
+  }
+  
+  
+  .infobutton{
+    display: inline-flex;
+    height: 50px;
+    width: 290px;
+    padding: 0;
+    margin: 2rem 0 0 0;
+    background: var(--bg);
+    border-color:var(--accent);
+    border-radius: 60px;
+    overflow: hidden;
+    font-family: serif;
+    font-size: 16px;
+    font-family: 500;
+    cursor: pointer;
+  
+  }
+  
+  
+  
+  
+  .footer{
+    background: var(--accent);
+  }
+  
+  .footerlogo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    
+  
+    width: 370px;
+    padding: 4rem 0 0 0;
+    font-size: 80px;
+    font-family: var(--accentfont);
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  .footerdes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--primary);
+    font-size: 60px;
+    padding: 2rem 0 4rem 0;
+    font-family: var(--accentfont);
+  }
+  
+  .copyright{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--line);
+    color: var(--primary);
+    padding: 1.5rem;
+  }
+  
+  
+  @media (max-width: 790px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+  
+    .toggle-button {
+        display: flex;
+    }
+  
+    .navbar-links {
+        display: none;
+        width: 100%;
+    }
+  
+    .navbar-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+  
+    .navbar-links ul li {
+        text-align: center;
+    }
+  
+    .navbar-links ul li a {
+        padding: .5rem 1rem;
+    }
+  
+    .navbar-links.active {
+        display: flex;
+    }
+  
+  
+  
+  
+  .headline{
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--primary);
+    font-size: 60px;
+    font-family: 'Samsung Sharp Sans', sans-serif;
+                                                  
+  }
+  
+  .mark{
+    position: relative;
+  }
+  
+  .mark::before{
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    background-color: var(--accent);
+    height: 16px;
+    box-sizing: border-box;
+    width: 178px;
+  z-index: -1;
+  }
+  
+  
+  .button{
+    display: inline-flex;
+    align-items: center;
+    height: 50px;
+    width: 290px;
+    padding: 0;
+    margin: 2rem 0 0 13rem;
+    background: var(--bg);
+    border-color:var(--accent);
+    border-radius: 60px;
+    overflow: hidden;
+    font-family: serif;
+    font-size: 16px;
+    font-family: 500;
+    cursor: pointer;
+  
+  }
+  
+  .mainsecond{
+    flex-direction: column;
+  }
+
+  
+
+
+  .footerdes{
+    font-size: 40px;
+  }
+  
+  
+  
+  
+  
+  }
+  
+  
+  

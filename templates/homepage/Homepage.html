@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <link rel="stylesheet" href="{% static 'css/Homepage.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="{% static 'js/homepage.js' %}" defer></script>
+    <link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
+                
+
+    <title>Homepage</title>
+</head>
+<body>
+    <header>
+        
+
+
+
+        <nav class="navbar">
+            <div class="brand-title" href="#"><img src="{% static 'images/logo.png' %}" width="150" alt="logo"></div>
+         
+            <a href="#" class="toggle-button">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+              <ul>
+                <li><a class="navbar-items" href="#">Home</a></li>
+                <li><a class="navbar-items" href="#">About Us</a></li>
+                <li><a class="navbar-items" href="#">Contact Us</a></li>
+                <li><a class="navbar-items" href="#">Login</a></li>
+                <li><a class="register" href="#">Get Paid to Test</a></li>
+              </ul>
+            </div>
+
+          </nav>
+
+
+
+      
+    </header>
+   
+    <div class="headerbackground">
+        <h1 class="headline"> Get your website <br>tested 
+            <span class="mark">today.</span></h1>
+        <button type="button" class="button">
+            <span class="button_icon">
+                <ion-icon name="play-circle-outline"></ion-icon>
+            </span>
+            <span class="button_text">See how it works</span>
+
+       </button>
+   
+     
+    </div>
+    
+
+    <!-- Header part ends -->
+
+    <section class="mainfirst">
+        <h1 class="intro" >How does it work?</h1>
+        <h2 class="introdes">This is how user testing works</h2>
+
+
+        <div class="card-grid">
+
+            <div class="card">     
+                <div class="card-header">
+                    <img src="{% static 'images/notebookicon.png' %}">
+                </div>
+                <div class="card-body">Create a Test</div>
+
+            </div>
+
+                <div class="card">   
+                <div class="card-header">
+                    <img src="{% static 'images/examicon.png' %}">
+                </div>
+                <div class="card-body">Get tested</div>
+            </div>
+
+            <div class="card">   
+                <div class="card-header">
+                    <img src="{% static 'images/feedbackicon.png' %}">
+                </div>
+                <div class="card-body">Get Feedback</div>
+            </div>
+
+
+        </div>
+
+
+    </section>
+    <section class="mainsecond">
+        <div class="infographics">
+            <img src="{% static 'images/infographics.png' %}">
+        </div>
+        <div class="info">
+            <h1 class="infotop">
+                Real human insights delivered real fast.
+            </h1>
+            <h2 class="infobottom">
+                Improve your products, services, and brands 
+                by watching video-based experience testing.
+            </h2>
+            <button type="button" class="infobutton">
+                <span class="button_icon">
+                    <ion-icon name="play-circle-outline"></ion-icon>
+                </span>
+                <span class="button_text">See how it works</span>
+    
+           </button>
+        </div>
+        
+    </section>
+
+    <footer class="footer">
+        <div class="footerlogo">TestMyUI
+        </div>
+        <h1 class="footerdes">Real . Human . Insights</h1>
+        <div class="copyright">Copyright 2022 | All Rights Reserverd
+
+        </div>
+    </footer>
+  
+  
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+</body>
+</html>

@@ -18,7 +18,9 @@ from django.contrib import admin
 from django.urls import path
 
 from client.views import *
+from pages.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('client/register', client_reg_view, name="client-reg" ),
+    path('homepage/', homepage, name='homepage' )
 ]
