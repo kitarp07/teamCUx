@@ -85,6 +85,11 @@ body {
     margin-top: 20px;
     padding: 10px 115px;
     font-size: medium;
+    cursor: pointer;
+}
+
+.form button:disabled {
+    background: #8b8ffc;
 }
 
 .form button:hover {
