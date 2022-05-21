@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+@font-face {
+    font-family: "Samsung";
+    src: url(../fonts/samsungsharpsans-bold.otf);
+}
+
+body {
+    background: #F2F2F2;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*------------------ button group--------------------- */
+.nav {
+    width: 800px;
+    margin: 100px auto;
+    height: 30px;
+}
+
+.nav h2 {
+    font-size: 32px;
+    font-family: "Samsung", sans-serif;
+}
+
+.btn-group button {
+    background: #513CD2;
+    border: 1px solid white;
+    color: white;
+    padding: 10px 24px;
+    cursor: pointer;
+    float: left;
+    width: 200px;
+}
+
+.btn-group {
+    margin-top: 20px;
+}
+
+.btn-group button:nth-child(1) {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.btn-group button:nth-child(4) {
+    border-right: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.btn-group:after {
+    content: "";
+    clear: both;
+}
+
+.btn-group button:hover {
+    background: #7479F8;
+}
+
+/*------------------- table content----------------- */
+table tr th {
+    padding: 10px 40px;
+    font-size: larger;
+    font-weight: 300;
+    color: #5C5C5C;
+}
+
+table tr td {
+    padding: 20px 60px;
+    background: white;
+    font-size: medium;
+}
+
+table tr td:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+table tr td:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+table {
+    display: flex;
+    justify-content: center;
+}
+
+.content-item {
+    border-collapse: separate;
+    border-spacing: 0 20px;
+}
+
+@media screen and (max-width: 480px) {
+    /*----------- button group----------------- */
+
+    .nav h2 {
+        font-size: 1.5em;
+        padding-left: 20px;
+    }
+
+    .nav .btn-group {
+        margin-left: 5px;
+    }
+
+    .nav .btn-group button {
+        display: flex;
+        width: 90px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    /*----------------- table----------------- */
+    table .thead {
+        display: none;
+    }
+
+    table,
+    table tbody,
+    table tr,
+    table td {
+        display: block;
+        width: 100%;
+    }
+
+    table tr {
+        margin-bottom: 15px;
+    }
+
+    table .tbody td {
+        text-align: right;
+        padding-left: 70%;
+        position: relative;
+        text-align: center;
+        font-size: 1em;
+    }
+
+    table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: 600;
+        font-size: 14px;
+        text-align: left;
+    }
+}

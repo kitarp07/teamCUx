@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+@font-face {
+    font-family: "Samsung";
+    src: url(../fonts/samsungsharpsans-bold.otf);
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #F2F2F2;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: large;
+}
+
+.topnav {
+    padding: 2px;
+    background: white;
+}
+
+.topnav .nav-menu li {
+    list-style: none;
+    font-family: "Samsung", sans-serif;
+    display: inline-block;
+    padding: 0 50px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.topnav .nav-menu .nav-item a {
+    text-decoration: none;
+    color: black;
+}
+
+.topnav .nav-menu li a:hover {
+    color: #513CD2;
+    transition: all 0.3s ease 0s;
+}
+
+.topnav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 5%;
+}
+
+.topnav img {
+    width: 150px;
+}
+
+/*--------------- profile dropdown----------- */
+.topnav .dropdown img {
+    border-radius: 50%;
+    width: 54px;
+    height: 54px;
+    cursor: pointer;
+}
+
+.topnav .dropdown img:hover {
+    transform: scale(1.1);
+}
+
+.profdrop-content {
+    display: none;
+    position: absolute;
+    margin: 5px -5px;
+    z-index: 1;
+    animation: goDown 200ms ease-in-out forwards;
+}
+
+.profdrop-content a {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.profdrop-content a:hover {
+    color: #513CD2;
+}
+
+.show {
+    display: block;
+}
+
+.topnav .nav-menu .logout {
+    display: none;
+}
+
+
+/*--------------- hamburger menu------------ */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background: #513CD2;
+}
+
+
+/*------------------- profile dropdown---------------- */
+@keyframes goDown {
+    0% {
+        transform: scaleY(0)
+    }
+
+    80% {
+        transform: scaleY(1.1)
+    }
+
+    100% {
+        transform: scaleY(1)
+    }
+}
+
+@media screen and (max-width:500px) {
+
+    .topnav .dropdown {
+        display: none;
+    }
+
+    .topnav .nav-menu .logout {
+        display: block;
+    }
+
+    .hamburger {
+        display: block;
+        position: relative;
+        left: 30px;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        display: flex;
+        position: fixed;
+        right: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: white;
+        width: 150%;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .nav-item {
+        margin: 16px 0;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .topnav img {
+        width: 130px;
+        position: relative;
+        right: 30px;
+    }
+}
