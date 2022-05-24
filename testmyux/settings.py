@@ -85,7 +85,7 @@ DATABASES = {
 
         'USER': 'postgres',
 
-        'PASSWORD': 'admin',
+        'PASSWORD': 'kitarp1234',
 
         'HOST': 'localhost',
 
@@ -135,3 +135,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     str(os.path.join(BASE_DIR, 'static')),
 ]
+
+AUTHENTICATION_BACKENDS = ('client.emailbackend.AuthBackend', )

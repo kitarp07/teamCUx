@@ -22,6 +22,8 @@ from pages.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('client/register', client_reg_view, name="client-reg" ),
-    path('homepage/', homepage, name='homepage' ),
-    path('',include('Tester.urls')),
+    path('', homepage, name="homepage" ),
+    path('tester/register',include('Tester.urls')),
+    path('client/login', client_login_view, name="client-login"),
+    path('client/dashboard', client_dashoard, name='client-dash')
 ]

@@ -1,7 +1,8 @@
-from multiprocessing import context
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from client.forms import ClientForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 # Create your views here.
 
 
@@ -23,10 +24,29 @@ def client_reg_view(request):
                 client = form.save(commit=False) # save info but dont commit change to database
                 client.user = user
                 client.save()
+                return redirect('client-login')
     context = {'form': form}
 
     return render(request, 'client/register.html', context)
     
 
 
+def client_login_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        passw = request.POST.get('password')
+        
 
+        user = authenticate(request, username=email, password=passw)
+
+        if user is None:
+            messages.success(request, "Wrong Credentials. Please try again")
+        if user is not None:
+            login(request, user)
+            return redirect('client-dash')
+
+
+    return render(request, "client/login.html")
+
+def client_dashoard(request):
+    return render(request, 'client/clientdash.html')
