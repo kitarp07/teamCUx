@@ -20,6 +20,7 @@ def tester_reg_view(request):
                 client = form.save(commit=False) # save info but dont commit change to database
                 client.user = user
                 client.save()
+                return redirect('/homepage')
     context = {'form': form}
  
     return render(request, 'tester/tregister.html', context)
