@@ -54,7 +54,7 @@ class TestViews(TestCase):
 
         customer.refresh_from_db()
 
-        url = reverse('client_login')
+        url = reverse('client-login')
 
         response = client.post(url, {
             'email': 'user@gmail.com',
@@ -62,4 +62,4 @@ class TestViews(TestCase):
         })
 
         self.assertEquals(response.status_code, 302)
-        self.assertRedirects(response, '/client/register')
+        self.assertRedirects(response, '/client/dashboard')
