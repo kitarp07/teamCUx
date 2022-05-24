@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from Tester.forms import TesterForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 def tester_reg_view(request):
     form = TesterForm()
@@ -23,3 +24,21 @@ def tester_reg_view(request):
     context = {'form': form}
  
     return render(request, 'tester/tregister.html', context)
+
+def tlogin(request):
+    if request.method=='POST':
+        email=request.POST.get('email')
+        password=request.POST.get('password')  
+
+        user=authenticate(request,email=email,password=password)
+
+        if user is not None:
+            tlogin(request,email)
+            print('email')
+        return redirect('tester-dash')
+
+    else:
+        return render(request, 'tester/login.html')   
+
+def tester_dashoard(request):
+    return render(request, 'Tester/testerdash.html')

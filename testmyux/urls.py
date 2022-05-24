@@ -19,11 +19,15 @@ from django.urls import path,include
 
 from client.views import *
 from pages.views import *
+from Tester.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('client/register', client_reg_view, name="client-reg" ),
     path('', homepage, name="homepage" ),
-    path('tester/register',include('Tester.urls')),
+    path('tester/register',include('Tester.urls'), name='tregister'),
     path('client/login', client_login_view, name="client-login"),
-    path('client/dashboard', client_dashoard, name='client-dash')
+    path('client/dashboard', client_dashoard, name='client-dash'),
+    path('tester/login', tlogin, name='tlogin' ),
+    path('tester/dashboard', tester_dashoard, name='tester-dash'),
+
 ]
