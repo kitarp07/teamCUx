@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tester Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/testerdash.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %} ">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="topnav" id="myTopnav">
+        <img src="{% static 'logo.png' %}" alt="Test MY UXLogo" class="logo">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a herf="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Contact Us</a>
+            </li>
+            <li class="logout nav-item">
+                <a href="#" class="nav-link">Log Out</a>
+            </li>
+        </ul>
+        <div class="dropdown">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
+                class="profimg" onclick="profFunction()">
+            <div id="profDrop" class="profdrop-content">
+                <a href="#">Log out</a>
+            </div>
+        </div>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="nav">
+            <h2>Tester Dashboard</h2>
+            <div class="btn-group">
+                <button>Available Tests</button>
+                <button>All Tests</button>
+                <button>Upload Video</button>
+                <button>My Profile</button>
+            </div>
+        </div>
+        <div class="dash-content">
+            <table class="content-item">
+                <tr class="thead">
+                    <th>Campaign Name</th>
+                    <th>Status</th>
+                    <th>Product Owner</th>
+                </tr>
+                <tr class="tbody">
+                    <td data-label="Campaign Name">Hello Pets</td>
+                    <td data-label="Status">Completed</td>
+                    <td data-label="Product Owner">Brian Miller</td>
+                </tr>
+                <tr class="tbody">
+                    <td data-label="Campaign Name">E-commerce website</td>
+                    <td data-label="Status">In-progress</td>
+                    <td data-label="Product Owner">Sugam Neupane</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script src="{% static 'js/navbar.js' %}" async defer></script>
+</body>
+
+</html>
