@@ -1,0 +1,32 @@
+<form method="post">
+    {% csrf_token %}
+    <label>
+        Email
+    </label>
+    <input type="text" name="email" placeholder="Type email" />
+    <br>
+    <br>
+
+    <label>
+        Password
+    </label>
+    <input type="password" name="password" />
+
+    <br>
+    <br>
+
+    <input type="submit" name="Login" />
+
+</form>
+{% for message in messages %}
+<script>
+    var url = 'client/login/'
+    alert('{{message}}')
+    if ('{{message}}' == 'Wrong Credentials. Please try again') {
+        window.location.href = "{%url 'login'%}"
+
+    }
+
+
+</script>
+{% endfor %}

@@ -22,6 +22,6 @@ from pages.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('client/register', client_reg_view, name="client-reg" ),
-    path('homepage/', homepage, name='homepage' ),
-    path('',include('Tester.urls')),
+    path('', homepage, name='homepage' ),
+    path('',include('Tester.urls'), name="tregister"),
 ]
