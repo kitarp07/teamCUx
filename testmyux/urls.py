@@ -24,4 +24,5 @@ urlpatterns = [
     path('client/register', client_reg_view, name="client-reg" ),
     path('', homepage, name='homepage' ),
     path('',include('Tester.urls'), name="tregister"),
+    path('client/login', client_login_view, name="client-login"),
 ]
