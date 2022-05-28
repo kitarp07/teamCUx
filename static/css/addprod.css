@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+@font-face {
+    font-family: "Samsung";
+    src: url(../fonts/samsungsharpsans-bold.otf);
+}
+
+
+.container .progress h2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+    color: #513CD2;
+    font-family: "Samsung", sans-serif;
+}
+
+.progress .row .steps {
+    color: black;
+    margin: 4px 20px;
+}
+
+.row {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.progress .num1 {
+    color: white;
+    background-color: #513CD2;
+    padding: 5px 16px;
+    border: 1px solid black;
+    border-radius: 50%;
+    text-align: center;
+    transition: background-color 0.5s ease;
+}
+
+.progress .num2 {
+    background-color: #F2F2F2;
+    padding: 5px 13px;
+    border: 1px solid black;
+    border-radius: 50%;
+    text-align: center;
+    margin-left: 20px;
+    transition: background-color 0.5s ease;
+}
+
+.line {
+    flex-grow: 0.2;
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+}
+
+
+/*---------------- for the input side-------------------- */
+.form-field {
+    width: 1500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form-field .left {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 25px;
+}
+
+.form-field button {
+    cursor: pointer;
+}
+
+.form-field .left button {
+    display: flex;
+    background-color: #513CD2;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 1px;
+    font-size: medium;
+    margin: 20px 0 0 30px;
+    width: 300px;
+    gap: 60px;
+    transition: background-color 0.5s ease;
+}
+
+.form-field .left button img {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    left: 40px;
+    bottom: 2px;
+}
+
+.form-field .right button {
+    display: flex;
+    background-color: #513CD2;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 1px;
+    font-size: medium;
+    margin: 20px 0 0 30px;
+    width: 300px;
+    gap: 45px;
+}
+
+.form-field .right button img {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    left: 30px;
+}
+
+.form-field button:hover {
+    background-color: #7479F8 !important;
+}
+
+.form-field button:disabled {
+    background-color: grey;
+    pointer-events: none;
+}
+
+.form-field .lbl {
+    font-weight: 300;
+}
+
+.form-field .inp {
+    border-radius: 10px;
+    font-size: larger;
+    padding: 5px 10px;
+    width: 300px;
+    height: 35px;
+    border: 1.5px solid black;
+}
+
+.form-field .right .date {
+    margin: 5px 25px;
+
+}
+
+.form-field .right {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 25px;
+}
+
+.form-field .left .next {
+    display: none;
+}
+
+@media screen and (max-width: 500px) {
+
+    .progress .num1,
+    .progress .num2,
+    .progress .line {
+        display: none;
+    }
+
+    /*-------------- for the input side------------ */
+    .form-field {
+        width: 800px;
+        display: flex;
+    }
+
+    .form-field .left {
+        margin-left: 1rem;
+    }
+
+    .form-field .left button {
+        margin-left: 1rem;
+    }
+
+    .form-field .left .proceed {
+        display: none;
+    }
+
+    .form-field .left .next {
+        display: block;
+    }
+
+    .form-field .right {
+        display: flex;
+        left: 100%;
+        transition: 0.3s;
+    }
+
+    .right.active {
+        left: -10px;
+        position: fixed;
+    }
+
+    /*----------------- top row-------------- */
+    .two {
+        position: fixed;
+    }
+
+    .left.inactive,
+    .one.inactive {
+        opacity: 0;
+        z-index: 0;
+    }
+
+}
