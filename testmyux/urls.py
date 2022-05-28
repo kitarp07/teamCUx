@@ -29,5 +29,7 @@ urlpatterns = [
     path('client/dashboard', client_dashoard, name='client-dash'),
     path('tester/login', tlogin, name='tlogin' ),
     path('tester/dashboard', tester_dashoard, name='tester-dash'),
+    path('client/create-test', create_test, name='create-test'),
+    path('client/verify-email/<uidb64>/<token>', verify_email, name="verify")
 
 ]
