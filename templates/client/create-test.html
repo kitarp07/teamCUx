@@ -21,7 +21,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div class="topnav" id="myTopnav">
-        <img src="{% static 'images/TestMyUX Transparent 5.png' %}" alt="Test MY UXLogo" class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Test MY UXLogo" class="logo">
         <ul class="nav-menu">
             <li class="nav-item">
                 <a herf="#" class="nav-link">Home</a>
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="container">
-        <div clfass="progress">
+        <div class="progress">
             <h2>Create Test</h2>
             <div class="row">
                 <p class="num1">1</p>
@@ -62,7 +62,7 @@
         </div>
         <div class="form-field">
 
-            <form method = "post"  fields left" id="form_left">
+            <form method="post" class="fields left" id="form_left">
                 {%csrf_token%}
                 <label class="lbl left">Test Campaign</label>
                 <input class="inp left" name="title" id="inp_left">
@@ -74,9 +74,10 @@
                 <label class="lbl left">Additional Guidelines</label>
                 <!-- <input class="inp left" name="guide"> -->
                 <textarea rows="rows" cols="cols" class="inp left" id="guide" name="additional_guidelines"></textarea>
-                <button onclick="leftside()" type="button" id="next_step" class="proceed"><img src="images/arrow 4.png">
+                <button onclick="leftside()" type="button" id="next_step" class="proceed"><img
+                        src="{% static 'images/arrow 4.png' %}">
                     Proceed to Checkout</button>
-                <input class="next" type="submit" id="next">Proceed to Checkout</input>
+                <button class="next" type="button" id="next">Proceed to Checkout</button>
             </form>
 
             <form method="post" class="fields right" id="form_right">
@@ -90,7 +91,8 @@
                 <input class="inp right" name="cvv" id="cvv" type="number">
                 <label class="lbl right">Expiry Date</label>
                 <input class="inp date" name="expire" id="edate" type="date" required>
-                <button id="checkout" onmousedown="leftsubmit()" type="button"><img src="images/submit-2 1.png">Pay and
+                <button id="checkout" onmousedown="leftsubmit()" type="button"><img
+                        src="{% static 'images/submit-2 1.png' %}">Pay and
                     Submit for
                     Review</button>
             </form>
