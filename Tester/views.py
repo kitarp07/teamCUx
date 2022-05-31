@@ -1,7 +1,40 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 from Tester.forms import TesterForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
+from .utils import generate_token
+from django.core.mail import EmailMessage
+from django.conf import settings
+from Tester.models import UxTester
+from django.contrib.auth.decorators import login_required
+
+
+def send_activation_email(user,request):
+    current_site=get_current_site(request)
+    email_subject ='Activate your account'
+    email_body= render_to_string('Tester/activate.html',{
+        'user':user,
+        'domain':current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generate_token.make_token(user)
+    })
+    customer=UxTester.objects.get(user=user.pk)
+    email=EmailMessage(subject=email_subject,body=email_body,
+                    from_email=settings.EMAIL_FROM_USER,
+                    to=[customer.email]
+    )
+    
+    email.send()
+    
+
+
+
+
 
 def tester_reg_view(request):
     form = TesterForm()
@@ -13,6 +46,7 @@ def tester_reg_view(request):
             email = form.cleaned_data['email']
             pw = form.cleaned_data['password']
             cpw = request.POST.get('cpassword')
+            
  
             if pw==cpw:
                 user = User.objects.create_user(name, email, pw)
@@ -21,21 +55,68 @@ def tester_reg_view(request):
                 client = form.save(commit=False) # save info but dont commit change to database
                 client.user = user
                 client.save()
+                send_activation_email(user,request)
+                return redirect('tlogin')
     context = {'form': form}
+
  
-    return render(request, 'tester/tregister.html', context)
+    return render(request, 'Tester/tregister.html', context)
 
 def tlogin(request):
     if request.method=='POST':
         email=request.POST.get('email')
         password=request.POST.get('password')  
 
-        user=authenticate(request,email=email,password=password)
+        user=authenticate(request,username=email,password=password)
+
+        # if not user.is_email_verified:
+        #     messages.add_message(request, messages.ERROR,
+        #     'Email is not verified, please check your email inbox')
+        #     return render(request, 'tester/login.html', context)
 
         if user is not None:
-            tlogin(request,email)
+            login(request,user)
             print('email')
-        return redirect('/')
+            return redirect('homepage')
 
+        # tlogin(request,user)  
+        # messages.add_message(request, messages.SUCCESS)  
+
+   
+    return render(request, 'Tester/login.html')   
+
+
+def activate_user(request, uidb64,token):
+    try:
+        uid= force_str(urlsafe_base64_decode(uidb64))
+        user=User.objects.get(pk=uid)
+        customer=UxTester.objects.get(user=user)
+
+
+    except Exception as e:  
+        user=None 
+
+    if user and generate_token.check_token(user,token):
+        customer.is_email_verified=True
+        customer.save()    
+
+        messages.add_message(request,messages.SUCCESS,'eMAIL VERIFIED')   
+        return redirect(reverse('tlogin'))
+
+
+    return render(request,'Tester/activate-failed.html',{"user":user})    
+
+
+@login_required
+def afterlogin_view(request):
+    if request.user.is_superuser:
+        return redirect('homepage')
     else:
-        return render(request, 'tester/login.html')   
+        messages.error(request, "Invalid login credentials")
+        return redirect('admin')    
+
+
+
+def view_customer(request):
+    users=UxTester.objects.all()
+    return render(request,"adminpage/viewcustomer.html",{'users':users})        

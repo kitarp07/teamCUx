@@ -1,3 +1,6 @@
+{% block content %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +16,7 @@
 	<script src="password.js" defer></script>
 
     <link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/Tlogin.css' %}">
     <title>Homepage</title>
                 
 </head>
@@ -49,7 +53,7 @@
 	
 
 		<div class="loginfield">
-			<form action="" method="POST" enctype="multipart/form-data" >
+			<form action="{% url 'tlogin' %}" method="POST" enctype="multipart/form-data" >
                 {% csrf_token%}
 				<label >Email Address</label>
 				
@@ -64,14 +68,16 @@
 					<input type="checkbox" onclick="myFunction()"> Show Password
 				</div>		
 
-			</form>
+			
 <br>
 			<div>
 				<a class="reset" href="#">Forgot Password?</a>
 			</div>
 			<div class="twobuttons">
-				<a class="loginbutton" href="#">Login</a>
-				<a class="">or</a>
+				<button type="submit" id="submit_btn" name="login" value="">Login
+                    </button>
+				</form>	
+		
 				<span class="registerbutton">Register</span>
 			</div>
 		</div>
@@ -86,4 +92,5 @@
 	 
 </body>
 </html>
+{% endblock %}
 

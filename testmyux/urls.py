@@ -16,14 +16,17 @@ Including another URLconf
 import imp
 from django.contrib import admin
 from django.urls import path,include
-
+from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+from django.conf import settings
 from client.views import *
 from pages.views import *
 urlpatterns = [
+    #  path('admin', auth_views.LoginView.as_view(template_name='adminpage/adminlogin.html'), name='admin'),
     path('admin/', admin.site.urls),
     path('client/register', client_reg_view, name="client-reg" ),
     path('', homepage, name="homepage" ),
-    path('tester/register',include('Tester.urls')),
+    path('',include('Tester.urls')),
     path('client/login', client_login_view, name="client-login"),
     path('client/dashboard', client_dashoard, name='client-dash')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
