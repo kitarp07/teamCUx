@@ -29,6 +29,11 @@ body {
     cursor: pointer;
 }
 
+.nav .addbtn a {
+    text-decoration: none;
+    color: #513CD2;
+}
+
 .nav .addbtn:hover {
     background-color: #7479F8;
     color: white;

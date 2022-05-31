@@ -9,6 +9,4 @@ urlpatterns = [
     path('activate-user/<uidb64>/<token>', views.activate_user, name='activate'),
     path('afterlogin', views.afterlogin_view, name="afterlogin"),
 
-     path('view-customer', views.view_customer, name='view-customer'),
-
 ]

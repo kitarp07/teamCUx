@@ -8,12 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 
-    <script src="homepage.js" defer></script>
-	<script src="password.js" defer></script>
+    <script src="{% static 'js/homepage.js' %}" defer></script>
+	
 
     <link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'css/Tlogin.css' %}">
@@ -21,7 +21,7 @@
                 
 </head>
 	<nav class="navbar">
-		<div class="brand-title" href="#"><img src="logo.png" width="150" alt="logo"></div>
+		<div class="brand-title" href="#"><img src="{% static 'images/logo.png' %}" width="150" alt="logo"></div>
 	 
 		<a href="#" class="toggle-button">
 		  <span class="bar"></span>
@@ -30,11 +30,11 @@
 		</a>
 		<div class="navbar-links">
 		  <ul>
-			<li><a class="navbar-items" href="#">Home</a></li>
+			<li><a class="navbar-items" href="{% url 'homepage'%}">Home</a></li>
 			<li><a class="navbar-items" href="#">About Us</a></li>
 			<li><a class="navbar-items" href="#">Contact Us</a></li>
 			<li><a class="navbar-items" href="#">Login</a></li>
-			<li><a class="register" href="#">Get Paid to Test</a></li>
+			<li><a class="register" href="{% url 'tregister'%}">Get Paid to Test</a></li>
 		  </ul>
 		</div>
 
@@ -48,7 +48,7 @@
 			<div class="pagetopic">
 				Login
 			</div>
-			<img src="loginimage.png">
+			<img src="{% static 'images/loginimage.png' %}">
 		</div> 
 	
 
@@ -66,7 +66,9 @@
 
 				<div class="password" style="color: black;">
 					<input type="checkbox" onclick="myFunction()"> Show Password
-				</div>		
+				</div>	
+				
+				<input class="loginbutton" type="submit" value="Login" href="#" />
 
 			
 <br>
@@ -74,11 +76,16 @@
 				<a class="reset" href="#">Forgot Password?</a>
 			</div>
 			<div class="twobuttons">
+<<<<<<< HEAD
 				<button type="submit" id="submit_btn" name="login" value="">Login
                     </button>
 				</form>	
 		
 				<span class="registerbutton">Register</span>
+=======
+				<a class="">or</a>
+				<a href="{% url 'tregister' %}" class="registerbutton">Register</a>
+>>>>>>> 094f9e26e53b2bd212fc5d828a1bea9ead73ae98
 			</div>
 		</div>
 

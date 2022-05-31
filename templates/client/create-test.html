@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add your Product</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/addprod.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="topnav" id="myTopnav">
+        <img src="{% static 'images/logo.png' %}" alt="Test MY UXLogo" class="logo">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a herf="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Contact Us</a>
+            </li>
+            <li class="logout nav-item">
+                <a href="#" class="nav-link">Log Out</a>
+            </li>
+        </ul>
+        <div class="dropdown">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
+                class="profimg" onclick="profFunction()">
+            <div id="profDrop" class="profdrop-content">
+                <a href="#">Log out</a>
+            </div>
+        </div>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="progress">
+            <h2>Create Test</h2>
+            <div class="row">
+                <p class="num1">1</p>
+                <p class="steps one">Create your test Campaign</p>
+                <span class="line"></span>
+                <p class="num2">2</p>
+                <p class="steps two">Checkout</p>
+            </div>
+        </div>
+        <div class="form-field">
+
+            <form method="post" class="fields left" id="form_left">
+                {%csrf_token%}
+                <label class="lbl left">Test Campaign</label>
+                <input class="inp left" name="title" id="inp_left">
+                <label class="lbl left">Mention Tasks</label>
+                <textarea rows="rows" cols="cols" class="inp left" id="task" name="mention_tasks"></textarea>
+                <label class="lbl left">Requirements</label>
+                <!-- <input class="inp left" name="requirement"> -->
+                <textarea rows="rows" cols="cols" class="inp left" id="require" name="requirements"></textarea>
+                <label class="lbl left">Additional Guidelines</label>
+                <!-- <input class="inp left" name="guide"> -->
+                <textarea rows="rows" cols="cols" class="inp left" id="guide" name="additional_guidelines"></textarea>
+                <button onclick="leftside()" type="button" id="next_step" class="proceed"><img
+                        src="{% static 'images/arrow 4.png' %}">
+                    Proceed to Checkout</button>
+                <button class="next" type="button" id="next">Proceed to Checkout</button>
+            </form>
+
+            <form method="post" class="fields right" id="form_right">
+                {%csrf_token%}
+                <!---------------- right side ------------------>
+                <label class="lbl right">Name on Card</label>
+                <input class="inp right" name="cname" id="inp_right">
+                <label class="lbl right">Card Number</label>
+                <input class="inp right" name="cnum" id="cardnum" type="number">
+                <label class="lbl right">CVV</label>
+                <input class="inp right" name="cvv" id="cvv" type="number">
+                <label class="lbl right">Expiry Date</label>
+                <input class="inp date" name="expire" id="edate" type="date" required>
+                <button id="checkout" onmousedown="leftsubmit()" type="button"><img
+                        src="{% static 'images/submit-2 1.png' %}">Pay and
+                    Submit for
+                    Review</button>
+            </form>
+        </div>
+    </div>
+    <script src="{% static 'js/navbar.js' %}" async defer></script>
+    <script src="{% static 'js/addprod.js' %}" async defer></script>
+</body>
+
+</html>

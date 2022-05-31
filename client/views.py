@@ -1,10 +1,37 @@
 from django.shortcuts import redirect, render
-from client.forms import ClientForm
+from client.forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-# Create your views here.
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
+from client.models import UxClient
+from .utils import generate_token
+from django.core.mail import EmailMessage
+from django.conf import settings
 
+def send_verification_email(user, request):
+    current_site = get_current_site(request)
+    email_subject = 'Verify your email'
+    email_body = render_to_string('client/emailverify.html', {
+        'user': user,
+        'domain': current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generate_token.make_token(user),
+
+    })
+
+    customer = UxClient.objects.get(user=user.pk)
+
+    email = EmailMessage(subject=email_subject, 
+    body=email_body, 
+    from_email= settings.EMAIL_FROM_USER,
+    to=[customer.email]
+    )
+
+    email.send()
 
 def client_reg_view(request):
     form = ClientForm()
@@ -24,10 +51,35 @@ def client_reg_view(request):
                 client = form.save(commit=False) # save info but dont commit change to database
                 client.user = user
                 client.save()
-                return redirect('client-login')
+                send_verification_email(user, request)
+
+                if user.uxclient.isEmailVerified:
+                    messages.success(request, "Please check your email for email verification")
     context = {'form': form}
 
     return render(request, 'client/register.html', context)
+
+def verify_email(requst, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+
+        user = User.objects.get(pk=uid)
+
+        customer = UxClient.objects.get(user=user)
+
+
+
+    except Exception as e:
+        user = None
+
+    if user and generate_token.check_token(user, token):
+        customer.isEmailVerified = True
+        customer.save()
+
+        messages.add_message(requst, messages.SUCCESS, 'Email verified')
+        return redirect ('homepage')
+
+    return render(requst, 'client/verification_failed.html', {"user": user })
     
 
 
@@ -50,3 +102,25 @@ def client_login_view(request):
 
 def client_dashoard(request):
     return render(request, 'client/clientdash.html')
+
+def create_test(request):
+    form = CreateTestForm()
+    if request.user.is_authenticated:
+        customer = request.user.uxclient
+        if request.method=='POST':
+            form = CreateTestForm(request.POST)
+            if form.is_valid():
+                title = form.cleaned_data['title']
+                mention_tasks = form.cleaned_data['mention_tasks']
+                requirements = form.cleaned_data['requirements']
+                additional_guidelines = form.cleaned_data['additional_guidelines']
+
+                CreateTests.objects.create(
+                    title= title,
+                    mention_tasks = mention_tasks,
+                    requirements = requirements,
+                    additional_guidelines = additional_guidelines,
+                    created_by = customer,
+                )
+
+    return render(request, "client/create-test.html")
