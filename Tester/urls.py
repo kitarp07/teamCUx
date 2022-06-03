@@ -8,5 +8,7 @@ urlpatterns = [
     path('tlogin/',views.tlogin, name="tlogin"),
     path('activate-user/<uidb64>/<token>', views.activate_user, name='activate'),
     path('afterlogin', views.afterlogin_view, name="afterlogin"),
+    path('view-customer',views.view_customer,name='view-customer'),
+    path('viewclient',views.view_client,name="viewclient"),
 
 ]

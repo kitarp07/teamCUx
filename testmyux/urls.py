@@ -24,10 +24,15 @@ from pages.views import *
 from Tester.views import *
 urlpatterns = [
     #  path('admin', auth_views.LoginView.as_view(template_name='adminpage/adminlogin.html'), name='admin'),
-    path('admin/', admin.site.urls),
-    path('client/register', client_reg_view, name="client-reg" ),
-    path('', homepage, name="homepage" ),
-    path('',include('Tester.urls')),
-    path('client/login', client_login_view, name="client-login"),
-    path('client/dashboard', client_dashoard, name='client-dash')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+   path('admin/', admin.site.urls),
+   path('client/register', client_reg_view, name="client-reg" ),
+   path('', homepage, name="homepage" ),
+   path('',include('Tester.urls'), name='tregister'),
+   path('client/login', client_login_view, name="client-login"),
+   path('client/dashboard', client_dashoard, name='client-dash'),
+   path('tester/login', tlogin, name='tlogin' ),
+   path('tester/dashboard', tester_dashoard, name='tester-dash'),
+   path('client/create-test', create_test, name='create-test'),
+   path('client/verify-email/<uidb64>/<token>', verify_email, name="verify")
+
+]
