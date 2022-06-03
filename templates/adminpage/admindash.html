@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -10,10 +9,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Tester Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/clientdash.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admindash.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 
@@ -22,7 +21,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div class="topnav" id="myTopnav">
-        <img src="{% static 'images/logo.png' %}" alt="Test MY UXLogo" class="logo">
+        <img src="images/TestMyUX Transparent 5.png" alt="Test MY UXLogo" class="logo">
         <ul class="nav-menu">
             <li class="nav-item">
                 <a herf="#" class="nav-link">Home</a>
@@ -52,34 +51,38 @@
     </div>
     <div class="container">
         <div class="nav">
-            <h2>Client Dashboard</h2>
-            <button class="addbtn" type="button"><a href="{% url 'create-test' %}">Add New</a></button>
+            <h2>Admin Dashboard</h2>
             <div class="btn-group">
-                <button>Sent by Testers</button>
-                <button>All Tests</button>
+                <button>Manage Tests</button>
+                <button>Manage Testers</button>
+                <button>Manage Clients</button>
                 <button>My Profile</button>
             </div>
         </div>
         <div class="dash-content">
             <table class="content-item">
                 <tr class="thead">
-                    <th>Campaign Name</th>
-                    <th>Status</th>
-                    <!--       <th>Product Owner</th> -->
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone no.</th>
+                    <th>Tests Created</th>
                 </tr>
                 <tr class="tbody">
-                    <td data-label="Campaign Name">Hello Pets</td>
-                    <td data-label="Status">Completed</td>
-                    <!--       <td>Brian Miller</td> -->
+                    <td data-label="Name">John Doe</td>
+                    <td data-label="Email">johndoe@gmail.com</td>
+                    <td data-label="Phone no.">98171766</td>
+                    <td data-label="Tests Created">5</td>
                 </tr>
                 <tr class="tbody">
-                    <td data-label="Campaign Name">Hello Pets</td>
-                    <td data-label="Status">Completed</td>
-                    <!--       <td>Brian Miller</td> -->
+                    <td data-label="Name">John Doe</td>
+                    <td data-label="Email">johndoe@gmail.com</td>
+                    <td data-label="Phone no.">98171766</td>
+                    <td data-label="Tests Created">5</td>
                 </tr>
             </table>
         </div>
     </div>
+
     <script src="{% static 'js/navbar.js' %}" async defer></script>
 </body>
 

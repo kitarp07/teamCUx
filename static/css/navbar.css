@@ -80,6 +80,8 @@ body {
     border-radius: 5px;
     border: 1px solid black;
     padding: 5px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .profdrop-content a:hover {
