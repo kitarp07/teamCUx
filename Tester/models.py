@@ -11,3 +11,4 @@ class UxTester(models.Model):
     email = models.CharField(max_length=200,blank=True, null=False)
     phone = models.CharField(max_length=10,blank=True, null=False)
     password = models.CharField(max_length=30,blank=True, null=False)
+    is_email_verified =models.BooleanField(default=False)

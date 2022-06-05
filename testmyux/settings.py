@@ -70,6 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'testmyux.wsgi.application'
+# LOGIN_REDIRECT_URL = '/afterlogin'
 
 
 # Database
@@ -85,7 +86,7 @@ DATABASES = {
 
         'USER': 'postgres',
 
-        'PASSWORD': 'admin',
+        'PASSWORD': '#Leshmania#406',
 
         'HOST': 'localhost',
 
@@ -138,10 +139,11 @@ STATICFILES_DIRS = [
 
 AUTHENTICATION_BACKENDS = ('client.emailbackend.AuthBackend', )
 
+#EMAIL CONFIG
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_FROM_USER = 'foremail84@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'foremail84@gmail.com'
 EMAIL_HOST_PASSWORD = 'pw@123456'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+EMAIL_FROM_USER = 'foremail84@gmail.com'

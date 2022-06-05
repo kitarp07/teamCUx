@@ -1,4 +1,6 @@
+{% block content %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +16,7 @@
 	
 
     <link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/Tlogin.css' %}">
     <title>Homepage</title>
                 
 </head>
@@ -50,7 +53,7 @@
 	
 
 		<div class="loginfield">
-			<form action="" method="POST" enctype="multipart/form-data" >
+			<form action="{% url 'tlogin' %}" method="POST" enctype="multipart/form-data" >
                 {% csrf_token%}
 				<label >Email Address</label>
 				
@@ -67,14 +70,22 @@
 				
 				<input class="loginbutton" type="submit" value="Login" href="#" />
 
-			</form>
+			
 <br>
 			<div>
 				<a class="reset" href="#">Forgot Password?</a>
 			</div>
 			<div class="twobuttons">
+<<<<<<< HEAD
+				<button type="submit" id="submit_btn" name="login" value="">Login
+                    </button>
+				</form>	
+		
+				<span class="registerbutton">Register</span>
+=======
 				<a class="">or</a>
 				<a href="{% url 'tregister' %}" class="registerbutton">Register</a>
+>>>>>>> 094f9e26e53b2bd212fc5d828a1bea9ead73ae98
 			</div>
 		</div>
 
@@ -88,4 +99,5 @@
 	 
 </body>
 </html>
+{% endblock %}
 
