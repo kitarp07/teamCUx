@@ -35,5 +35,8 @@ urlpatterns = [
    path('client/create-test', create_test, name='create-test'),
    path('client/verify-email/<uidb64>/<token>', verify_email, name="verify"),
    path('tester/upload-video', tester_upload_video, name='upload-video'),
+   path('client/email-verified', email_verified_page, name='email-verified' ),
+    path('tester/email-verified', email_verified_page, name='tester-email-verified' ),
+
 
 ]

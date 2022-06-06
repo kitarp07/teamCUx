@@ -25,7 +25,7 @@
         <img src="{% static 'logo.png' %}" alt="Test MY UXLogo" class="logo">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a herf="#" class="nav-link">Home</a>
+                <a href="{% url 'homepage'%}" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">About Us</a>
@@ -56,7 +56,7 @@
             <div class="btn-group">
                 <button>Available Tests</button>
                 <button>All Tests</button>
-                <button>Upload Video</button>
+                <a href="{% url 'upload-video' %}"><button>Upload Video</button></a>
                 <button>My Profile</button>
             </div>
         </div>
