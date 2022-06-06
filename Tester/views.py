@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render, reverse
-from Tester.forms import TesterForm
+from Tester.forms import TesterForm, UploadVideoForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -12,7 +12,7 @@ from client.models import UxClient
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
-from Tester.models import UxTester
+from Tester.models import UploadVideo, UxTester
 from django.contrib.auth.decorators import login_required
 
 
@@ -131,3 +131,16 @@ def view_client(request):
 
 def tester_dashoard(request):
     return render(request, 'Tester/testerdash.html')    
+
+def tester_upload_video(request):
+    form = UploadVideoForm()
+    if request.user.is_authenticated:
+        customer = request.user.uxtester
+        if request.method == 'POST':
+            form = UploadVideoForm(request.POST)
+            if form.is_valid():
+                link = form.cleaned_data['video_link']
+
+            form.save()
+
+    return render(request, "Tester/uploadvideo.html")

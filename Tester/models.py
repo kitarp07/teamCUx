@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from client.models import CreateTests, UxClient
 
 from django.contrib.auth.models import User
 # Create your models here.
@@ -12,3 +13,12 @@ class UxTester(models.Model):
     phone = models.CharField(max_length=10,blank=True, null=False)
     password = models.CharField(max_length=30,blank=True, null=False)
     is_email_verified =models.BooleanField(default=False)
+
+
+class UploadVideo(models.Model):
+    id = models.AutoField(auto_created=True, primary_key=True)
+    video_link = models.CharField(max_length=255, blank=True, null=False)
+    client = models.ForeignKey(UxClient, on_delete=models.SET_NULL, null=True, blank=True)
+    test = models.ForeignKey(CreateTests, on_delete=models.SET_NULL, null=True, blank=True)
+    tester = models.ForeignKey(UxTester, on_delete=models.SET_NULL, null=True, blank=True)
+    
