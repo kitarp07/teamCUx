@@ -137,3 +137,13 @@
     font-size: large;
     text-decoration: none;
 }
+
+@media screen and (max-width: 700px) {
+    .popup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 80px;
+    }
+
+}
