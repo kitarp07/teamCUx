@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -10,11 +9,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tester Dashboard</title>
+    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/testerdash.css' %}">
-    <link rel="stylesheet" href="{% static 'css/navbar.css' %} ">
+    <link href='https://fonts.googleapis.com/css?family=Prompt' rel='stylesheet' />
+    <link rel="stylesheet" href="{% static 'css/clientdash.css' %}">
+    <link rel="stylesheet" href="{% static 'css/download.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
 </head>
 
 <body>
@@ -52,11 +54,11 @@
     </div>
     <div class="container">
         <div class="nav">
-            <h2>Tester Dashboard</h2>
+            <h2>Client Dashboard</h2>
+            <button class="addbtn">Add New</button>
             <div class="btn-group">
-                <button>Available Tests</button>
+                <button>Sent by Testers</button>
                 <button>All Tests</button>
-                <button>Upload Video</button>
                 <button>My Profile</button>
             </div>
         </div>
@@ -65,22 +67,36 @@
                 <tr class="thead">
                     <th>Campaign Name</th>
                     <th>Status</th>
-                    <th>Product Owner</th>
+                    <th>Video Link</th>
                 </tr>
                 <tr class="tbody">
                     <td data-label="Campaign Name">Hello Pets</td>
                     <td data-label="Status">Completed</td>
-                    <td data-label="Product Owner">Brian Miller</td>
+                    <td data-label="Video Link">
+                        <a href="#popup1" class="download"></a>
+                    </td>
                 </tr>
                 <tr class="tbody">
-                    <td data-label="Campaign Name">E-commerce website</td>
-                    <td data-label="Status">In-progress</td>
-                    <td data-label="Product Owner">Sugam Neupane</td>
+                    <td data-label="Campaign Name">Hello Pets</td>
+                    <td data-label="Status">Completed</td>
+                    <td data-label="Video Link">
+                        <a href="#popup1" class="download"></a>
+                    </td>
                 </tr>
             </table>
         </div>
-    </div>
 
+        <div id="popup1" class="overlay">
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <h3>Click a link to go to the video</h3>
+                    <button class="link1"><a href="#">Link 1</a></button>
+                    <button class="link2"><a href="#">Link 2</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="{% static 'js/navbar.js' %}" async defer></script>
 </body>
 
