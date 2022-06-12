@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 import imp
+from optparse import AmbiguousOptionError
 from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
@@ -36,7 +37,8 @@ urlpatterns = [
    path('client/verify-email/<uidb64>/<token>', verify_email, name="verify"),
    path('tester/upload-video', tester_upload_video, name='upload-video'),
    path('client/email-verified', email_verified_page, name='email-verified' ),
-    path('tester/email-verified', email_verified_page, name='tester-email-verified' ),
+   path('tester/email-verified', email_verified_page, name='tester-email-verified' ),
+   path('tester/alltests', view_all_tests, name= "alltests")
 
 
 ]

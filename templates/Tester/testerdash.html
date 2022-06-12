@@ -55,12 +55,15 @@
             <h2>Tester Dashboard</h2>
             <div class="btn-group">
                 <button>Available Tests</button>
-                <button>All Tests</button>
+                <a href="{% url 'alltests' %}"> <button>All Tests</button></a>
                 <a href="{% url 'upload-video' %}"><button>Upload Video</button></a>
                 <button>My Profile</button>
             </div>
         </div>
-        <div class="dash-content">
+        {% block uploadvideo %}
+        {% endblock uploadvideo%}
+        {%block testerdash%}
+        <!-- <div class="dash-content">
             <table class="content-item">
                 <tr class="thead">
                     <th>Campaign Name</th>
@@ -78,7 +81,8 @@
                     <td data-label="Product Owner">Sugam Neupane</td>
                 </tr>
             </table>
-        </div>
+        </div> -->
+        {%endblock testerdash%}
     </div>
 
     <script src="{% static 'js/navbar.js' %}" async defer></script>

@@ -1,4 +1,5 @@
 
+from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, reverse
 from Tester.forms import TesterForm, UploadVideoForm
@@ -10,7 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 
-from client.models import UxClient
+from client.models import CreateTests, UxClient
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -161,3 +162,8 @@ def tester_upload_video(request):
         return HttpResponse("You are not logged in.")
 
     return render(request, "Tester/uploadvideo.html")
+
+def view_all_tests(request):
+    tests = CreateTests.objects.all()
+    context = {"tests": tests}
+    return render(request, "Tester/inside-dash/all-tests.html", context)
