@@ -38,7 +38,9 @@ urlpatterns = [
    path('tester/upload-video', tester_upload_video, name='upload-video'),
    path('client/email-verified', email_verified_page, name='email-verified' ),
    path('tester/email-verified', email_verified_page, name='tester-email-verified' ),
-   path('tester/alltests', view_all_tests, name= "alltests")
+   path('tester/alltests', view_all_tests, name= "alltests"),
+   path('client/sentbytester', sent_by_tester, name='sentbytester'),
+   path('client/profile/<int:pk>', client_profile, name='client-profile')
 
 
 ]

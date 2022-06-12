@@ -38,9 +38,9 @@
             </li>
         </ul>
         <div class="dropdown">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
+            <a href="{% url 'client-profile' customer.id %}"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
                 class="profimg" onclick="profFunction()">
-            <div id="profDrop" class="profdrop-content">
+            <div id="profDrop" class="profdrop-content"> </a>
                 <a href="#">Log out</a>
             </div>
         </div>
@@ -55,11 +55,12 @@
             <h2>Client Dashboard</h2>
             <button class="addbtn" type="button"><a href="{% url 'create-test' %}">Add New</a></button>
             <div class="btn-group">
-                <button>Sent by Testers</button>
+                <a href="{%url 'sentbytester' %}"><button>Sent by Testers</button> </a>
                 <button>All Tests</button>
                 <button>My Profile</button>
             </div>
         </div>
+        {% block videolink%}
         <div class="dash-content">
             <table class="content-item">
                 <tr class="thead">
@@ -79,6 +80,7 @@
                 </tr>
             </table>
         </div>
+        {% endblock videolink %}
     </div>
     <script src="{% static 'js/navbar.js' %}" async defer></script>
 </body>

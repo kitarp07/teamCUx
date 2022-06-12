@@ -1,5 +1,6 @@
 from attr import has
 from django.shortcuts import redirect, render
+from Tester.models import UploadVideo
 from client.forms import *
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
@@ -102,7 +103,18 @@ def client_login_view(request):
     return render(request, "client/login.html")
 
 def client_dashoard(request):
-    return render(request, 'client/clientdash.html')
+    if request.user.is_authenticated:
+        user = request.user
+        if user.groups.all()[0].name == 'client':
+            customer = user.uxclient
+            context ={
+                    'customer':customer
+                }
+    else:
+        messages.success(request, "Wrong Credentials. Please try again")
+        return redirect('client-login')
+
+    return render(request, 'client/clientdash.html', context)
 
 def create_test(request):
     form = CreateTestForm()
@@ -132,3 +144,37 @@ def create_test(request):
 
 def email_verified_page(request):
     return render(request, "client/EmailVerified.html")
+
+def sent_by_tester(request):
+    if request.user.is_authenticated:
+        user = request.user.uxclient
+        videos = UploadVideo.objects.get(id=user.pk)
+      
+    else:
+        videos = UploadVideo.objects.all()
+    
+    context = {
+            'videos': videos
+        }
+
+    return render(request, "client/sentbytester.html", context)
+
+def client_profile(request, pk):
+    user = request.user
+
+    if user is not None:
+        if user.groups.all()[0].name == 'client':
+             
+            customer = request.user.uxclient
+
+            context ={
+                 'customer':customer
+             }
+            return render(request, "client/clientprofile.html",context)
+
+
+    
+    else:
+        messages.success(request, "Wrong Credentials. Please try again")
+        return redirect('client-login')
+   
