@@ -1,0 +1,149 @@
+/*----------------- download button------------------- */
+.download {
+    position: absolute;
+    border: 2px solid #513CD2;
+    transform: translate(-50%, -50%);
+    border-radius: 50px;
+    padding: 25px 0 0 0;
+    width: 50px;
+    height: 25px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.download:before {
+    font-family: 'ionicons';
+    content: '\f2dd';
+    font-size: 26px;
+    color: #513CD2;
+    position: absolute;
+    transform: translate(-50%, -90%);
+    transition: 0.3s;
+}
+
+.download:hover:before {
+    display: none;
+}
+
+.download:hover:after {
+    content: 'Download';
+    color: #513CD2;
+    font-size: 18px;
+    position: absolute;
+    transform: translate(-50%, -90%);
+    transition: 0.3s;
+    animation: fadein 0.3s;
+}
+
+.download:hover {
+    width: 120px;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/*------------- download overlay---------------- */
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    margin: 300px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+
+.popup h3 {
+    margin-top: 0;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+}
+
+.popup .close {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.popup .close:hover {
+    color: #513CD2;
+}
+
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup .content button {
+    background-color: #513CD2;
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
+}
+
+.popup .content button:hover {
+    background-color: #7479F8;
+}
+
+.popup .content .link1 {
+    margin-bottom: 20px;
+}
+
+.popup .content a {
+    color: white;
+    font-size: large;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 700px) {
+    .popup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 80px;
+    }
+
+}

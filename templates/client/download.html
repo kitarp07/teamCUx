@@ -9,11 +9,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tester Dashboard</title>
+    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/admindash.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Prompt' rel='stylesheet' />
+    <link rel="stylesheet" href="{% static 'css/clientdash.css' %}">
+    <link rel="stylesheet" href="{% static 'css/download.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
 </head>
 
 <body>
@@ -51,34 +54,49 @@
     </div>
     <div class="container">
         <div class="nav">
-            <h2>Admin Dashboard</h2>
+            <h2>Client Dashboard</h2>
+            <button class="addbtn">Add New</button>
             <div class="btn-group">
-                <button>Manage Tests</button>
-                <button>Manage Testers</button>
-                <button>Manage Clients</button>
+                <button>Sent by Testers</button>
+                <button>All Tests</button>
                 <button>My Profile</button>
             </div>
         </div>
         <div class="dash-content">
             <table class="content-item">
                 <tr class="thead">
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone no.</th>
-                    <th>Tests Created</th>
+                    <th>Campaign Name</th>
+                    <th>Status</th>
+                    <th>Video Link</th>
                 </tr>
-                {% for c in users%}
                 <tr class="tbody">
-                    <td data-label="Name">{{c.name}}</td>
-                    <td data-label="Email">{{c.email}}</td>
-                    <td data-label="Phone no.">{{c.phone}}</td>
-                    <td data-label="Tests Created">1</td>
+                    <td data-label="Campaign Name">Hello Pets</td>
+                    <td data-label="Status">Completed</td>
+                    <td data-label="Video Link">
+                        <a href="#popup1" class="download"></a>
+                    </td>
+                </tr>
+                <tr class="tbody">
+                    <td data-label="Campaign Name">Hello Pets</td>
+                    <td data-label="Status">Completed</td>
+                    <td data-label="Video Link">
+                        <a href="#popup1" class="download"></a>
+                    </td>
                 </tr>
             </table>
-            {% endfor %}
+        </div>
+
+        <div id="popup1" class="overlay">
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <h3>Click a link to go to the video</h3>
+                    <button class="link1"><a href="#">Link 1</a></button>
+                    <button class="link2"><a href="#">Link 2</a></button>
+                </div>
+            </div>
         </div>
     </div>
-
     <script src="{% static 'js/navbar.js' %}" async defer></script>
 </body>
 
