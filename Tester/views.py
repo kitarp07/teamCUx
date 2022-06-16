@@ -1,3 +1,6 @@
+
+from multiprocessing import context
+from django.http import HttpResponse
 from django.shortcuts import redirect, render, reverse
 from Tester.forms import TesterForm
 from django.contrib.auth.models import User
@@ -14,6 +17,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from Tester.models import UxTester
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 
 def send_activation_email(user,request):
@@ -79,7 +83,7 @@ def tlogin(request):
         if user is not None:
             login(request,user)
             print('email')
-            return redirect('homepage')
+            return redirect('tester-dash')
 
         # tlogin(request,user)  
         # messages.add_message(request, messages.SUCCESS)  
@@ -112,7 +116,7 @@ def activate_user(request, uidb64,token):
 @login_required
 def afterlogin_view(request):
     if request.user.is_superuser:
-        return redirect('homepage')
+        return redirect('admindash')
     else:
         messages.error(request, "Invalid login credentials")
         return redirect('admin')    
@@ -130,4 +134,37 @@ def view_client(request):
     return render(request,"adminpage/viewclient.html",{'clients':clients})
 
 def tester_dashoard(request):
-    return render(request, 'Tester/testerdash.html')    
+    tester= request.user.uxtester
+    context={
+        'tester':tester
+    }
+    return render(request, 'Tester/testerdash.html',context)    
+
+def admin_dashoard(request):
+    return render(request, 'adminpage/admindash.html')     
+
+def myprofile(request, pk):
+    
+    user=UxTester.objects.get(id=pk)
+    if request.user.uxtester:
+       context={
+        "user": user
+        }
+    return render(request,'Tester/myprofile.html',context)
+
+def editprofile(request,pk):
+    user =UxTester.objects.get(id=pk)
+    userForm= TesterForm(instance=user)
+    if request.method=='POST':
+        userForm=TesterForm(request.POST,request.FILES, instance=user)
+        if userForm.is_valid():
+            userForm.save()
+            
+            return redirect('/')
+    return render(request,'Tester/editprofile.html',{
+        'userForm': userForm,
+        'user':user
+    })
+
+
+
