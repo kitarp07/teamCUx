@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@font-face {
+    font-family: "Samsung";
+    src: url(/static/fonts/samsungsharpsans-bold.otf);
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.logo {
+    margin-top: 180px;
+}
+
+.h1 {
+    font-size: 30px;
+    font-weight: 600;
+    font-family: "Samsung";
+}
+
+.p1 {
+    font-size: 15px;
+}
+
+.button {
+    display: inline-block;
+    padding: 9px 20px;
+    background-color: #512CD2;
+    color: white;
+    font-family: "poppins", sans-serif;
+    font-weight: 400;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+
+}

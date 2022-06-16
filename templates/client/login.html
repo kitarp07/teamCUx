@@ -33,7 +33,7 @@
 			<li><a class="navbar-items" href="#">About Us</a></li>
 			<li><a class="navbar-items" href="#">Contact Us</a></li>
 			<li><a class="navbar-items" href="#">Login</a></li>
-			<li><a class="register" href="{% url 'client-reg'%}">Get Paid to Test</a></li>
+			<li><a class="register" href="">Get Paid to Test</a></li>
 		</ul>
 	</div>
 
@@ -45,7 +45,7 @@
 
 	<div class="loginimage">
 		<div class="pagetopic">
-			Login
+			Client Login
 		</div>
 		<img src="{% static 'images/loginimage.png' %}">
 	</div>
@@ -77,6 +77,7 @@
 				window.location.href = "{%url 'client-login'%}"
 
 			}
+			
 
 
 		</script>
@@ -88,7 +89,7 @@
 		<div class="twobuttons">
 
 			<a class="">or</a>
-			<span class="registerbutton">Register</span>
+			<a href="{% url 'client-reg'%}" class="registerbutton">Register</a>
 		</div>
 	</div>
 

@@ -2,8 +2,8 @@
 from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, reverse
-from Tester.forms import TesterForm
-from django.contrib.auth.models import User
+from Tester.forms import TesterForm, UploadVideoForm
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -11,14 +11,15 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 
-from client.models import UxClient
+from client.models import CreateTests, UxClient
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
-from Tester.models import UxTester
+from Tester.models import UploadVideo, UxTester
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
+from testmyux.decoraters import tester_user_group
 
 def send_activation_email(user,request):
     current_site=get_current_site(request)
@@ -56,6 +57,8 @@ def tester_reg_view(request):
  
             if pw==cpw:
                 user = User.objects.create_user(name, email, pw)
+                group = Group.objects.get(name='tester')
+                user.groups.add(group)
                 user.save()
  
                 client = form.save(commit=False) # save info but dont commit change to database
@@ -67,6 +70,7 @@ def tester_reg_view(request):
 
  
     return render(request, 'Tester/tregister.html', context)
+
 
 def tlogin(request):
     if request.method=='POST':
@@ -84,6 +88,17 @@ def tlogin(request):
             login(request,user)
             print('email')
             return redirect('tester-dash')
+        if user is None:
+            messages.success(request, "Wrong Credentials. Please try again")
+
+        elif user.groups.all()[0].name == 'tester':
+            login(request, user)
+            return redirect('tester-dash')
+           
+        
+            
+        else:
+            messages.success(request, "Wrong Credentials. Please try again")
 
         # tlogin(request,user)  
         # messages.add_message(request, messages.SUCCESS)  
@@ -107,7 +122,7 @@ def activate_user(request, uidb64,token):
         customer.save()    
 
         messages.add_message(request,messages.SUCCESS,'eMAIL VERIFIED')   
-        return redirect(reverse('tlogin'))
+        return redirect(reverse('tester-email-verified'))
 
 
     return render(request,'Tester/activate-failed.html',{"user":user})    
@@ -168,3 +183,27 @@ def editprofile(request,pk):
 
 
 
+    return render(request, 'Tester/testerdash.html')    
+
+def tester_email_verified(request):
+    return render(request, "EmailVerified/EmailVerified.html")
+
+def tester_upload_video(request):
+    form = UploadVideoForm()
+    if request.user.is_authenticated:
+        customer = request.user.uxtester
+        if request.method == 'POST':
+            form = UploadVideoForm(request.POST)
+            if form.is_valid():
+                link = form.cleaned_data['video_link']
+
+            form.save()
+    else:
+        return HttpResponse("You are not logged in.")
+
+    return render(request, "Tester/uploadvideo.html")
+
+def view_all_tests(request):
+    tests = CreateTests.objects.all()
+    context = {"tests": tests}
+    return render(request, "Tester/inside-dash/all-tests.html", context)

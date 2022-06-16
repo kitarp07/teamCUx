@@ -1,6 +1,8 @@
+from attr import has
 from django.shortcuts import redirect, render
+from Tester.models import UploadVideo
 from client.forms import *
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -46,6 +48,8 @@ def client_reg_view(request):
 
             if pw==cpw:
                 user = User.objects.create_user(name, email, pw)
+                group = Group.objects.get(name='client')
+                user.groups.add(group)
                 user.save()
 
                 client = form.save(commit=False) # save info but dont commit change to database
@@ -59,27 +63,21 @@ def client_reg_view(request):
 
     return render(request, 'client/register.html', context)
 
-def verify_email(requst, uidb64, token):
+def verify_email(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
-
         user = User.objects.get(pk=uid)
-
         customer = UxClient.objects.get(user=user)
-
-
-
     except Exception as e:
         user = None
-
     if user and generate_token.check_token(user, token):
         customer.isEmailVerified = True
         customer.save()
 
-        messages.add_message(requst, messages.SUCCESS, 'Email verified')
-        return redirect ('homepage')
+        messages.add_message(request, messages.SUCCESS, 'Email verified')
+        return redirect ('email-verified')
 
-    return render(requst, 'client/verification_failed.html', {"user": user })
+    return render(request, 'client/verification_failed.html', {"user": user })
     
 
 
@@ -88,25 +86,43 @@ def client_login_view(request):
         email = request.POST.get('email')
         passw = request.POST.get('password')
         
-
         user = authenticate(request, username=email, password=passw)
 
         if user is None:
             messages.success(request, "Wrong Credentials. Please try again")
-        if user is not None:
+       
+        elif user.groups.all()[0].name == 'client':
             login(request, user)
             return redirect('client-dash')
+           
+        else:
+            messages.success(request, "Wrong Credentials. Please try again")
+            
 
 
     return render(request, "client/login.html")
 
 def client_dashoard(request):
-    return render(request, 'client/clientdash.html')
+    if request.user.is_authenticated:
+        user = request.user
+        if user.groups.all()[0].name == 'client':
+            customer = user.uxclient
+            context ={
+                    'customer':customer
+                }
+    else:
+        messages.success(request, "Wrong Credentials. Please try again")
+        return redirect('client-login')
+
+    return render(request, 'client/clientdash.html', context)
 
 def create_test(request):
     form = CreateTestForm()
     if request.user.is_authenticated:
-        customer = request.user.uxclient
+        if request.user.uxclient:
+            customer = request.user.uxclient
+        else:
+            messages.erorr(request, "Wrong Credentials. Please try again")
         if request.method=='POST':
             form = CreateTestForm(request.POST)
             if form.is_valid():
@@ -124,3 +140,41 @@ def create_test(request):
                 )
 
     return render(request, "client/create-test.html")
+
+
+def email_verified_page(request):
+    return render(request, "client/EmailVerified.html")
+
+def sent_by_tester(request):
+    if request.user.is_authenticated:
+        user = request.user.uxclient
+        videos = UploadVideo.objects.get(id=user.pk)
+      
+    else:
+        videos = UploadVideo.objects.all()
+    
+    context = {
+            'videos': videos
+        }
+
+    return render(request, "client/sentbytester.html", context)
+
+def client_profile(request, pk):
+    user = request.user
+
+    if user is not None:
+        if user.groups.all()[0].name == 'client':
+             
+            customer = request.user.uxclient
+
+            context ={
+                 'customer':customer
+             }
+            return render(request, "client/clientprofile.html",context)
+
+
+    
+    else:
+        messages.success(request, "Wrong Credentials. Please try again")
+        return redirect('client-login')
+   

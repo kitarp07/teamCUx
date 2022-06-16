@@ -29,15 +29,17 @@
             <form method="post">
                 {%csrf_token%}
                 <label class="lbl">Email</label>
-                <input class="inp" type="email" name="email" placeholder="e.g. example@domain.com">
+                <input class="inp" type="email" name="email" placeholder="e.g. example@domain.com" required>
                 <label class="lbl">Phone Number</label>
-                <input class="inp" type="number" name="phone">
+                <input class="inp" type="number" name="phone" required>
                 <label class="lbl">Full Name</label>
-                <input class="inp" type="text" name="name" placeholder="e.g. John Doe">
+                <input class="inp" type="text" name="name" placeholder="e.g. John Doe"
+                    pattern="(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})"
+                    required>
                 <label class="lbl">Password</label>
-                <input class="inp" type="password" name="password" placeholder="••••••••">
+                <input class="inp" type="password" name="password" placeholder="••••••••" required>
                 <label class="lbl">Confirm Password</label>
-                <input class="inp" type="password" name="cpassword" placeholder="••••••••">
+                <input class="inp" type="password" name="cpassword" placeholder="••••••••" required>
                 <button type="submit" id="submit_btn" name="register" value="Create account" disabled>Register
                     Now</button>
                 <!---------------- User Agreement ---------------->
