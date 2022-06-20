@@ -16,13 +16,11 @@ class TestViews(TestCase):
         user.save()
         client = Client()
 
-        login = client.login(username="user", password = "password")
-
-       
+        login = client.login(username="user", password="password")
 
         url = reverse('client-reg')
 
-        response =  client.post(url, {
+        response = client.post(url, {
             'name': 'test name',
             'email': 'test email',
             'phone': 'phone',
@@ -30,26 +28,24 @@ class TestViews(TestCase):
         })
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, "client/register.html")
-    
 
     def test_client_login(self):
         user = User.objects.create(username="user", email="user@gmail.com")
         user.set_password('password')
         user.save()
-        
+
         client = Client()
-        
+
         group = Group.objects.create(name='client')
         user.groups.add(group)
-        login = client.login(username="user", password = "password")
-
+        login = client.login(username="user", password="password")
 
         customer = UxClient.objects.create(
-            user= user,
+            user=user,
             name="testname",
             email="user@gmail.com",
             phone="9848044876",
-            password = "password"
+            password="password"
 
         )
 
@@ -64,37 +60,36 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 302)
         self.assertRedirects(response, '/client/dashboard')
-    
+
     def test_create_tests(self):
         user = User.objects.create(username="user", email="user@gmail.com")
         user.set_password('password')
         user.save()
         client = Client()
 
-        login = client.login(username="user", password = "password")
+        login = client.login(username="user", password="password")
 
         customer = UxClient.objects.create(
-            user= user,
+            user=user,
             name="testname",
             email="user@gmail.com",
             phone="9848044876",
-            password = "password"
+            password="password"
 
         )
 
         url = reverse('create-test')
 
-        response =  client.post(url, {
+        response = client.post(url, {
             'title': 'test name',
             'mention_tasks': 'tasks',
             'requirements': 'requirements',
             'additional_guidelines': 'additional',
-            
+
         })
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'client/create-test.html')
-
 
     def test_email_verification(self):
         user = User.objects.create(username="user", email="user@gmail.com")
@@ -103,19 +98,19 @@ class TestViews(TestCase):
         client = Client()
 
         customer = UxClient.objects.create(
-            user= user,
+            user=user,
             name="testname",
             email="user@gmail.com",
             phone="9848044876",
-            password = "password"
+            password="password"
 
         )
 
-        login = client.login(username="user", password = "password")
+        login = client.login(username="user", password="password")
 
         token = generate_token.make_token(user)
 
-        url = reverse('verify', args=[user.pk, token ])
+        url = reverse('verify', args=[user.pk, token])
 
         response = client.post(url)
         print(response.status_code)
@@ -132,23 +127,117 @@ class TestViews(TestCase):
         group = Group.objects.create(name='client')
         user.groups.add(group)
 
-        login = client.login(username="user", password = "password")
-        
+        login = client.login(username="user", password="password")
+
         customer = UxClient.objects.create(
-            user= user,
-            id = 1,
+            user=user,
+            id=1,
             name="testname",
             email="user@gmail.com",
             phone="9848044876",
-            password = "password"
+            password="password"
 
         )
 
-        url = reverse('client-profile', args=[customer.id])
+        url = reverse('client-profile')
 
         response = client.post(url)
 
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'client/clientprofile.html')
 
-  
+    def test_edit_profile(self):
+        user = User.objects.create(username="user", email="user@gmail.com")
+        user.set_password('password')
+        user.save()
+        client = Client()
+
+        group = Group.objects.create(name='client')
+        user.groups.add(group)
+        login = client.login(username="user", password="password")
+
+        customer = UxClient.objects.create(
+            user=user,
+            id=1,
+            name="testname",
+            email="user@gmail.com",
+            phone="9848044876",
+            password="password"
+
+        )
+        customer.refresh_from_db()
+
+        url = reverse('client-edit-profile', args=[customer.id])
+
+        response = client.post(url, {
+            'user': user,
+            'name': 'edit name',
+            'email': 'test email',
+            'phone': 'phone',
+            'password': 'password'
+        })
+
+        customer.refresh_from_db()
+
+        self.assertEquals(customer.name, 'edit name')
+        self.assertEquals(response.status_code, 302)
+    
+    # def test_forget_email(self):
+    #     user = User.objects.create(username="user", email="user@gmail.com")
+    #     user.set_password('password')
+    #     user.save()
+    #     client = Client()
+
+    #     customer = UxClient.objects.create(
+    #         user=user,
+    #         name="testname",
+    #         email="user@gmail.com",
+    #         phone="9848044876",
+    #         password="password"
+
+    #     )
+
+    #     customer.refresh_from_db()
+
+    #     login = client.login(username="user", password="password")
+
+    #     token = generate_token.make_token(user)
+
+    #     url = reverse('clicklink', args=[user.id, token])
+
+    #     response = client.post(url)
+    #     print(response.status_code)
+
+    #     self.assertEquals(response.status_code, 200)
+    
+    def change_password(self):
+        user = User.objects.create(username="user", email="user@gmail.com")
+        user.set_password('password')
+        user.save()
+        client = Client()
+
+        customer = UxClient.objects.create(
+            user=user,
+            name="testname",
+            email="user@gmail.com",
+            phone="9848044876",
+            password="password"
+
+        )
+
+        url = reverse('change-password', args=[customer.id])
+
+        response = client.post(url,
+        {
+            'newpassword': 'newp',
+            'cpassword': 'newp'
+        })
+
+        customer.refresh_from_db()
+
+        customer.refresh_from_db()
+
+        self.assertEquals(customer.password, 'newpassword')
+        self.assertEquals(response.status_code, 302)
+
+    
