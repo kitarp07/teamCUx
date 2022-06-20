@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+@font-face {
+    font-family: "ionicons";
+    src: url(../fonts/ionicons.ttf);
+}
+
 body {
     background: #F2F2F2;
     font-family: 'Poppins', sans-serif;
