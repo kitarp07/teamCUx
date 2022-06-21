@@ -1,0 +1,20 @@
+{% extends 'Tester/testerforgotpassword.html' %}
+<!-- <form method="post">
+    {%csrf_token%}
+    <input type="text" name="email" />
+    <input type="submit" />
+</form> -->
+{% load static %}
+
+{% block enteremail%}
+           
+<div class="first-page">
+    <form method="post">
+        {%csrf_token%}
+        <label class="forgotpass-lbl">Enter your email address:</label>
+        <input class="forgotpass-inp" placeholder="e.g.john@email.com" id="email-inp" type="text" name="email" />
+        <button class="forgotpass-btn" onclick="first_page()">Proceed to Next Step <img
+                src="{% static 'images/arrow 4.png' %}"></button>
+    </form>
+</div>
+{% endblock enteremail%}

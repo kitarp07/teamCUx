@@ -70,7 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'testmyux.wsgi.application'
-# LOGIN_REDIRECT_URL = '/afterlogin'
+LOGIN_REDIRECT_URL = '/afterlogin'
 
 
 # Database

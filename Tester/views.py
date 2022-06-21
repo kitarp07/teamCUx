@@ -17,6 +17,8 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from Tester.models import UploadVideo, UxTester
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+
 from testmyux.decoraters import tester_user_group
 
 def send_activation_email(user,request):
@@ -82,6 +84,10 @@ def tlogin(request):
         #     'Email is not verified, please check your email inbox')
         #     return render(request, 'tester/login.html', context)
 
+        if user is not None:
+            login(request,user)
+            print('email')
+            return redirect('tester-dash')
         if user is None:
             messages.success(request, "Wrong Credentials. Please try again")
 
@@ -125,7 +131,7 @@ def activate_user(request, uidb64,token):
 @login_required
 def afterlogin_view(request):
     if request.user.is_superuser:
-        return redirect('homepage')
+        return redirect('admindash')
     else:
         messages.error(request, "Invalid login credentials")
         return redirect('admin')    
@@ -143,6 +149,40 @@ def view_client(request):
     return render(request,"adminpage/viewclient.html",{'clients':clients})
 
 def tester_dashoard(request):
+    tester= request.user.uxtester
+    context={
+        'tester':tester
+    }
+    return render(request, 'Tester/testerdash.html',context)    
+
+def admin_dashoard(request):
+    return render(request, 'adminpage/admindash.html')     
+
+def myprofile(request, pk):
+    
+    user=UxTester.objects.get(id=pk)
+    if request.user.uxtester:
+       context={
+        "user": user
+        }
+    return render(request,'Tester/myprofile.html',context)
+
+def editprofile(request,pk):
+    user =UxTester.objects.get(id=pk)
+    userForm= TesterForm(instance=user)
+    if request.method=='POST':
+        userForm=TesterForm(request.POST,request.FILES, instance=user)
+        if userForm.is_valid():
+            userForm.save()
+            
+            return redirect('/')
+    return render(request,'Tester/editprofile.html',{
+        'userForm': userForm,
+        'user':user
+    })
+
+
+
     return render(request, 'Tester/testerdash.html')    
 
 def tester_email_verified(request):
@@ -167,3 +207,66 @@ def view_all_tests(request):
     tests = CreateTests.objects.all()
     context = {"tests": tests}
     return render(request, "Tester/inside-dash/all-tests.html", context)
+
+def send_forget_password_email(request, user):
+    subject = "Reset password link"
+    if request.method == "POST":
+        email = request.POST.get('email')
+    current_site = get_current_site(request)
+    email_body = render_to_string('client/forgetpassword/clicklink.html', {
+        'user': user,
+        'domain': current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generate_token.make_token(user),
+
+    })
+    email = EmailMessage(subject=subject, 
+    body=email_body, 
+    from_email= settings.EMAIL_FROM_USER,
+    to=[user.email]
+    )
+
+    email.send()
+
+
+#forget password
+def enter_email(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if not User.objects.filter(email=email):
+            messages.success(request, 'User not registered')
+        else:
+            user = User.objects.get(email=email)
+            print (user.username)
+            send_forget_password_email(request, user)
+    
+
+    return render(request, 'Tester/forgetpassword/enteremail.html')
+
+def click_link(request,  uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+        customer = UxTester.objects.get(user=user)
+    except Exception as e:
+        user = None
+    if user and generate_token.check_token(user, token):
+        return redirect ('change-password', pk=user.id)
+
+    return render(request, 'Tester/forgetpassword/clicklink.html')
+
+def change_password(request, pk):
+    user = User.objects.get(id=pk)
+    customer = UxTester.objects.get(user=user)
+    if request.method == "POST":
+        password = request.POST.get("newpassword")
+        cpassword = request.POST.get("confirmpassword")
+
+        if password == cpassword:
+            customer.password = password
+            user.set_password(password)
+            user.save()
+            customer.save()
+            return redirect('tlogin')
+    return render(request, "Tester/forgetpassword/changepassword.html")
+    
