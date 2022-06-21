@@ -39,3 +39,11 @@ function second_page() {
     }
 }
 
+if (document.querySelector(".third-page").style.display == "flex") {
+    document.querySelector(".num2").style.backgroundColor = "#513CD2";
+    document.querySelector(".num2").style.color = "white";
+    document.querySelector(".line").style.borderBottom = "3px solid #513CD2";
+    document.querySelector(".num3").style.backgroundColor = "#513CD2";
+    document.querySelector(".num3").style.color = "white";
+    document.querySelector(".line1").style.borderBottom = "3px solid #513CD2";
+}

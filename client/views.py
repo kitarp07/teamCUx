@@ -1,8 +1,6 @@
 from lib2to3.pgen2 import token
 import uuid
-from attr import has
 from django.shortcuts import redirect, render
-from platformdirs import user_config_dir
 from Tester.models import UploadVideo
 from client.forms import *
 from django.contrib.auth.models import User, Group
