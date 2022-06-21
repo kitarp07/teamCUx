@@ -165,9 +165,10 @@ body {
         gap: 0;
         flex-direction: column;
         background-color: white;
-        width: 150%;
+        width: 100%;
         text-align: center;
         transition: 0.3s;
+        z-index: 1;
     }
 
     .nav-item {
@@ -182,5 +183,13 @@ body {
         width: 130px;
         position: relative;
         right: 30px;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        overflow-x: hidden;
     }
 }

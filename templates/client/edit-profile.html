@@ -1,0 +1,22 @@
+<form method="post">
+    {% csrf_token%}
+    <input type="text" name="name" value="{{uxclient.name}}"/>
+    <input type="text" name="email" value="{{uxclient.email}}"/>
+    <input type="text" name="phone" value="{{uxclient.phone}}"/>
+    <input type="submit" value="Update"/>
+
+
+</form>
+{% for message in messages %}
+		<script>
+			var url = 'client/login/'
+			alert('{{message}}')
+			if ('{{message}}' == 'Wrong Credentials. Please try again') {
+				window.location.href = "{%url 'client-login'%}"
+
+			}
+			
+
+
+		</script>
+{% endfor %}
