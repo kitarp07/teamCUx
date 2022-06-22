@@ -40,7 +40,14 @@ urlpatterns = [
    path('tester/email-verified', email_verified_page, name='tester-email-verified' ),
    path('tester/alltests', view_all_tests, name= "alltests"),
    path('client/sentbytester', sent_by_tester, name='sentbytester'),
-   path('client/profile/<int:pk>', client_profile, name='client-profile')
+   path('client/profile', client_profile, name='client-profile'),
+   path('client/edit-profile/<int:pk>', edit_profile, name='client-edit-profile'),
+   path('client/forgetpassword/enteremail', enter_email, name='enter-email'),
+   path('client/forgetpassword/clicklink/<uidb64>/<token>', click_link, name="clicklink"),
+   path('client/changepassword/<int:pk>', change_password, name="change-password"),
+   path('tester/forgetpassword/enteremail', enter_email, name='tester-enter-email'),
+   path('tester/forgetpassword/clicklink/<uidb64>/<token>', click_link, name="tester-clicklink"),
+   path('tester/changepassword/<int:pk>', change_password, name="tester-change-password")
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

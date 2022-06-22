@@ -207,3 +207,66 @@ def view_all_tests(request):
     tests = CreateTests.objects.all()
     context = {"tests": tests}
     return render(request, "Tester/inside-dash/all-tests.html", context)
+
+def send_forget_password_email(request, user):
+    subject = "Reset password link"
+    if request.method == "POST":
+        email = request.POST.get('email')
+    current_site = get_current_site(request)
+    email_body = render_to_string('client/forgetpassword/clicklink.html', {
+        'user': user,
+        'domain': current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generate_token.make_token(user),
+
+    })
+    email = EmailMessage(subject=subject, 
+    body=email_body, 
+    from_email= settings.EMAIL_FROM_USER,
+    to=[user.email]
+    )
+
+    email.send()
+
+
+#forget password
+def enter_email(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if not User.objects.filter(email=email):
+            messages.success(request, 'User not registered')
+        else:
+            user = User.objects.get(email=email)
+            print (user.username)
+            send_forget_password_email(request, user)
+    
+
+    return render(request, 'Tester/forgetpassword/enteremail.html')
+
+def click_link(request,  uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+        customer = UxTester.objects.get(user=user)
+    except Exception as e:
+        user = None
+    if user and generate_token.check_token(user, token):
+        return redirect ('change-password', pk=user.id)
+
+    return render(request, 'Tester/forgetpassword/clicklink.html')
+
+def change_password(request, pk):
+    user = User.objects.get(id=pk)
+    customer = UxTester.objects.get(user=user)
+    if request.method == "POST":
+        password = request.POST.get("newpassword")
+        cpassword = request.POST.get("confirmpassword")
+
+        if password == cpassword:
+            customer.password = password
+            user.set_password(password)
+            user.save()
+            customer.save()
+            return redirect('tlogin')
+    return render(request, "Tester/forgetpassword/changepassword.html")
+    

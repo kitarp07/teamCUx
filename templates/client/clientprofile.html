@@ -3,10 +3,10 @@
     <thead>
         <tr>
 
-       
-        <th>name</th>
-        <th>email</th>
-        <th>phone</th>
+
+            <th>name</th>
+            <th>email</th>
+            <th>phone</th>
         </tr>
     </thead>
 
@@ -15,7 +15,27 @@
             <td>{{customer.name}}</td>
             <td>{{customer.email}}</td>
             <td>{{customer.phone}}</td>
+            <td><a href="{% url 'client-edit-profile' customer.id%}"
+          >Edit</a></td>
+
         </tr>
+         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        <a href="/client/edit-profile/{{uxclient.id}}" type="submit" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </tbody>
 </table> -->
 
@@ -36,9 +56,12 @@
                 
 </head>
 <body>
+    <a href="{% url 'client-edit-profile' customer.id %} "> Edit </a>
     <div class="wrapper">
         <div class="profilebox">
-            <button class="edit"><i class="far fa-edit"></i>Edit</button>
+            <button class="edit"><i class="far fa-edit"></i> <a href="{% url 'client-edit-profile' customer.id %}"> Edit </a></button>
+
+            
         
             <img class="profilepic" img src="{% static 'images/profilepic.jpg' %}" alt="profile_image"></img>
             

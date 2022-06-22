@@ -1,4 +1,5 @@
-
+from lib2to3.pgen2 import token
+import uuid
 from django.shortcuts import redirect, render
 from Tester.models import UploadVideo
 from client.forms import *
@@ -141,7 +142,6 @@ def create_test(request):
 
     return render(request, "client/create-test.html")
 
-
 def email_verified_page(request):
     return render(request, "client/EmailVerified.html")
 
@@ -159,7 +159,7 @@ def sent_by_tester(request):
 
     return render(request, "client/sentbytester.html", context)
 
-def client_profile(request, pk):
+def client_profile(request):
     user = request.user
 
     if user is not None:
@@ -177,4 +177,91 @@ def client_profile(request, pk):
     else:
         messages.success(request, "Wrong Credentials. Please try again")
         return redirect('client-login')
+
+def edit_profile(request, pk):
+    uxclient = UxClient.objects.get(id=pk)
+    form = ClientForm(request.POST)
+    user = request.user
+    if user is None:
+            messages.success(request, "Wrong Credentials. Please try again")
+       
+    elif user.groups.all()[0].name == 'client':
+        if request.method == "POST":
+            uxclient.name = request.POST.get('name')
+            uxclient.email = request.POST.get('email')
+            uxclient.phone = request.POST.get('phone')
+            user.username = request.POST.get('name')
+            user.email = request.POST.get('email')
+            user.save()
+            uxclient.save()
+            return redirect('client-profile')
+           
+    else:
+        messages.success(request, "Wrong Credentials. Please try again")
    
+
+    context = {'form': form, 'uxclient':uxclient}
+    return render(request, 'client/edit-profile.html', context)
+
+def send_forget_password_email(request, user):
+    subject = "Reset password link"
+    if request.method == "POST":
+        email = request.POST.get('email')
+    current_site = get_current_site(request)
+    email_body = render_to_string('client/forgetpassword/clicklink.html', {
+        'user': user,
+        'domain': current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generate_token.make_token(user),
+
+    })
+    email = EmailMessage(subject=subject, 
+    body=email_body, 
+    from_email= settings.EMAIL_FROM_USER,
+    to=[user.email]
+    )
+
+    email.send()
+
+
+#forget password
+def enter_email(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if not User.objects.filter(email=email):
+            messages.success(request, 'User not registered')
+        else:
+            user = User.objects.get(email=email)
+            print (user.username)
+            send_forget_password_email(request, user)
+    
+
+    return render(request, 'client/forgetpassword/enteremail.html')
+
+def click_link(request,  uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+        customer = UxClient.objects.get(user=user)
+    except Exception as e:
+        user = None
+    if user and generate_token.check_token(user, token):
+        return redirect ('change-password', pk=user.id)
+
+    return render(request, 'client/forgetpassword/clicklink.html')
+
+def change_password(request, pk):
+    user = User.objects.get(id=pk)
+    customer = UxClient.objects.get(user=user)
+    if request.method == "POST":
+        password = request.POST.get("newpassword")
+        cpassword = request.POST.get("confirmpassword")
+
+        if password == cpassword:
+            customer.password = password
+            user.set_password(password)
+            user.save()
+            customer.save()
+            return redirect('client-login')
+    return render(request, "client/forgetpassword/changepassword.html")
+    
