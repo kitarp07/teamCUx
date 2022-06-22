@@ -1,4 +1,4 @@
-from attr import has
+
 from django.shortcuts import redirect, render
 from Tester.models import UploadVideo
 from client.forms import *
