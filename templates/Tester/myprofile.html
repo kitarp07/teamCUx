@@ -28,7 +28,7 @@
           
           <td>{{ user.email }}</td>
           <td>{{ user.phone }}</td>
-          <td><a href="/editprofile/{{ user.id }}" type="button" > Edit my Profile</a> </td>
+          <td><a href="{% url 'deletetester' user.id  %}"> Delete</span></a></td>
         </tr>
 
         

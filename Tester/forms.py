@@ -10,3 +10,9 @@ class UploadVideoForm(ModelForm):
     class Meta:
         model = UploadVideo
         fields = '__all__'
+
+
+class UserDeleteForm(ModelForm):
+    class Meta:
+        model=UxTester
+        fields=[]

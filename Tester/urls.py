@@ -15,6 +15,7 @@ urlpatterns = [
     path('myprofile/<int:pk>', views.myprofile, name='myprofile'),
     path('editprofile/<int:pk>', views.editprofile, name= 'editprofile'),
     path('testerdashboard', views.tester_dashoard, name='tester-dash'),
+    path('deletetester/<int:pk>', views.delete_tester,name="deletetester"),
 
 
 

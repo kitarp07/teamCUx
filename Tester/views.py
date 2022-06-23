@@ -2,7 +2,7 @@
 from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, reverse
-from Tester.forms import TesterForm, UploadVideoForm
+from Tester.forms import TesterForm, UploadVideoForm, UserDeleteForm
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -270,3 +270,25 @@ def change_password(request, pk):
             return redirect('tlogin')
     return render(request, "Tester/forgetpassword/changepassword.html")
     
+# @login_required
+# def deleteuser(request):
+#     if request.method=='POST':
+#         delete_form= UserDeleteForm(request.POST, instance=request.user)
+#         user=request.user
+#         user.delete()
+#         messages.info(request,'your account has been deleted.')
+#         return redirect('homepage')
+
+#     else:
+#         delete_form =UserDeleteForm(instance=request.user)
+
+#     context={
+#         'delete_form': delete_form
+#     }   
+#     return render(request,'Tester/delete_account.html',context)     
+
+@login_required
+def delete_tester(request,pk):
+    user=UxTester.objects.get(id=pk)
+    user.delete()
+    return redirect('homepage')  
