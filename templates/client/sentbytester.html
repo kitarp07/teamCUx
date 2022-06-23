@@ -35,8 +35,12 @@
             <td data-label="Product Owner">{{video.client.name}}</td>
             <td data-label="Video by">{{video.tester.name}}</td>
             <td data-label="Video Link">
-                <a href="{{video.video_link}}" class="download"></a>
+                <a target="_blank" href="{{video.video_link}}" class="download"></a>
             </td>
+            <td class="pop" data-label="Feedback">
+                <a href="#popup2" class="feedback"></a>
+            </td>
+           
             <!--       <td>Brian Miller</td> -->
         </tr>
         {%endfor%}
@@ -59,7 +63,8 @@
     <div class="popup">
         <a class="close" href="#">&times;</a>
         <div class="content">
-            <form>
+            <form method="post">
+                {%csrf_token%}
                 <!-- <div class="rate">
                     <div class="rate-drop">
                         <input id="radio1" type="radio" value="1" name="star"><label for="

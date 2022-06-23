@@ -1,3 +1,4 @@
+from http import client
 from lib2to3.pgen2 import token
 import uuid
 from django.shortcuts import redirect, render
@@ -148,7 +149,7 @@ def email_verified_page(request):
 def sent_by_tester(request):
     if request.user.is_authenticated:
         user = request.user.uxclient
-        videos = UploadVideo.objects.get(id=user.pk)
+        videos = UploadVideo.objects.filter(client=user.pk)
       
     else:
         videos = UploadVideo.objects.all()

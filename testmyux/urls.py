@@ -50,4 +50,5 @@ urlpatterns = [
    path('tester/changepassword/<int:pk>', change_password, name="tester-change-password")
 
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
