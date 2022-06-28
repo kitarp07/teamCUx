@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from Tester.models import UxTester, UploadVideo
+from Tester.models import UxTester, UploadVideo, FeedBack
 class TesterForm(ModelForm):
     class Meta:
         model = UxTester
@@ -16,3 +16,9 @@ class UserDeleteForm(ModelForm):
     class Meta:
         model=UxTester
         fields=[]
+
+
+class FeedbackForm(ModelForm):
+    class Meta:
+        model=FeedBack
+        fields='__all__'        

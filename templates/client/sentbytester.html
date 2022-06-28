@@ -63,7 +63,7 @@
     <div class="popup">
         <a class="close" href="#">&times;</a>
         <div class="content">
-            <form method="post">
+            <form action="{% url 'sendfeedback' %}" method="POST">
                 {%csrf_token%}
                 <!-- <div class="rate">
                     <div class="rate-drop">
@@ -100,7 +100,10 @@
                 </select>
                 <h3>Feedback</h3>
                 <textarea class="comment" cols="40" rows="8" charswidth="23"
-                    placeholder="Enter your feedback here"></textarea>
+                    placeholder="Enter your feedback here" name="feedback"></textarea>
+                <!-- <textarea class="comment" cols="40" rows="8" charswidth="23"
+                    name="tester"></textarea>
+                    <input value="{{request.user.id}}" > -->
                 <button class="feedbtn" type="submit">Submit</button>
             </form>
         </div>

@@ -2,7 +2,7 @@
 from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, reverse
-from Tester.forms import TesterForm, UploadVideoForm, UserDeleteForm
+from Tester.forms import FeedbackForm, TesterForm, UploadVideoForm, UserDeleteForm
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -15,7 +15,7 @@ from client.models import CreateTests, UxClient
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
-from Tester.models import UploadVideo, UxTester
+from Tester.models import FeedBack, UploadVideo, UxTester
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
@@ -292,3 +292,36 @@ def delete_tester(request,pk):
     user=UxTester.objects.get(id=pk)
     user.delete()
     return redirect('homepage')  
+
+
+# def send_feedback(request):
+    # if request.user.is_authenticated:
+    #     user=request.user.uxclient
+    # #     # user1=request.user.uxtester
+    #     feed=FeedBack.objects.filter(client=user.pk)  
+    # else:
+    # feed=FeedBack.objects.all()
+
+    # context={
+    #     'feed':feed
+    # } 
+
+    # return render(request, "client/sendfeedback.html",context)        
+
+def send_feedbackform(request):
+    print(request.user.id)
+    user = request.user
+    if request.method=='POST':
+
+        form=FeedbackForm(request.POST)
+        
+        if form.is_valid():
+            feedback=form.cleaned_data['feedback']
+            
+            
+            form.save()
+        return render(request,'client/sendfeedback.html')
+    else:
+        form=FeedbackForm()    
+    context={'form':form}
+    return render(request, 'client/sendfeedback.html',context)

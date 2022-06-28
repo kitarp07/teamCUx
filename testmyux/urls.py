@@ -47,7 +47,8 @@ urlpatterns = [
    path('client/changepassword/<int:pk>', change_password, name="change-password"),
    path('tester/forgetpassword/enteremail', enter_email, name='tester-enter-email'),
    path('tester/forgetpassword/clicklink/<uidb64>/<token>', click_link, name="tester-clicklink"),
-   path('tester/changepassword/<int:pk>', change_password, name="tester-change-password")
+   path('tester/changepassword/<int:pk>', change_password, name="tester-change-password"),
+   
 
 
 ] 

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# from Tester.models import UxTester
+
 # Create your models here.
 class UxClient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -12,6 +14,9 @@ class UxClient(models.Model):
     isEmailVerified = models.BooleanField(default=False)
     
 
+
+
+    
 class CreateTests(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
     title = models.CharField(max_length=100, null=True, blank=True)
@@ -19,4 +24,9 @@ class CreateTests(models.Model):
     requirements = models.TextField(null=True, blank=True)
     additional_guidelines = models.TextField(null=True, blank=True) 
     created_by = models.ForeignKey(UxClient, on_delete=models.SET_NULL, null=True, blank=True)
+    
+
+
+   
+
     

@@ -22,3 +22,10 @@ class UploadVideo(models.Model):
     test = models.ForeignKey(CreateTests, on_delete=models.SET_NULL, null=True, blank=True)
     tester = models.ForeignKey(UxTester, on_delete=models.SET_NULL, null=True, blank=True)
     
+
+
+class FeedBack(models.Model):
+    id=models.AutoField(auto_created=True, primary_key=True)
+    feedback=models.CharField(max_length=255,blank=True)
+    tester=models.ForeignKey(UxTester,on_delete=models.SET_NULL,null=True,blank=True)
+    client=models.ForeignKey(UxClient,on_delete=models.SET_NULL,null=True,blank=True)

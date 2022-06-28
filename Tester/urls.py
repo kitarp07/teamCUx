@@ -16,6 +16,8 @@ urlpatterns = [
     path('editprofile/<int:pk>', views.editprofile, name= 'editprofile'),
     path('testerdashboard', views.tester_dashoard, name='tester-dash'),
     path('deletetester/<int:pk>', views.delete_tester,name="deletetester"),
+    # path('sendfeedback',views.send_feedback,name='sendfeedback'),
+    path('sendfeedback',views.send_feedbackform,name='sendfeedback'),
 
 
 
