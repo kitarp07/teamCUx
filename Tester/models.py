@@ -13,6 +13,8 @@ class UxTester(models.Model):
     phone = models.CharField(max_length=10,blank=True, null=False)
     password = models.CharField(max_length=30,blank=True, null=False)
     is_email_verified =models.BooleanField(default=False)
+    rating = models.FloatField(default = 0, null=True, blank=True)
+
 
 
 class UploadVideo(models.Model):
@@ -21,7 +23,7 @@ class UploadVideo(models.Model):
     client = models.ForeignKey(UxClient, on_delete=models.SET_NULL, null=True, blank=True)
     test = models.ForeignKey(CreateTests, on_delete=models.SET_NULL, null=True, blank=True)
     tester = models.ForeignKey(UxTester, on_delete=models.SET_NULL, null=True, blank=True)
-    
+    rating = models.FloatField(default = 0, null=True, blank=True)
 
 
 class FeedBack(models.Model):
@@ -29,3 +31,4 @@ class FeedBack(models.Model):
     feedback=models.CharField(max_length=255,blank=True)
     tester=models.ForeignKey(UxTester,on_delete=models.SET_NULL,null=True,blank=True)
     client=models.ForeignKey(UxClient,on_delete=models.SET_NULL,null=True,blank=True)
+    

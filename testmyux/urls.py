@@ -49,6 +49,7 @@ urlpatterns = [
    path('tester/forgetpassword/clicklink/<uidb64>/<token>', click_link, name="tester-clicklink"),
    path('tester/changepassword/<int:pk>', change_password, name="tester-change-password"),
    
+   path('client/rating/<int:pk>', rating, name='rating'),
 
 
 ] 
