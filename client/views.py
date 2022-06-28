@@ -150,9 +150,15 @@ def sent_by_tester(request):
     if request.user.is_authenticated:
         user = request.user.uxclient
         videos = UploadVideo.objects.filter(client=user.pk)
+        if request.method== 'POST':
+            rating = request.POST.get('rating')
+            
       
     else:
         videos = UploadVideo.objects.all()
+
+   
+        
     
     context = {
             'videos': videos
@@ -266,3 +272,11 @@ def change_password(request, pk):
             return redirect('client-login')
     return render(request, "client/forgetpassword/changepassword.html")
     
+def rating(request, pk):
+    video = UploadVideo.objects.get(id=pk)
+    if request.method == 'POST':
+        video.rating = request.POST.get('rating')
+        video.save()
+        messages.success(request, "Your rating has been submitted")
+    return redirect('sentbytester')
+        
