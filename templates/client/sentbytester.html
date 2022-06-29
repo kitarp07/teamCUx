@@ -35,17 +35,25 @@
             <td data-label="Campaign Name">{{video.test.title}}</td>
             <td data-label="Product Owner">{{video.client.name}}</td>
             <td data-label="Video by">{{video.tester.name}}</td>
-            <td data-label="Video Link" data-target="#gotoLink">
-                <a href="#popup1" class="download"></a>
+            <td data-label="Video Link">
+                <a href="#popup1"  class="download videolink"></a>
+                <!-- Button trigger modal -->
+                <a type="button" data-target="{{video.video_link}}" data-toggle="modal" class="download">
+                    
+                </a>
             </td>
             <!-- <td class="pop" data-label="Feedback">
                 <a href="#popup2" class="feedback"></a>
             </td> -->
-            <td class="pop" data-label="Feedback"><a type="button"  data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" class="feedback"></a>
+            <td class="pop" data-label="Feedback"><a type="button" data-toggle="modal" data-target="#exampleModal"
+                    data-whatever="@mdo" class="feedback"></a>
             </td>
+            <td><a target="_blank" href="{{video.video_link}}">fkfkkfk</a> </td>
 
             <!--       <td>Brian Miller</td> -->
         </tr>
+
+
 
 
 
@@ -64,6 +72,7 @@
                             {%csrf_token%}
 
                             <h3>Rate</h3>
+                            {{video.video_link}}
                             <select name="rating" id="ratedrop" required>
                                 <option value="">Select a Star</option>
                                 <option class="firststar" value="1" onclick="teststarvalue()">1 &#11088;</option>
@@ -76,17 +85,44 @@
                             <textarea class="comment" cols="40" rows="8" charswidth="23"
                                 placeholder="Enter your feedback here"></textarea>
                             <!-- <button class="feedbtn" type="submit">Submit</button> -->
-                       
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        
-                       <input type="submit" value="Save changes" />
-                    </form>
+
+                        <input type="submit" value="Save changes" />
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+        <!-- Modal
+        <div class="modal fade" id="{{video.video_link}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Click a link to go to the video</h3>
+                        {{video.video_link}}
+                        <button class="link1"><a href="{{video.video_link}}">Link 1</a></button>
+                        <button class="link2"><a href="#">Link 2</a></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       
+                    </div>
+                </div>
+            </div>
+        </div> -->
         {%endfor%}
 
 
@@ -98,11 +134,14 @@
         <a class="close" href="#">&times;</a>
         <div class="content">
             <h3>Click a link to go to the video</h3>
+            {{video.video_link}}
             <button class="link1"><a href="{{video.video_link}}">Link 1</a></button>
             <button class="link2"><a href="#">Link 2</a></button>
         </div>
     </div>
 </div>
+
+
 
 
 <!-- <div id="popup2" class="overlay feed">
@@ -147,8 +186,8 @@
                     <option class="fifthstar" value="5">5 &#11088;&#11088;&#11088;&#11088;&#11088;</option>
                 </select>
                 <h3>Feedback</h3>
-                <textarea class="comment" cols="40" rows="8" charswidth="23"
-                    placeholder="Enter your feedback here" name="feedback"></textarea>
+                <textarea class="comment" cols="40" rows="8" charswidth="23" placeholder="Enter your feedback here"
+                    name="feedback"></textarea>
                 <!-- <textarea class="comment" cols="40" rows="8" charswidth="23"
                     name="tester"></textarea>
                     <input value="{{request.user.id}}" > -->
@@ -170,6 +209,16 @@
     }
 
 
+
+</script>
+<script>
+    var btn = document.getElementsByClassName('videolink')
+    var popup1 = document.getElementById('popup1')
+    btn.addEventListener('click', function(){
+        popup1.show();
+
+
+    });
 
 </script>
 {% endfor %}

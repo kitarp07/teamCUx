@@ -50,6 +50,7 @@ urlpatterns = [
    path('tester/changepassword/<int:pk>', change_password, name="tester-change-password"),
    
    path('client/rating/<int:pk>', rating, name='rating'),
+   path('client/delete-account/<int:pk>', delete_account, name="delete-account")
 
 
 ] 

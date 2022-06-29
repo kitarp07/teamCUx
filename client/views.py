@@ -272,6 +272,16 @@ def change_password(request, pk):
             customer.save()
             return redirect('client-login')
     return render(request, "client/forgetpassword/changepassword.html")
+
+def delete_account(request, pk):
+    customer = UxClient.objects.get(id=pk)
+    user = User.objects.get(email=customer.email)
+    logout(request)
+    customer.delete()
+    user.delete()
+    messages.success(request, "Your account has been deleted")
+    return redirect('client-login')
+
     
 def rating(request, pk):
     video = UploadVideo.objects.get(id=pk)
