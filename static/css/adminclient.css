@@ -1,0 +1,49 @@
+.btn {
+    border-radius: 10px;
+    border: 2px solid #513CD2;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+.popup .content button {
+    overflow: hidden;
+}
+
+.popup .content .confirm {
+    background-color: #198754;
+    padding: 10px 40px;
+}
+
+.popup .content a {
+    position: relative;
+    right: 28px;
+    bottom: 5px;
+}
+
+.popup .content .cancel {
+    background-color: #d4403a;
+    padding: 10px 40px;
+    text-align: center;
+}
+
+.popup .content .confirm:hover {
+    background-color: #5cb85c;
+}
+
+.popup .content .cancel:hover {
+    background-color: #ff4039;
+}
