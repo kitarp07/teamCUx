@@ -122,7 +122,7 @@ def activate_user(request, uidb64,token):
         customer.save()    
 
         messages.add_message(request,messages.SUCCESS,'eMAIL VERIFIED')   
-        return redirect(reverse('tester-email-verified'))
+        return redirect('tester-email-verified')
 
 
     return render(request,'Tester/activate-failed.html',{"user":user})    
@@ -192,16 +192,36 @@ def tester_upload_video(request):
     form = UploadVideoForm()
     if request.user.is_authenticated:
         customer = request.user.uxtester
+        tests = CreateTests.objects.all()
         if request.method == 'POST':
             form = UploadVideoForm(request.POST)
             if form.is_valid():
                 link = form.cleaned_data['video_link']
+                test = form.cleaned_data['test']
+                
+                client = test.created_by
+                tester = request.user.uxtester
 
-            form.save()
+                video = UploadVideo.objects.create(
+                    video_link = link,
+                    client = client, 
+                    test = test, 
+                    tester= tester)
+
+            
+        
+        context = {
+            'tests': tests
+        }
     else:
+        context = {
+            
+        }
         return HttpResponse("You are not logged in.")
 
-    return render(request, "Tester/uploadvideo.html")
+       
+
+    return render(request, "Tester/uploadvideo.html", context)
 
 def view_all_tests(request):
     tests = CreateTests.objects.all()

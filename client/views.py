@@ -151,21 +151,35 @@ def sent_by_tester(request):
     if request.user.is_authenticated:
         user = request.user.uxclient
         videos = UploadVideo.objects.filter(client=user.pk)
-        if request.method== 'POST':
-            rating = request.POST.get('rating')
-            
-      
+        
     else:
         videos = UploadVideo.objects.all()
 
-   
-        
-    
     context = {
             'videos': videos
         }
 
     return render(request, "client/sentbytester.html", context)
+
+def alltests(request):
+    if request.user.is_authenticated:
+        user = request.user.uxclient
+        tests = CreateTests.objects.filter(created_by=user.pk)
+        
+    else:
+        messages.success(request, "You are not logged in")
+        return redirect('client-login')
+
+   
+        
+    
+    context = {
+            'tests': tests
+        }
+
+    return render(request, "client/alltests.html", context)
+
+
 
 def client_profile(request):
     user = request.user

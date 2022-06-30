@@ -60,7 +60,12 @@
 }
 
 /*------------- download overlay---------------- */
+
+#popup1 {
+    display: none;
+}
 .overlay {
+   
     position: fixed;
     top: 0;
     bottom: 0;
@@ -76,6 +81,8 @@
     visibility: visible;
     opacity: 1;
 }
+
+
 
 .popup {
     margin: 300px auto;

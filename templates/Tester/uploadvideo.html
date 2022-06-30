@@ -12,7 +12,13 @@
     <form method="post">
         {%csrf_token%}
         <label>Campaign Name:</label>
-        <input type="text" />
+        
+        <select name="test" required>
+            {% for test in tests%}
+            <option value={{test.id}}>{{test.title}}</option>
+            {% endfor%}
+        </select>
+        <br>
         <label>Video Link:</label>
         <input type="text" name="video_link" />
         <label>Video Link 2 (Optional):</label>
