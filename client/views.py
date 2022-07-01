@@ -133,6 +133,11 @@ def create_test(request):
                 mention_tasks = form.cleaned_data['mention_tasks']
                 requirements = form.cleaned_data['requirements']
                 additional_guidelines = form.cleaned_data['additional_guidelines']
+                cardname = form.cleaned_data['nameoncard']
+                cardnum = form.cleaned_data['cardnumber']
+                cvv = form.cleaned_data['cvv']
+                expdate = form.cleaned_data['expirydate']
+
 
                 CreateTests.objects.create(
                     title= title,
@@ -140,6 +145,12 @@ def create_test(request):
                     requirements = requirements,
                     additional_guidelines = additional_guidelines,
                     created_by = customer,
+                    nameoncard = cardname,
+                    cardnumber = cardnum,
+                    cvv = cvv,
+                    expirydate =expdate,
+                    amountpaid = 10
+
                 )
 
     return render(request, "client/create-test.html")
@@ -304,4 +315,12 @@ def rating(request, pk):
         video.save()
         messages.success(request, "Your rating has been submitted")
     return redirect('sentbytester')
-        
+
+
+def approvetests(request, pk):
+    test = CreateTests.objects.get(id=pk)
+     
+    if request.method == 'POST':
+        test.isApproved = True
+        test.save()
+        return redirect('admintests')

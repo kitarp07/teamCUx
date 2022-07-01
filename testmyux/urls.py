@@ -55,6 +55,7 @@ urlpatterns = [
    path('admin/admintester', admintester, name="admintester"),
    path('admin/adminclient', adminclient, name="adminclient"),
    path('admin/admintests', admintests, name="admintests"),
+   path('client/approvetests/<int:pk>', approvetests, name="approvetest")
 
 
 ] 
