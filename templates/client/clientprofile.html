@@ -21,22 +21,23 @@
 
 
 </head>
-<a href="{% url 'client-edit-profile' customer.id%}">Edit</a>
+
 <!-- <button type="button" class="edit" data-toggle="modal" data-target="#exampleModal">
     Delete
 </button> -->
 
-<a href="#delete" type="button" class="deletelink" >
-    Delete
-</a>
+
 
 <body>
     <div class="wrapper">
         <div class="profilebox">
-            <button class="edit"><i class="far fa-edit"></i>Edit</button>
+            <button class="edit"><i class="far fa-edit"></i><a
+                    href="{% url 'client-edit-profile' customer.id%}">Edit</a></button>
 
-            <button type="button" class="edit" data-toggle="modal" data-target="#exampleModal">
-                Delete
+            <button type="button" class="edit delete" data-toggle="modal" data-target="#exampleModal">
+                <a href="#delete" type="button" class="deletelink">
+                    Delete
+                </a>
             </button>
 
             <img class="profilepic" img src="{% static 'images/profilepic.jpg' %}" alt="profile_image"></img>
@@ -91,19 +92,19 @@
 
         </div> -->
 
-        <div id="delete" class="overlay" >
+        <div id="delete" class="overlay">
             <div class="popup">
                 <a class="close" href="#">&times;</a>
                 <div class="content">
                     <h3>Delete?</h3>
-                    
+
                     <a href="/client/delete-account/{{customer.id}}">Delete</a>
                     <button><a href="#">Cancel</a></button>
                 </div>
             </div>
         </div>
 
-    
+
 
         <div class="wrapper-two">
 
@@ -130,15 +131,19 @@
                     <tr class="tbody">
                         <td data-label="productimg"><img src="{% static 'images/profilepic.jpg' %}"></td>
                         <td data-label="campaignname">Hello Pets</td>
-                        <td data-label="editing"><button>Edit</button> <button>Delete</button></td>
+                        <td data-label="editing">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </td>
 
                     </tr>
                     <tr class="tbody">
                         <td data-label="productimg"><img src="{% static 'images/profilepic.jpg' %}"></td>
                         <td data-label="campaignname">Hello Pets</td>
-                        <td data-label="editing"><button class="edit">Edit</button> <button
-                                class="delete">Delete</button></td>
-
+                        <td data-label="editing">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -150,13 +155,13 @@
 
     {{message}}
     {% endif%}
-   
-    <script>
-        ".deletelink".click(function(){
 
-           $('#delete').show();
+    <script>
+        ".deletelink".click(function () {
+
+            $('#delete').show();
         });
-    
+
     </script>
 
 
