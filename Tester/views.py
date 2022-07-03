@@ -190,6 +190,7 @@ def tester_email_verified(request):
 
 def tester_upload_video(request):
     form = UploadVideoForm()
+    tests = CreateTests.objects.all()
     if request.user.is_authenticated:
         customer = request.user.uxtester
         if request.method == 'POST':
@@ -200,9 +201,10 @@ def tester_upload_video(request):
             form.save()
     else:
         return HttpResponse("You are not logged in.")
-
-    return render(request, "Tester/uploadvideo.html")
-
+    
+    context = {"tests": tests}
+    return render(request, "Tester/uploadvideo.html", context)
+    
 def view_all_tests(request):
     tests = CreateTests.objects.all()
     context = {"tests": tests}
