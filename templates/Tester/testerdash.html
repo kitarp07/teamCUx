@@ -25,7 +25,7 @@
         <img src="{% static 'images/logo.png' %}" alt="Test MY UXLogo" class="logo">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="{% url 'homepage'%}" class="nav-link">Home</a>
+                <a href="{% url 'homepage' %}" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">About Us</a>
@@ -38,7 +38,7 @@
             </li>
         </ul>
         <div class="dropdown">
-            <a href="{% url 'myprofile' request.user.uxtester.id %}"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png" class="profimg" onclick="profFunction()"></class>/a>
+            <a href="{% url 'myprofile' request.user.uxtester.id %}"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png" class="profimg" onclick="profFunction()"></class>
                
             <div id="profDrop" class="profdrop-content">
                 <a href="#">Log out</a>

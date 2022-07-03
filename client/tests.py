@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from pydoc import cli
 from re import S
 from urllib import response
@@ -9,6 +10,7 @@ from requests import request
 from client.views import *
 from client.models import UxClient
 from client.utils import generate_token
+from Tester.models import UxTester
 
 
 class TestViews(TestCase):
@@ -284,6 +286,54 @@ class TestViews(TestCase):
 
         self.assertEquals(response.status_code, 302)
         self.assertRedirects(response, '/client/login')
+    
+    def test_rating(self):
+        user = User.objects.create(username="user", email="user@gmail.com")
+        user.set_password('password')
+        user1 = User.objects.create(username="user1", email="user1@gmail.com")
+        user1.set_password('password1')
+        user.save()
+        client = Client()
+        login = client.login(username="user", password="password")
+        customer = UxTester.objects.create( user=user1,
+            name="testname",
+            email="user@gmail.com",
+            phone="9848044876",
+            password="password" )
+        customer1 = UxClient.objects.create(
+            user=user,
+            name="testname",
+            email="user@gmail.com",
+            phone="9848044876",
+            password="password"
+
+        )
+        test = CreateTests.objects.create(
+           id = 1,
+           title = 'test name',
+           mention_tasks = 'tasks',
+           requirements = 'requirements',
+           additional_guidelines = 'additional',
+        )
+        video = UploadVideo.objects.create(
+            id = 100,
+            video_link = 'videolink',
+            client = customer1,
+            test = test,
+            tester = customer
+
+        )
+        rate_url = reverse('rating', args=[video.id])
+        response_rate = client.post(rate_url)
+        client.post(rate_url)
+        self.assertEquals(response_rate.status_code, 302)
+        self.assertRedirects(response_rate, '/client/sentbytester')
+
+
+        
+
+        
+
 
 
 
