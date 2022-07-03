@@ -26,8 +26,8 @@
                 <!------------ image on the left side --------------->
                 <img src="{% static 'images/secure_login_pdn4 2.png' %}" alt="register image">
             </div>
-            
-           
+
+
             <form method="post">
                 {%csrf_token%}
                 <label class="lbl">Email</label>
@@ -49,7 +49,7 @@
                     <input type="checkbox" id="terms_and_conditions" value="1" onclick="terms_changed(this)">
                     By submitting, I agree to terms and conditions.
                 </agree>
-                <a href="#link">Already have an account? Login</a>
+                <a href="{% url 'client-login' %}">Already have an account? Login</a>
             </form>
         </div>
     </div>
