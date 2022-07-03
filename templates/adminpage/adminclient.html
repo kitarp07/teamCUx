@@ -12,16 +12,18 @@
             <!-- <th>Tests Created</th> -->
             <th>Manage</th>
         </tr>
+        {% for user in users%}
         <tr class="tbody">
-            {% for user in users%}
+
             <td data-label="Client Name">{{user.name}}</td>
             <td data-label="Email">{{user.email}}</td>
             <td data-label="Phone no.">{{user.phone}}</td>
             <!-- <td data-label="Tests Created">5</td> -->
-            
+
             <td> <a href="#popup1_{{user.id}}" class="managetester">Delete</a> </td>
-            {% endfor %}
+
         </tr>
+        {% endfor %}
 
     </table>
 </div>
