@@ -1,7 +1,9 @@
+from pydoc import cli
 from re import S
 from urllib import response
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
+from requests import request
 # Create your tests here.
 
 from client.views import *
@@ -239,5 +241,50 @@ class TestViews(TestCase):
 
         self.assertEquals(customer.password, 'newpassword')
         self.assertEquals(response.status_code, 302)
+    
+    def sent_by_tester(self):
+        user = User.objects.create(username="user", email="user@gmail.com")
+        user.set_password('password')
+        user.save()
+        client = Client()
+
+        customer = UxClient.objects.create(
+            user=user,
+            name="testname",
+            email="user@gmail.com",
+            phone="9848044876",
+            password="password"
+
+        )
+        url = reverse('sent-by-tester')
+
+        response = client.post(url)
+
+        customer.refresh_from_db()
+
+        self.assertEquals(response.status_code, 302)
+
+    def test_deleteaccount(self):
+        user = User.objects.create(username="user", email="user@gmail.com")
+        user.set_password('password')
+        user.save()
+        client = Client()
+
+        customer = UxClient.objects.create(
+            user=user,
+            name="testname",
+            email="user@gmail.com",
+            phone="9848044876",
+            password="password"
+
+        )
+        url = reverse('delete-account', args=[customer.id])
+        
+        response = client.post(url)
+
+        self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, '/client/login')
+
+
 
     
