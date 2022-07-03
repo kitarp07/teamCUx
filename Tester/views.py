@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render, reverse
 from Tester.forms import FeedbackForm, TesterForm, UploadVideoForm, UserDeleteForm
 from django.contrib.auth.models import User, Group
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -12,7 +12,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 
 from client.models import CreateTests, UxClient
-from .utils import generate_token
+from Tester.utils import generatee_token
 from django.core.mail import EmailMessage
 from django.conf import settings
 from Tester.models import FeedBack, UploadVideo, UxTester
@@ -29,7 +29,7 @@ def send_activation_email(user, request):
         'user': user,
         'domain': current_site,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': generate_token.make_token(user)
+        'token': generatee_token.make_token(user)
     })
     customer = UxTester.objects.get(user=user.pk)
     email = EmailMessage(subject=email_subject, body=email_body,
@@ -118,6 +118,23 @@ def tlogin(request):
     return render(request, 'Tester/login.html')   
 
 
+def send_activation_email(user,request):
+    current_site=get_current_site(request)
+    email_subject ='Activate your account'
+    email_body= render_to_string('Tester/activate.html',{
+        'user':user,
+        'domain':current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generatee_token.make_token(user)
+    })
+    customer=UxTester.objects.get(user=user.pk)
+    email=EmailMessage(subject=email_subject,body=email_body,
+                    from_email=settings.EMAIL_FROM_USER,
+                    to=[customer.email]
+    )
+    
+    email.send()
+
 def activate_user(request, uidb64,token):
     try:
         uid= force_str(urlsafe_base64_decode(uidb64))
@@ -128,7 +145,7 @@ def activate_user(request, uidb64,token):
     except Exception as e:  
         user=None 
 
-    if user and generate_token.check_token(user,token):
+    if user and generatee_token.check_token(user,token):
         customer.is_email_verified=True
         customer.save()    
 
@@ -139,35 +156,37 @@ def activate_user(request, uidb64,token):
     return render(request,'Tester/activate-failed.html',{"user":user})    
 
 
-@login_required
+
 def afterlogin_view(request):
     if request.user.is_superuser:
-        return redirect('admindash')
+        return redirect('homepage')
     else:
         messages.error(request, "Invalid login credentials")
-        return redirect('admin')    
+        return redirect('admin')  
 
+
+# @login_required (login_required='admin')
+def admin_dashoard(request):
+    return render(request, 'adminpage/viewcustomer.html')    
 
 
 def view_customer(request):
     users=UxTester.objects.all()
-    return render(request,"adminpage/viewcustomer.html",{'users':users})   
-
-    
+    return render(request,"adminpage/viewcustomer.html",{'users':users})    
 
 def view_client(request):
     clients=UxClient.objects.all()
     return render(request,"adminpage/viewclient.html",{'clients':clients})
 
-def tester_dashoard(request):
+
+def tester_dashboard(request):
     tester= request.user.uxtester
     context={
         'tester':tester
     }
     return render(request, 'Tester/testerdash.html',context)    
 
-def admin_dashoard(request):
-    return render(request, 'adminpage/admindash.html')     
+ 
 
 def myprofile(request, pk):
     
@@ -177,6 +196,7 @@ def myprofile(request, pk):
         "user": user
         }
     return render(request,'Tester/myprofile.html',context)
+
 
 def editprofile(request,pk):
     user =UxTester.objects.get(id=pk)
@@ -191,14 +211,69 @@ def editprofile(request,pk):
         'userForm': userForm,
         'user':user
     })
-
-
-
     return render(request, 'Tester/testerdash.html')    
 
 def tester_email_verified(request):
     return render(request, "EmailVerified/EmailVerified.html")
 
+def send_forget_password_email(request, user):
+    subject = "Reset password link"
+    if request.method == "POST":
+        email = request.POST.get('email')
+    current_site = get_current_site(request)
+    email_body = render_to_string('client/forgetpassword/clicklink.html', {
+        'user': user,
+        'domain': current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generatee_token.make_token(user),
+
+    })
+    email = EmailMessage(subject=subject, 
+    body=email_body, 
+    from_email= settings.EMAIL_FROM_USER,
+    to=[user.email]
+    )
+    email.send()
+
+
+#forget password
+def enter_email(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if not User.objects.filter(email=email):
+            messages.success(request, 'User not registered')
+        else:
+            user = User.objects.get(email=email)
+            print (user.username)
+            send_forget_password_email(request, user)
+    return render(request, 'Tester/forgetpassword/enteremail.html')
+
+def click_link(request,  uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+        customer = UxTester.objects.get(user=user)
+    except Exception as e:
+        user = None
+    if user and generatee_token.check_token(user, token):
+        return redirect ('change-password', pk=user.id)
+    return render(request, 'Tester/forgetpassword/clicklink.html')
+
+def change_password(request, pk):
+    user = User.objects.get(id=pk)
+    customer = UxTester.objects.get(user=user)
+    if request.method == "POST":
+        password = request.POST.get("newpassword")
+        cpassword = request.POST.get("confirmpassword")
+        if password == cpassword:
+            customer.password = password
+            user.set_password(password)
+            user.save()
+            customer.save()
+            return redirect('tlogin')
+    return render(request, "Tester/forgetpassword/changepassword.html")
+    
+@login_required(login_url='tlogin')
 def tester_upload_video(request):
     form = UploadVideoForm()
     if request.user.is_authenticated:
@@ -248,7 +323,7 @@ def send_forget_password_email(request, user):
         'user': user,
         'domain': current_site,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-        'token': generate_token.make_token(user),
+        'token': generatee_token.make_token(user),
 
     })
     email = EmailMessage(subject=subject, 
@@ -281,7 +356,7 @@ def click_link(request,  uidb64, token):
         customer = UxTester.objects.get(user=user)
     except Exception as e:
         user = None
-    if user and generate_token.check_token(user, token):
+    if user and generatee_token.check_token(user, token):
         return redirect ('change-password', pk=user.id)
 
     return render(request, 'Tester/forgetpassword/clicklink.html')
@@ -323,22 +398,7 @@ def delete_tester(request,pk):
     user=UxTester.objects.get(id=pk)
     user.delete()
     return redirect('homepage')  
-
-
-# def send_feedback(request):
-    # if request.user.is_authenticated:
-    #     user=request.user.uxclient
-    # #     # user1=request.user.uxtester
-    #     feed=FeedBack.objects.filter(client=user.pk)  
-    # else:
-    # feed=FeedBack.objects.all()
-
-    # context={
-    #     'feed':feed
-    # } 
-
-    # return render(request, "client/sendfeedback.html",context)        
-
+     
 def send_feedbackform(request):
     print(request.user.id)
     user = request.user
@@ -356,3 +416,18 @@ def send_feedbackform(request):
         form=FeedbackForm()    
     context={'form':form}
     return render(request, 'client/sendfeedback.html',context)
+
+
+def tlogout(request):
+    logout(request)
+    messages.add_message(request,messages.SUCCESS,'Sucessfully logged out') 
+    return redirect('tlogin')
+        
+
+
+def logout_admin(request):
+    logout(request)
+    messages.add_message(request,messages.SUCCESS,'Sucessfully logged out') 
+
+    return redirect ('tlogin')
+
