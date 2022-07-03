@@ -1,5 +1,7 @@
 from http import client
 from lib2to3.pgen2 import token
+from tokenize import group
+from unicodedata import name
 import uuid
 
 
@@ -19,6 +21,8 @@ from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from Tester.models import UxTester
+
 
 def send_verification_email(user, request):
     current_site = get_current_site(request)
@@ -41,6 +45,8 @@ def send_verification_email(user, request):
 
     email.send()
 
+
+
 def client_reg_view(request):
     form = ClientForm()
     if request.method == 'POST': 
@@ -51,20 +57,37 @@ def client_reg_view(request):
             email = form.cleaned_data['email']
             pw = form.cleaned_data['password']
             cpw = request.POST.get('cpassword')
+            
+            if User.objects.filter(username=name).exists() or User.objects.filter(email=email).exists():
+                messages.success(request, "User already exists. Please choose different name and email")
+            else:
+                if name != "" and name !=  "" and name != "" and name != "":
+                    if pw==cpw:
+                        user = User.objects.create_user(name, email, pw)
+                        
+                        
+                        try:   
+                            group = Group.objects.get(name="client")
+                        except:
+                            group = Group.objects.create(name="client")
+                            
+                        user.groups.add(group)
+                        user.save()
 
-            if pw==cpw:
-                user = User.objects.create_user(name, email, pw)
-                group = Group.objects.get(name='client')
-                user.groups.add(group)
-                user.save()
+                    
 
-                client = form.save(commit=False) # save info but dont commit change to database
-                client.user = user
-                client.save()
-                send_verification_email(user, request)
+                        client = form.save(commit=False) # save info but dont commit change to database
+                        client.user = user
+                        client.save()
+                        send_verification_email(user, request)
+                        messages.success(request, "Please check your email for email verification")
+                        return redirect('client-login')
+                    else:
+                        messages.success(request, "Passwords don't match")
+                else:
+                    messages.success(request, "Please fill all the fields")
 
-                if user.uxclient.isEmailVerified:
-                    messages.success(request, "Please check your email for email verification")
+
     context = {'form': form}
 
     return render(request, 'client/register.html', context)
@@ -88,12 +111,16 @@ def verify_email(request, uidb64, token):
 
 
 def client_login_view(request):
+   
+    
+
     if request.method == 'POST':
         email = request.POST.get('email')
         passw = request.POST.get('password')
         
         user = authenticate(request, username=email, password=passw)
 
+        
         if user is None:
             messages.success(request, "Wrong Credentials. Please try again")
        
@@ -137,6 +164,11 @@ def create_test(request):
                 mention_tasks = form.cleaned_data['mention_tasks']
                 requirements = form.cleaned_data['requirements']
                 additional_guidelines = form.cleaned_data['additional_guidelines']
+                cardname = form.cleaned_data['nameoncard']
+                cardnum = form.cleaned_data['cardnumber']
+                cvv = form.cleaned_data['cvv']
+                expdate = form.cleaned_data['expirydate']
+
 
                 CreateTests.objects.create(
                     title= title,
@@ -144,6 +176,12 @@ def create_test(request):
                     requirements = requirements,
                     additional_guidelines = additional_guidelines,
                     created_by = customer,
+                    nameoncard = cardname,
+                    cardnumber = cardnum,
+                    cvv = cvv,
+                    expirydate =expdate,
+                    amountpaid = 10
+
                 )
 
     return render(request, "client/create-test.html")
@@ -155,21 +193,35 @@ def sent_by_tester(request):
     if request.user.is_authenticated:
         user = request.user.uxclient
         videos = UploadVideo.objects.filter(client=user.pk)
-        if request.method== 'POST':
-            rating = request.POST.get('rating')
-            
-      
+        
     else:
         videos = UploadVideo.objects.all()
 
-   
-        
-    
     context = {
             'videos': videos
         }
 
     return render(request, "client/sentbytester.html", context)
+
+def alltests(request):
+    if request.user.is_authenticated:
+        user = request.user.uxclient
+        tests = CreateTests.objects.filter(created_by=user.pk)
+        
+    else:
+        messages.success(request, "You are not logged in")
+        return redirect('client-login')
+
+   
+        
+    
+    context = {
+            'tests': tests
+        }
+
+    return render(request, "client/alltests.html", context)
+
+
 
 def client_profile(request):
     user = request.user
@@ -276,6 +328,16 @@ def change_password(request, pk):
             customer.save()
             return redirect('client-login')
     return render(request, "client/forgetpassword/changepassword.html")
+
+def delete_account(request, pk):
+    customer = UxClient.objects.get(id=pk)
+    user = User.objects.get(email=customer.email)
+    logout(request)
+    customer.delete()
+    user.delete()
+    messages.success(request, "Your account has been deleted")
+    return redirect('client-login')
+
     
 def rating(request, pk):
     video = UploadVideo.objects.get(id=pk)
@@ -289,3 +351,12 @@ def clientlogout(request):
     logout(request)
     messages.add_message(request,messages.SUCCESS,'Sucessfully logged out') 
     return redirect('login')        
+
+
+def approvetests(request, pk):
+    test = CreateTests.objects.get(id=pk)
+     
+    if request.method == 'POST':
+        test.isApproved = True
+        test.save()
+        return redirect('admintests')

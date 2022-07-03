@@ -1,0 +1,74 @@
+{% extends 'adminpage/admindash.html' %}
+
+{% load static %}
+
+{% block adminblock%}
+<div class="dash-content">
+    <table class="content-item">
+        <tr class="thead">
+            <th>Tester Name</th>
+            <th>Email</th>
+            <th>Phone no.</th>
+            <!-- <th>Tests Created</th> -->
+            <th>Manage</th>
+        </tr>
+        {% for user in users%}
+        <tr class="tbody">
+
+            <td data-label="Tester Name">{{user.name}}</td>
+            <td data-label="Email">{{user.email}}</td>
+            <td data-label="Phone no.">{{user.phone}}</td>
+            <!-- <td data-label="Tests Created">5</td> -->
+            <!-- <td data-label="Manage"><button class="del btn"><a href="#popup1_{{user.id}}">Delete</a></button></td> -->
+            <td> <a href="#popup1_{{user.id}}" class="managetester">Delete</a> </td>
+            <!-- <td><a href="#popup1_{{user.id}}" type="button" class="deletelink">
+                    Delete
+                </a></td> -->
+        </tr>
+        <div id="popup1_{{user.id}}" class="overlay" data-target="gotoLink">
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <h3>Are you sure you want to delete {{user.name}} from the database?</h3>
+                    <button class="link1 confirm"><a href="#">Confirm</a></button>
+                    <button class="link2 cancel"><a href="#">Cancel</a></button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </table>
+</div>
+
+<!-- <script>
+    ".deletelink".click(function () {
+
+        $('#delete').show();
+    });
+
+</script> -->
+
+<div id="delete" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+            <h3>Delete?</h3>
+
+            <button href="/client/delete-account/{{customer.id}}">Delete</button>
+            <button><a href="#">Cancel</a></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (".managetester").click(function () {
+        var id = $(this).attr("id").split("_")[1]
+
+        $('#popup1_${id}').show();
+    })
+
+
+</script>
+
+
+{%endblock adminblock%}

@@ -61,6 +61,10 @@
     margin-top: 20px;
 }
 
+.form-field form {
+    display: flex;
+}
+
 .form-field .left {
     display: flex;
     flex-direction: column;

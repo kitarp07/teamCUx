@@ -24,7 +24,14 @@ class CreateTests(models.Model):
     requirements = models.TextField(null=True, blank=True)
     additional_guidelines = models.TextField(null=True, blank=True) 
     created_by = models.ForeignKey(UxClient, on_delete=models.SET_NULL, null=True, blank=True)
-    
+    #paymentdetails
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    nameoncard = models.CharField(max_length=100, null=True, blank=True)
+    cardnumber = models.FloatField(default = 0, null=True, blank=True)
+    cvv = models.FloatField(default = 0, null=True, blank=True)
+    expirydate = models.DateTimeField(auto_now_add=False,  null=True, blank=True)
+    amountpaid = models.FloatField(default = 0, null=True, blank=True)
+    isApproved = models.BooleanField(default=False)
 
 
    

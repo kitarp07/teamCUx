@@ -198,7 +198,6 @@ function leftsubmit() {
         document.getElementById("checkout").addEventListener("click", (event) => {
             event.preventDefault();
             document.getElementById('form_left').submit();
-            // document.getElementById('form_right').submit();
             alert('you have submitted');
         })
     }

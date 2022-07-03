@@ -50,8 +50,28 @@ class TestViews(TestCase):
 
 
 
+    # def test_email_verification(self):
+    #     user = User.objects.create(username="user76", email="user123@gmail.com")
+    #     user.set_password('password')
+    #     user.save()
+    #     client = Client()
+    #     customer = UxTester.objects.create(
+    #         user= user,
+    #         name="testname",
+    #          password = "password"
+    #    )
+    #     login = client.login(username="user", password = "password")
+    #     token = generate_token.make_token(user)
+    #     url = reverse('activate', args=[user.pk, token ])
+    #     response = client.post(url)
+    #     print(response.status_code)
+    #     self.assertEquals(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'Tester/activate-failed.html')
+
+
+
     def test_email_verification(self):
-        user = User.objects.create(username="user76", email="user123@gmail.com")
+        user = User.objects.create(username="user", email="user@gmail.com")
         user.set_password('password')
         user.save()
         client = Client()
@@ -74,6 +94,7 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'Tester/activate-failed.html')
     
 
+    
 
     
     def test_adminlogin(self):
@@ -186,26 +207,26 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 302)     
     
     
-    def test_logout(self):
-        # Log in
-        self.client.login(username='XXX', password="XXX")
+    # def test_logout(self):
+    #     # Log in
+    #     self.client.login(username='XXX', password="XXX")
 
-        # Check response code
-        response = self.client.get('/admin/')
-        self.assertEquals(response.status_code, 302)
+    #     # Check response code
+    #     response = self.client.get('/admin/')
+    #     self.assertEquals(response.status_code, 302)
 
-        # Check 'Log out' in response
-        # self.assertTrue('Log out' in response.content)
+    #     # Check 'Log out' in response
+    #     # self.assertTrue('Log out' in response.content)
 
-        # Log out
-        self.client.logout()
+    #     # Log out
+    #     self.client.logout()
 
-        # Check response code
-        response = self.client.get('/admin/')
-        self.assertEquals(response.status_code, 302)
+    #     # Check response code
+    #     response = self.client.get('/admin/')
+    #     self.assertEquals(response.status_code, 302)
 
-        # Check 'Log in' in response
-        self.assertTrue('Log in' in response.content)
+    #     # Check 'Log in' in response
+    #     self.assertTrue('Log in' in response.content)
 
 class TestURL(SimpleTestCase):
     def test_login(self):
@@ -239,3 +260,12 @@ class TestURL(SimpleTestCase):
     def logout_admin(self):
         url=reverse('logout_admin')
         self.assertEquals(resolve(url).func,logout_admin)    
+    #     client=Client()
+    #     client.login(username="myuser",password="password")
+    #     url=reverse('afterlogin')
+    #     response = client.post(url, {
+    #         'username': 'myuser',
+    #         'password': 'password'
+    #     })
+    #     self.assertEquals(response.status_code, 302)
+    #     self.assertRedirects(response, 'admindash')     

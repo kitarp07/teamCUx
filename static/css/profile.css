@@ -3,18 +3,18 @@
     margin: 0;
     padding: 0;
 }
-  
-:root{
+
+:root {
     --font-color: rgba(255, 255, 255);
-    --primary:#ffffff;
+    --primary: #ffffff;
     --accent: #513CD2;
-    --line:#000000;
-    --bg:#F2F2F2;
+    --line: #000000;
+    --bg: #F2F2F2;
     --accentfont: 'Samsung Sharp Sans', sans-serif;
-    
+
 }
 
-body{
+body {
     background: var(--bg);
 }
 
@@ -24,72 +24,70 @@ body{
     grid-template-columns: 500px auto;
     column-gap: 10px;
     row-gap: 1em;
-  }
-  
+}
 
-.profilebox{
-	width: 350px;
-	max-width: 86%;
-	min-height: 500px;
-	padding: 1rem 2rem;
-	border-radius: 30px;
-	background: var(--primary);
-	backdrop-filter: blur(4px);
-	-webkit-backdrop-filter: blur(4px);
-	margin: 40px auto;
-	overflow: hidden;
+
+.profilebox {
+    width: 350px;
+    max-width: 86%;
+    min-height: 500px;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    background: var(--primary);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    margin: 40px auto;
+    overflow: hidden;
 
     text-decoration: none;
-  
+
     position: relative;
 }
 
-  .profilebox:after {
+.profilebox:after {
     content: '';
     display: block;
-    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     border-radius: 30px;
     border: 1px solid #747474;
-  }
+}
 
 
 
-.edit{
+/* .edit {
     margin: auto;
     display: block;
     width: 73px;
     height: 25px;
     margin-top: 2rem;
-    background: #D0D2FF;    
+    background: #D0D2FF;
     border-radius: 30rem;
     color: var(--accent);
     border: none;
     cursor: pointer;
+} */
 
-}
 
-  
-.profilepic{
+.profilepic {
     margin: auto;
     display: block;
     border-radius: 50%;
     width: 8rem;
     height: 8rem;
     margin-top: 2rem;
-    
+
 }
 
-.name{
+.name {
     text-align: center;
-    margin: 2rem 0 ;
+    margin: 2rem 0;
     font-family: var(--accentfont);
 }
 
-.contact{
+.contact {
     text-align: center;
     font-size: 16px;
     font-weight: 500;
@@ -98,7 +96,7 @@ body{
 
 }
 
-.number{
+.number {
     text-align: center;
     font-size: 16px;
     font-weight: normal;
@@ -107,7 +105,7 @@ body{
 
 }
 
-.wrapper-two{
+.wrapper-two {
     width: 80%;
     margin-left: 3rem;
     display: block;
@@ -118,21 +116,21 @@ body{
 
 
 
-.wrapper .wrapper-two .about{
+.wrapper .wrapper-two .about {
     margin: 40px auto;
 
 }
 
-.topic{
+.topic {
     margin-bottom: 1rem;
     font-family: var(--accentfont);
 }
 
-.aboutdes{
+.aboutdes {
     font-family: var(--accentfont);
 }
 
-.producttop{
+.producttop {
     font-family: var(--accentfont);
 
 }
@@ -167,48 +165,190 @@ table {
 .content-item {
     border-collapse: separate;
     border-spacing: 0 20px;
+    width: 100%;
 }
 
-.dash-content .content-item .tbody img{ 
+.dash-content .content-item .tbody img {
     width: 6rem;
-    height: 4rem;  
+    height: 4rem;
 }
-.editing{
+
+.editing {
     display: block;
     align-items: center;
     text-align: center;
 
 }
 
-.editproduct{
+/* .editproduct {
     width: 1rem;
     height: 1rem;
-    background: #D0D2FF;    
+    background: #D0D2FF;
+    border-radius: 30rem;
+    color: var(--accent);
+    border: none;
+    cursor: pointer;
+} */
+
+.edit {
+    width: 73px;
+    height: 25px;
+    background: #D0D2FF;
+    border-radius: 30rem;
+    color: var(--accent);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.delete {
+    width: 73px;
+    height: 25px;
+    background: #D0D2FF;
     border-radius: 30rem;
     color: var(--accent);
     border: none;
     cursor: pointer;
 }
 
-.delete{
-    width: 73px;
-    height: 25px;
-    background: #D0D2FF;    
-    border-radius: 30rem;
-    color: var(--accent);
-    border: none;
-    cursor: pointer;
+.profilebox .edit {
+    margin: 0 auto 10px;
+}
+
+.profilebox .delete {
+    margin: 0 auto;
+}
+
+.profilebox a {
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.profilebox i {
+    margin-top: 5px;
 }
 
 @media screen and (max-width: 900px) {
-    .wrapper{
+    .wrapper {
         display: block;
     }
-    .wrapper-two{
+
+    .wrapper-two {
         margin: auto;
     }
-    .profilebox{
-        min-height: 450px ;
+
+    .profilebox {
+        min-height: 450px;
+    }
+
+}
+
+.deletemodal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: red;
+    transition: opacity 500ms;
+
+    opacity: 0;
+}
+
+#delete {
+    display: none;
+}
+
+
+.overlay {
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+.popup {
+    margin: 300px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+
+.popup h3 {
+    margin-top: 0;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+}
+
+.popup .close {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.popup .close:hover {
+    color: #513CD2;
+}
+
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup .content button {
+    background-color: #513CD2;
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
+}
+
+.popup .content button:hover {
+    background-color: #7479F8;
+}
+
+.popup .content .link1 {
+    margin-bottom: 20px;
+}
+
+.popup .content a {
+    color: white;
+    font-size: large;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 700px) {
+    .popup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 80px;
     }
 
 }

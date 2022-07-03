@@ -38,8 +38,9 @@ urlpatterns = [
    path('tester/upload-video', tester_upload_video, name='upload-video'),
    path('client/email-verified', email_verified_page, name='email-verified' ),
    path('tester/email-verified', email_verified_page, name='tester-email-verified' ),
-   path('tester/alltests', view_all_tests, name= "alltests"),
+   path('tester/alltests', view_all_tests, name= "testeralltests"),
    path('client/sentbytester', sent_by_tester, name='sentbytester'),
+   path('client/alltests', alltests, name='alltests'),
    path('client/profile', client_profile, name='client-profile'),
    path('client/edit-profile/<int:pk>', edit_profile, name='client-edit-profile'),
    path('client/forgetpassword/enteremail', enter_email, name='enter-email'),
@@ -50,7 +51,12 @@ urlpatterns = [
    path('tester/changepassword/<int:pk>', change_password, name="tester-change-password"),
    
    path('client/rating/<int:pk>', rating, name='rating'),
-   path('client/clientlogout',clientlogout,name='clientlogout')
+   path('client/clientlogout',clientlogout,name='clientlogout'),
+   path('client/delete-account/<int:pk>', delete_account, name="delete-account"),
+   path('admin/admintester', admintester, name="admintester"),
+   path('admin/adminclient', adminclient, name="adminclient"),
+   path('admin/admintests', admintests, name="admintests"),
+   path('client/approvetests/<int:pk>', approvetests, name="approvetest")
 
 
 ] 

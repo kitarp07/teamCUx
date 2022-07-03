@@ -55,7 +55,7 @@
             <h2>Tester Dashboard</h2>
             <div class="btn-group">
                 <button>Available Tests</button>
-                <a href="{% url 'alltests' %}"> <button>All Tests</button></a>
+                <a href="{% url 'testeralltests' %}"> <button>All Tests</button></a>
                 <a href="{% url 'upload-video' %}"><button>Upload Video</button></a>
                 <button>My Profile</button>
                 {% if request.user.is_authenticated %}

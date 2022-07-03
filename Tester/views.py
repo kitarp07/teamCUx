@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 
 from client.models import CreateTests, UxClient
@@ -22,15 +22,27 @@ from django.http import HttpResponseRedirect
 from testmyux.decoraters import tester_user_group
 
 
-    
+def send_activation_email(user, request):
+    current_site = get_current_site(request)
+    email_subject = 'Activate your account'
+    email_body = render_to_string('Tester/activate.html', {
+        'user': user,
+        'domain': current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generatee_token.make_token(user)
+    })
+    customer = UxTester.objects.get(user=user.pk)
+    email = EmailMessage(subject=email_subject, body=email_body,
+                    from_email=settings.EMAIL_FROM_USER,
+                    to=[customer.email]
+    )
 
-
-
+    email.send()
 
 
 def tester_reg_view(request):
     form = TesterForm()
-    if request.method == 'POST': 
+    if request.method == 'POST':
         form = TesterForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -38,19 +50,33 @@ def tester_reg_view(request):
             email = form.cleaned_data['email']
             pw = form.cleaned_data['password']
             cpw = request.POST.get('cpassword')
-            
- 
-            if pw==cpw:
-                user = User.objects.create_user(name, email, pw)
-                group = Group.objects.get(name='tester')
-                user.groups.add(group)
-                user.save()
- 
-                client = form.save(commit=False) # save info but dont commit change to database
-                client.user = user
-                client.save()
-                send_activation_email(user,request)
-                return redirect('tlogin')
+
+            if User.objects.filter(username=name).exists() or User.objects.filter(email=email).exists():
+                messages.success(request, "User already exists. Please choose different name and email")
+            else:
+                if name != "" and name !=  "" and name != "" and name != "":
+                    if pw==cpw:
+                        user = User.objects.create_user(name, email, pw)
+                        
+                        
+                        try:   
+                            group = Group.objects.get(name="tester")
+                        except:
+                            group = Group.objects.create(name="tester")
+                            
+                        user.groups.add(group)
+                        user.save()
+                        client = form.save(commit=False) # save info but dont commit change to database
+                        client.user = user
+                        client.save()
+                        send_activation_email(user,request)
+                        messages.success(request, "Please check your email for email verification")
+                        return redirect('tlogin')
+                    else:
+                        messages.success(request, "Passwords don't match")
+                else:
+                    messages.success(request, "Please fill all the fields")
+
     context = {'form': form}
 
  
@@ -124,7 +150,7 @@ def activate_user(request, uidb64,token):
         customer.save()    
 
         messages.add_message(request,messages.SUCCESS,'eMAIL VERIFIED')   
-        return redirect(reverse('tester-email-verified'))
+        return redirect('tester-email-verified')
 
 
     return render(request,'Tester/activate-failed.html',{"user":user})    
@@ -252,21 +278,120 @@ def tester_upload_video(request):
     form = UploadVideoForm()
     if request.user.is_authenticated:
         customer = request.user.uxtester
+        tests = CreateTests.objects.all()
         if request.method == 'POST':
             form = UploadVideoForm(request.POST)
             if form.is_valid():
                 link = form.cleaned_data['video_link']
+                test = form.cleaned_data['test']
+                
+                client = test.created_by
+                tester = request.user.uxtester
 
-            form.save()
+                video = UploadVideo.objects.create(
+                    video_link = link,
+                    client = client, 
+                    test = test, 
+                    tester= tester)
+
+            
+        
+        context = {
+            'tests': tests
+        }
     else:
+        context = {
+            
+        }
         return HttpResponse("You are not logged in.")
 
-    return render(request, "Tester/uploadvideo.html")
+       
+
+    return render(request, "Tester/uploadvideo.html", context)
 
 def view_all_tests(request):
     tests = CreateTests.objects.all()
     context = {"tests": tests}
     return render(request, "Tester/inside-dash/all-tests.html", context)
+
+def send_forget_password_email(request, user):
+    subject = "Reset password link"
+    if request.method == "POST":
+        email = request.POST.get('email')
+    current_site = get_current_site(request)
+    email_body = render_to_string('client/forgetpassword/clicklink.html', {
+        'user': user,
+        'domain': current_site,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generatee_token.make_token(user),
+
+    })
+    email = EmailMessage(subject=subject, 
+    body=email_body, 
+    from_email= settings.EMAIL_FROM_USER,
+    to=[user.email]
+    )
+
+    email.send()
+
+
+# forget password
+def enter_email(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if not User.objects.filter(email=email):
+            messages.success(request, 'User not registered')
+        else:
+            user = User.objects.get(email=email)
+            print (user.username)
+            send_forget_password_email(request, user)
+    
+
+    return render(request, 'Tester/forgetpassword/enteremail.html')
+
+def click_link(request,  uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+        customer = UxTester.objects.get(user=user)
+    except Exception as e:
+        user = None
+    if user and generatee_token.check_token(user, token):
+        return redirect ('change-password', pk=user.id)
+
+    return render(request, 'Tester/forgetpassword/clicklink.html')
+
+def change_password(request, pk):
+    user = User.objects.get(id=pk)
+    customer = UxTester.objects.get(user=user)
+    if request.method == "POST":
+        password = request.POST.get("newpassword")
+        cpassword = request.POST.get("confirmpassword")
+
+        if password == cpassword:
+            customer.password = password
+            user.set_password(password)
+            user.save()
+            customer.save()
+            return redirect('tlogin')
+    return render(request, "Tester/forgetpassword/changepassword.html")
+    
+# @login_required
+# def deleteuser(request):
+#     if request.method=='POST':
+#         delete_form= UserDeleteForm(request.POST, instance=request.user)
+#         user=request.user
+#         user.delete()
+#         messages.info(request,'your account has been deleted.')
+#         return redirect('homepage')
+
+#     else:
+#         delete_form =UserDeleteForm(instance=request.user)
+
+#     context={
+#         'delete_form': delete_form
+#     }   
+#     return render(request,'Tester/delete_account.html',context)     
 
 @login_required
 def delete_tester(request,pk):
