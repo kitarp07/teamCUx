@@ -10,7 +10,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-
 /*------------------ button group--------------------- */
 .nav {
     width: 800px;
@@ -81,7 +80,7 @@ body {
 
 /*------------------- table content----------------- */
 table tr th {
-    padding: 10px 40px;
+    padding: 10px 70px;
     font-size: larger;
     font-weight: 300;
     width: 300px;
@@ -107,6 +106,7 @@ table tr td:last-child {
 table {
     display: flex;
     justify-content: center;
+    margin-top: 5rem;
 }
 
 .content-item {
