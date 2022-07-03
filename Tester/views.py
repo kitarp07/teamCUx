@@ -51,10 +51,9 @@ def tester_reg_view(request):
             pw = form.cleaned_data['password']
             cpw = request.POST.get('cpassword')
 
-            try:
-                user = User.objects.filter(username=name, email=email)
+            if User.objects.filter(username=name).exists() or User.objects.filter(email=email).exists():
                 messages.success(request, "User already exists. Please choose different name and email")
-            except:
+            else:
                 if name != "" and name !=  "" and name != "" and name != "":
                     if pw==cpw:
                         user = User.objects.create_user(name, email, pw)
