@@ -28,6 +28,17 @@ a {
     padding: 10px 40px;
 }
 
+.popup .content .approve {
+    background-color: #198754;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.popup .content .approve:hover {
+    background-color: #5cb85c;
+}
+
 .popup .content a {
     position: relative;
     right: 28px;
@@ -46,4 +57,15 @@ a {
 
 .popup .content .cancel:hover {
     background-color: #ff4039;
+}
+
+table td button {
+    padding: 5px 8px;
+    border-radius: 10px;
+    border: 2px solid #513CD2;
+    cursor: pointer;
+}
+
+table td button:hover {
+    transform: scale(1.2)
 }

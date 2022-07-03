@@ -25,7 +25,7 @@ table tr th {
     font-size: 26px;
     color: #513CD2;
     position: absolute;
-    transform: translate(-50%, -90%);
+    transform: translate(-50%, -80%);
     transition: 0.3s;
 }
 
@@ -151,7 +151,11 @@ table tr th {
     flex-direction: column;
 }
 
-.popup .content form button {
+.popup form .feedlbl {
+    margin-top: 50px;
+}
+
+.popup .content button {
     margin: 20px 0 0 20px;
     color: white;
 }
