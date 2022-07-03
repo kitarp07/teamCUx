@@ -1,5 +1,7 @@
 from http import client
 from lib2to3.pgen2 import token
+from tokenize import group
+from unicodedata import name
 import uuid
 
 from django.shortcuts import redirect, render
@@ -16,6 +18,8 @@ from client.models import UxClient
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
+from Tester.models import UxTester
+
 
 def send_verification_email(user, request):
     current_site = get_current_site(request)
@@ -38,6 +42,8 @@ def send_verification_email(user, request):
 
     email.send()
 
+
+
 def client_reg_view(request):
     form = ClientForm()
     if request.method == 'POST': 
@@ -48,20 +54,38 @@ def client_reg_view(request):
             email = form.cleaned_data['email']
             pw = form.cleaned_data['password']
             cpw = request.POST.get('cpassword')
+            
+            try:
+                user = User.objects.filter(username=name, email=email)
+                messages.success(request, "User already exists. Please choose different name and email")
+            except:
+                if name != "" and name !=  "" and name != "" and name != "":
+                    if pw==cpw:
+                        user = User.objects.create_user(name, email, pw)
+                        
+                        
+                        try:   
+                            group = Group.objects.get(name="client")
+                        except:
+                            group = Group.objects.create(name="client")
+                            
+                        user.groups.add(group)
+                        user.save()
 
-            if pw==cpw:
-                user = User.objects.create_user(name, email, pw)
-                group = Group.objects.get(name='client')
-                user.groups.add(group)
-                user.save()
+                    
 
-                client = form.save(commit=False) # save info but dont commit change to database
-                client.user = user
-                client.save()
-                send_verification_email(user, request)
+                        client = form.save(commit=False) # save info but dont commit change to database
+                        client.user = user
+                        client.save()
+                        send_verification_email(user, request)
+                        messages.success(request, "Please check your email for email verification")
+                        return redirect('client-login')
+                    else:
+                        messages.success(request, "Passwords don't match")
+                else:
+                    messages.success(request, "Please fill all the fields")
 
-                if user.uxclient.isEmailVerified:
-                    messages.success(request, "Please check your email for email verification")
+
     context = {'form': form}
 
     return render(request, 'client/register.html', context)
@@ -85,12 +109,16 @@ def verify_email(request, uidb64, token):
 
 
 def client_login_view(request):
+   
+    
+
     if request.method == 'POST':
         email = request.POST.get('email')
         passw = request.POST.get('password')
         
         user = authenticate(request, username=email, password=passw)
 
+        
         if user is None:
             messages.success(request, "Wrong Credentials. Please try again")
        

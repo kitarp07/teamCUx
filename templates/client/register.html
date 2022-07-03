@@ -26,6 +26,8 @@
                 <!------------ image on the left side --------------->
                 <img src="{% static 'images/secure_login_pdn4 2.png' %}" alt="register image">
             </div>
+            
+           
             <form method="post">
                 {%csrf_token%}
                 <label class="lbl">Email</label>
@@ -51,6 +53,9 @@
             </form>
         </div>
     </div>
+    {% for message in messages%}
+    {{message}}
+    {%endfor%}
 
     <script src="{% static 'js/register.js' %}" async defer></script>
 </body>
