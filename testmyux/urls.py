@@ -25,7 +25,7 @@ from pages.views import *
 from Tester.views import *
 urlpatterns = [
 #    path('admin', auth_views.LoginView.as_view(template_name='adminpage/adminlogin.html'), name='admin'),
-    path('admin/', admin.site.urls),
+   path('admin/', admin.site.urls),
    path('client/register', client_reg_view, name="client-reg" ),
    path('', homepage, name="homepage" ),
    path('',include('Tester.urls')),
@@ -50,6 +50,7 @@ urlpatterns = [
    path('tester/changepassword/<int:pk>', change_password, name="tester-change-password"),
    
    path('client/rating/<int:pk>', rating, name='rating'),
+   path('client/clientlogout',clientlogout,name='clientlogout')
 
 
 ] 

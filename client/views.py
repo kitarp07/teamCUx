@@ -2,6 +2,7 @@ from http import client
 from lib2to3.pgen2 import token
 import uuid
 
+
 from django.shortcuts import redirect, render
 from Tester.models import UploadVideo
 from client.forms import *
@@ -13,9 +14,11 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 from client.models import UxClient
+from testmyux.settings import LOGIN_REDIRECT_URL
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 def send_verification_email(user, request):
     current_site = get_current_site(request)
@@ -105,6 +108,7 @@ def client_login_view(request):
 
     return render(request, "client/login.html")
 
+@login_required(login_url='client-login')
 def client_dashoard(request):
     if request.user.is_authenticated:
         user = request.user
@@ -281,3 +285,7 @@ def rating(request, pk):
         messages.success(request, "Your rating has been submitted")
     return redirect('sentbytester')
         
+def clientlogout(request):
+    logout(request)
+    messages.add_message(request,messages.SUCCESS,'Sucessfully logged out') 
+    return redirect('login')        
