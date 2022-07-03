@@ -44,6 +44,9 @@
             </form>
         </div>
     </div>
+    {% for message in messages%}
+    {{message}}
+    {%endfor%}
 
     <script src="/static/js/tregister.js" async defer></script>
 </body>

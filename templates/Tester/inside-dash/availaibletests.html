@@ -11,7 +11,7 @@
             <th> Created by</th>
         </tr>
         {%for test in tests %}
-        
+        {%if test.isApproved%}
         <tr class="tbody">
             <td data-label="Campaign Name">{{test.title}}</td>
             <td data-label="Status">{{test.mention_tasks}}</td>
@@ -19,6 +19,7 @@
             <td>{{test.additional_guidelines}}</td>
             <td>{{test.created_by.name}}</td>
         </tr>
+        {%endif%}
        
 
         {%endfor%}

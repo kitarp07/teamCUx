@@ -64,39 +64,42 @@
 
             <form method="post" class="fields left" id="form_left">
                 {%csrf_token%}
-                <label class="lbl left">Test Campaign</label>
-                <input class="inp left" name="title" id="inp_left">
-                <label class="lbl left">Mention Tasks</label>
-                <textarea rows="rows" cols="cols" class="inp left" id="task" name="mention_tasks"></textarea>
-                <label class="lbl left">Requirements</label>
-                <!-- <input class="inp left" name="requirement"> -->
-                <textarea rows="rows" cols="cols" class="inp left" id="require" name="requirements"></textarea>
-                <label class="lbl left">Additional Guidelines</label>
-                <!-- <input class="inp left" name="guide"> -->
-                <textarea rows="rows" cols="cols" class="inp left" id="guide" name="additional_guidelines"></textarea>
-                <button onclick="leftside()" type="button" id="next_step" class="proceed"><img
-                        src="{% static 'images/arrow 4.png' %}">
-                    Proceed to Checkout</button>
-                <button class="next" type="button" id="next">Proceed to Checkout</button>
-            </form>
+                
+                    <label class="lbl left">Test Campaign</label>
+                    <input class="inp left" name="title" id="inp_left">
+                    <label class="lbl left">Mention Tasks</label>
+                    <textarea rows="rows" cols="cols" class="inp left" id="task" name="mention_tasks"></textarea>
+                    <label class="lbl left">Requirements</label>
+                    <!-- <input class="inp left" name="requirement"> -->
+                    <textarea rows="rows" cols="cols" class="inp left" id="require" name="requirements"></textarea>
+                    <label class="lbl left">Additional Guidelines</label>
+                    <!-- <input class="inp left" name="guide"> -->
+                    <textarea rows="rows" cols="cols" class="inp left" id="guide"
+                        name="additional_guidelines"></textarea>
+                    <button onclick="leftside()" type="button" id="next_step" class="proceed"><img
+                            src="{% static 'images/arrow 4.png' %}">
+                        Proceed to Checkout</button>
+                    <button class="next" type="button" id="next">Proceed to Checkout</button>
+                    <!-- </form>
 
             <form method="post" class="fields right" id="form_right">
-                {%csrf_token%}
-                <!---------------- right side ------------------>
-                <label class="lbl right">Name on Card</label>
-                <input class="inp right" name="cname" id="inp_right">
-                <label class="lbl right">Card Number</label>
-                <input class="inp right" name="cnum" id="cardnum" type="number">
-                <label class="lbl right">CVV</label>
-                <input class="inp right" name="cvv" id="cvv" type="number">
-                <label class="lbl right">Expiry Date</label>
-                <input class="inp date" name="expire" id="edate" type="date" required>
-                <button id="checkout" onmousedown="leftsubmit()" type="button"><img
-                        src="{% static 'images/submit-2 1.png' %}">Pay and
-                    Submit for
-                    Review</button>
-            </form>
+                {%csrf_token%} -->
+                    <!---------------- right side ------------------>
+                    <label class="lbl right">Name on Card</label>
+                    <input class="inp right" name="nameoncard" id="inp_right">
+                    <label class="lbl right">Card Number</label>
+                    <input class="inp right" name="cardnumber" id="cardnum" type="number">
+                    <label class="lbl right">CVV</label>
+                    <input class="inp right" name="cvv" id="cvv" type="number">
+                    <label class="lbl right">Expiry Date</label>
+                    <input class="inp date" name="expirydate" id="edate" type="date" required>
+                    <button id="checkout" onmousedown="leftsubmit()" type="button"><img
+                            src="{% static 'images/submit-2 1.png' %}">Pay and
+                        Submit for
+                        Review</button>
+            
         </div>
+    </div>
     </div>
     <script src="{% static 'js/navbar.js' %}" async defer></script>
     <script src="{% static 'js/addprod.js' %}" async defer></script>

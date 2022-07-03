@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 
 from client.models import CreateTests, UxClient
@@ -21,31 +21,28 @@ from django.http import HttpResponseRedirect
 
 from testmyux.decoraters import tester_user_group
 
-def send_activation_email(user,request):
-    current_site=get_current_site(request)
-    email_subject ='Activate your account'
-    email_body= render_to_string('Tester/activate.html',{
-        'user':user,
-        'domain':current_site,
+
+def send_activation_email(user, request):
+    current_site = get_current_site(request)
+    email_subject = 'Activate your account'
+    email_body = render_to_string('Tester/activate.html', {
+        'user': user,
+        'domain': current_site,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': generate_token.make_token(user)
     })
-    customer=UxTester.objects.get(user=user.pk)
-    email=EmailMessage(subject=email_subject,body=email_body,
+    customer = UxTester.objects.get(user=user.pk)
+    email = EmailMessage(subject=email_subject, body=email_body,
                     from_email=settings.EMAIL_FROM_USER,
                     to=[customer.email]
     )
-    
+
     email.send()
-    
-
-
-
 
 
 def tester_reg_view(request):
     form = TesterForm()
-    if request.method == 'POST': 
+    if request.method == 'POST':
         form = TesterForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -53,19 +50,34 @@ def tester_reg_view(request):
             email = form.cleaned_data['email']
             pw = form.cleaned_data['password']
             cpw = request.POST.get('cpassword')
-            
- 
-            if pw==cpw:
-                user = User.objects.create_user(name, email, pw)
-                group = Group.objects.get(name='tester')
-                user.groups.add(group)
-                user.save()
- 
-                client = form.save(commit=False) # save info but dont commit change to database
-                client.user = user
-                client.save()
-                send_activation_email(user,request)
-                return redirect('tlogin')
+
+            try:
+                user = User.objects.filter(username=name, email=email)
+                messages.success(request, "User already exists. Please choose different name and email")
+            except:
+                if name != "" and name !=  "" and name != "" and name != "":
+                    if pw==cpw:
+                        user = User.objects.create_user(name, email, pw)
+                        
+                        
+                        try:   
+                            group = Group.objects.get(name="tester")
+                        except:
+                            group = Group.objects.create(name="tester")
+                            
+                        user.groups.add(group)
+                        user.save()
+                        client = form.save(commit=False) # save info but dont commit change to database
+                        client.user = user
+                        client.save()
+                        send_activation_email(user,request)
+                        messages.success(request, "Please check your email for email verification")
+                        return redirect('tlogin')
+                    else:
+                        messages.success(request, "Passwords don't match")
+                else:
+                    messages.success(request, "Please fill all the fields")
+
     context = {'form': form}
 
  
@@ -249,7 +261,7 @@ def send_forget_password_email(request, user):
     email.send()
 
 
-#forget password
+# forget password
 def enter_email(request):
     if request.method == 'POST':
         email = request.POST.get('email')

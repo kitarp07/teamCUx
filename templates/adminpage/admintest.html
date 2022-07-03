@@ -11,26 +11,96 @@
             <!-- <th>Tests Created</th> -->
             <th>Manage</th>
         </tr>
-        <tr class="tbody">
-            {% for test in tests%}
-            <td data-label="Campaign Name">{{test.title}}</td>
-            <td data-label="Owner">{{test.created_by.name}}</td>
-            <!-- <td data-label="Tests Created">5</td> -->
-            <td data-label="Manage"><button class="del btn"><a href="#popup1">Delete</a></button></td>
-            {% endfor %}
-        </tr>
+        {% for test in tests%}
+        
+
+            <tr class="tbody">
+
+                <td data-label="Campaign Name"><a href="#test_{{test.id}}" class="testdetail">{{test.title}}</a></td> 
+                <td data-label="Owner">{{test.created_by.name}}</td>
+                <!-- <td data-label="Tests Created">5</td> -->
+                {% if test.isApproved %}
+                <td>Approved</td>
+
+                {%else%}
+                <td> <a href="#approve_{{test.id}}" class="approvetest"><button>Approve</button></a> </td>
+                {%endif%}
+
+                <td> <a href="#popup1_{{test.id}}" class="managetester"><button>Delete</button></a> </td>
+
+            </tr>
        
+        <div id="popup1_{{test.id}}" class="overlay" data-target="gotoLink">
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <h3>Are you sure you want to delete {{test.title}} from the database?</h3>
+                    <button class="link1 confirm"><a href="#">Confirm</a></button>
+                    <button class="link2 cancel"><a href="#">Cancel</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="approve_{{test.id}}" class="overlay" data-target="gotoLink">
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <h3>Are you sure you want to approve this test?</h3>
+                    <form action="{% url 'approvetest' test.id%}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Approve </button>
+                    </form>
+
+                    <button class="link2 cancel"><a href="#">Cancel</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="test_{{test.id}}" class="overlay" data-target="gotoLink">
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <h3>Test details</h3>
+                    Name: {{test.title}}
+                    <br>
+                    Mention Tasks:
+                    {{test.mention_tasks}}
+                    <br>
+                    Requirements:
+                    {{test.additional_guidelines}}
+                    <br>
+                    Additional Guidelines:
+                    {{test.additional_guidelines}}
+                    
+                    
+
+                    <button class="link2 cancel"><a href="#">Cancel</a></button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </table>
 </div>
-<div id="popup1" class="overlay">
-    <div class="popup">
-        <a class="close" href="#">&times;</a>
-        <div class="content">
-            <h3>Are you sure you want to delete John Doe from the database?</h3>
-            <button class="link1 confirm"><a href="#">Confirm</a></button>
-            <button class="link2 cancel"><a href="#">Cancel</a></button>
-        </div>
-    </div>
-</div>
+<script>
+    (".managetester").click(function () {
+        var id = $(this).attr("id").split("_")[1]
+
+        $('#popup1_${id}').show();
+    })
+
+    (".approvetest").click(function () {
+        var id = $(this).attr("id").split("_")[1]
+
+        $('#approve_${id}').show();
+    })
+
+    (".testdetail").click(function () {
+        var id = $(this).attr("id").split("_")[1]
+
+        $('#test_${id}').show();
+    })
+
+
+</script>
 
 {% endblock adminblock %}
