@@ -59,8 +59,8 @@
         <div class="nav">
             <h2>Admin Dashboard</h2>
             <div class="btn-group">
-                <button>Manage Tests</button>
-                <button>Manage Testers</button>
+                <a href="{% url 'view-customer' %}"></a><button>Manage Tests</button></a>
+                <a href="{% url 'adminclient' %}"><button>Manage Testers</button></a>
                 <button>Manage Clients</button>
                 <button>My Profile</button>
             </div>
@@ -80,8 +80,9 @@
                     <td data-label="Phone no.">{{c.phone}}</td>
                     <td data-label="Tests Created">1</td>
                 </tr>
+                {% endfor %}
             </table>
-            {% endfor %}
+            
         </div>
     </div>
 

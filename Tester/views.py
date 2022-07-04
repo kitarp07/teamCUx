@@ -153,7 +153,7 @@ def activate_user(request, uidb64,token):
 
 def afterlogin_view(request):
     if request.user.is_superuser:
-        return redirect('homepage')
+        return redirect('admindash')
     else:
         messages.error(request, "Invalid login credentials")
         return redirect('admin')  
@@ -189,10 +189,10 @@ def myprofile(request, pk):
        context={
         "user": user
         }
-    return render(request,'Tester/myprofile.html',context)
+    return render(request,'Tester/tester-profile.html',context)
 
 
-def editprofile(request,pk):
+def edit_profile(request,pk):
     user =UxTester.objects.get(id=pk)
     userForm= TesterForm(instance=user)
     if request.method=='POST':
@@ -201,11 +201,12 @@ def editprofile(request,pk):
             userForm.save()
             
             return redirect('/')
-    return render(request,'Tester/editprofile.html',{
+    return render(request,'Tester/tester-edit-profile.html',{
         'userForm': userForm,
         'user':user
     })
-    return render(request, 'Tester/testerdash.html')    
+    return render(request, 'Tester/testerdash.html')   
+
 
 def tester_email_verified(request):
     return render(request, "EmailVerified/EmailVerified.html")
