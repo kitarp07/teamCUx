@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@font-face {
+    font-family: "Samsung";
+    src: url(/fonts/samsungsharpsans-bold.otf);
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+
+}
+
+.h1 {
+    font-size: 30px;
+    font-weight: 600;
+    font-family: "Samsung";
+}
+
+.p1 {
+    font-size: 15px;
+}
+
+h3,
+h5 {
+
+    padding: 0 0 0 0.4em;
+    margin: 0 0 0 0;
+}
+
+h5 {
+    background-color: #ffffff;
+}
+
+.card-container {
+    background-color: #ffffff;
+    padding: 0 0 0 0;
+}
+
+.card-image {
+    background-image: url('image.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+label,
+h4 {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
