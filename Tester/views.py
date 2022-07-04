@@ -95,19 +95,13 @@ def tlogin(request):
         #     'Email is not verified, please check your email inbox')
         #     return render(request, 'tester/login.html', context)
 
-        if user is not None:
-            login(request,user)
-            print('email')
-            return redirect('tester-dash')
         if user is None:
             messages.success(request, "Wrong Credentials. Please try again")
-
+       
         elif user.groups.all()[0].name == 'tester':
             login(request, user)
             return redirect('tester-dash')
            
-        
-            
         else:
             messages.success(request, "Wrong Credentials. Please try again")
 
@@ -315,12 +309,12 @@ def view_all_tests(request):
     context = {"tests": tests}
     return render(request, "Tester/inside-dash/all-tests.html", context)
 
-def send_forget_password_email(request, user):
+def send_forget_password_email_tester(request, user):
     subject = "Reset password link"
     if request.method == "POST":
         email = request.POST.get('email')
     current_site = get_current_site(request)
-    email_body = render_to_string('client/forgetpassword/clicklink.html', {
+    email_body = render_to_string('Tester/forgetpassword/clicklink.html', {
         'user': user,
         'domain': current_site,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -337,7 +331,7 @@ def send_forget_password_email(request, user):
 
 
 # forget password
-def enter_email(request):
+def tester_enter_email(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         if not User.objects.filter(email=email):
@@ -345,12 +339,12 @@ def enter_email(request):
         else:
             user = User.objects.get(email=email)
             print (user.username)
-            send_forget_password_email(request, user)
+            send_forget_password_email_tester(request, user)
     
 
     return render(request, 'Tester/forgetpassword/enteremail.html')
 
-def click_link(request,  uidb64, token):
+def tester_click_link(request,  uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
@@ -362,7 +356,7 @@ def click_link(request,  uidb64, token):
 
     return render(request, 'Tester/forgetpassword/clicklink.html')
 
-def change_password(request, pk):
+def tester_change_password(request, pk):
     user = User.objects.get(id=pk)
     customer = UxTester.objects.get(user=user)
     if request.method == "POST":

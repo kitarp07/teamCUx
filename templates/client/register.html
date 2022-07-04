@@ -13,22 +13,30 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    
 </head>
 
 <body>
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+
     <div class="container">
         <div class="form">
+
+
             <div class="imgfield">
                 <h2>Client Register</h2>
+
                 <!------------ image on the left side --------------->
                 <img src="{% static 'images/secure_login_pdn4 2.png' %}" alt="register image">
             </div>
-            
-           
+
+
+
+
             <form method="post">
+
                 {%csrf_token%}
                 <label class="lbl">Email</label>
                 <input class="inp" type="email" name="email" placeholder="e.g. example@domain.com" required>
@@ -49,15 +57,27 @@
                     <input type="checkbox" id="terms_and_conditions" value="1" onclick="terms_changed(this)">
                     By submitting, I agree to terms and conditions.
                 </agree>
-                <a href="#link">Already have an account? Login</a>
+                <a href="{% url 'client-login' %}">Already have an account? Login</a>
             </form>
         </div>
     </div>
-    {% for message in messages%}
-    {{message}}
-    {%endfor%}
+    
+    
+
+
+
+
 
     <script src="{% static 'js/register.js' %}" async defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    {% for message in messages %}
+        
+    <script>
+        swal('{{message}}')
+        
+    </script>
+    {% endfor %}
 </body>
 
 </html>

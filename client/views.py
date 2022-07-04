@@ -267,7 +267,7 @@ def edit_profile(request, pk):
     context = {'form': form, 'uxclient':uxclient}
     return render(request, 'client/edit-profile.html', context)
 
-def send_forget_password_email(request, user):
+def send_forget_password_email_client(request, user):
     subject = "Reset password link"
     if request.method == "POST":
         email = request.POST.get('email')
@@ -297,7 +297,7 @@ def enter_email(request):
         else:
             user = User.objects.get(email=email)
             print (user.username)
-            send_forget_password_email(request, user)
+            send_forget_password_email_client(request, user)
     
 
     return render(request, 'client/forgetpassword/enteremail.html')
