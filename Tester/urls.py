@@ -13,13 +13,14 @@ urlpatterns = [
     path('viewclient',views.view_client,name="viewclient"),
     path('admindash' ,views.admin_dashoard,name='admindash'),
     path('myprofile/<int:pk>', views.myprofile, name='myprofile'),
-    path('editprofile/<int:pk>', views.editprofile, name= 'editprofile'),
+    path('editprofile/<int:pk>', views.edit_profile, name= 'editprofile'),
     path('testerdashboard', views.tester_dashboard, name='tester-dash'),
     path('deletetester/<int:pk>', views.delete_tester,name="deletetester"),
     # path('sendfeedback',views.send_feedback,name='sendfeedback'),
     path('sendfeedback',views.send_feedbackform,name='sendfeedback'),
     path('tlogout',views.tlogout,name="tlogout"),
     path('logout_admin',views.logout_admin,name="logout_admin"),
+    
 
 
 
