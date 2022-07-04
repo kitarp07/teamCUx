@@ -286,7 +286,9 @@ def tester_upload_video(request):
                     video_link = link,
                     client = client, 
                     test = test, 
-                    tester= tester)
+                    tester= tester,
+                    paymentreceived =2,
+                    )
 
             
         
