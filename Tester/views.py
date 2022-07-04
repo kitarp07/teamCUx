@@ -182,14 +182,28 @@ def tester_dashboard(request):
 
  
 
-def myprofile(request, pk):
+def testerprofile(request):
     
-    user=UxTester.objects.get(id=pk)
-    if request.user.uxtester:
-       context={
-        "user": user
-        }
-    return render(request,'Tester/tester-profile.html',context)
+    user=request.user
+    if user is not None:
+        if user.groups.all()[0].name == 'tester':
+             
+            customer = request.user.uxtester
+
+            videos = UploadVideo.objects.filter( tester = customer.id)
+
+            context ={
+                 'customer':customer,
+                 'videos': videos
+             }
+            return render(request,'Tester/tester-profile.html',context)
+
+
+    
+    else:
+        messages.success(request, "Wrong Credentials. Please try again")
+        return redirect('tlogin')
+    
 
 
 def edit_profile(request,pk):

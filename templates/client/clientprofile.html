@@ -48,7 +48,7 @@
 
             
 
-            <img class="profilepic" img src="{% static 'images/profilepic.jpg' %}" alt="profile_image"></img>
+            <a href="{%url 'client-profile' %}"> <img class="profilepic" img src="{% static 'images/profilepic.jpg' %}" alt="profile_image"></img></a>
 
             <h2 class="name">{{customer.name}}</h2>
             <h4 class="contact">Contact info: <span class="number">{{customer.phone}}</span></h4>
@@ -99,23 +99,34 @@
             <div class="dash-content">
                 <h2 class="producttop">MY PRODUCTS</h2>
                 <table class="content-item">
+                    <tr >
+                        <td data-label="productimg">Image</td>
+                        <td data-label="campaignname">Title</td>
+                        <td data-label="date">Date Created</td>
+                        
+                        <td data-label="isapproved">Approval</td>
+                        <td>Edit</td>
+                        
+                    </tr>
+                    {% for test in tests%}
                     <tr class="tbody">
                         <td data-label="productimg"><img src="{% static 'images/profilepic.jpg' %}"></td>
-                        <td data-label="campaignname">Hello Pets</td>
+                        <td data-label="campaignname">{{test.title}}</td>
+                        <td data-label="date">{{test.date_created}}</td>
+                        {% if test.isApproved%}
+                        <td data-label="isapproved">Approved</td>
+                        {%else%}
+                        <td data-label="isapproved">Not Approved</td>
+                        {%endif%}
+
                         <td data-label="editing">
                             <button class="edit">Edit</button>
                             <button class="delete">Delete</button>
                         </td>
 
                     </tr>
-                    <tr class="tbody">
-                        <td data-label="productimg"><img src="{% static 'images/profilepic.jpg' %}"></td>
-                        <td data-label="campaignname">Hello Pets</td>
-                        <td data-label="editing">
-                            <button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
-                        </td>
-                    </tr>
+                   {% endfor %}
+                    
                 </table>
             </div>
         </div>

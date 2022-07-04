@@ -25,6 +25,7 @@ class UploadVideo(models.Model):
     tester = models.ForeignKey(UxTester, on_delete=models.SET_NULL, null=True, blank=True)
     rating = models.FloatField(default = 0, null=True, blank=True)
     paymentreceived = models.FloatField(default = 0, null=True, blank=True)
+    feedback=models.CharField(max_length=255,blank=True)
 
 
 class FeedBack(models.Model):
