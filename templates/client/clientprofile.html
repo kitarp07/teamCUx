@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/download.css'%}">
     <link rel="stylesheet" href="{% static 'css/adminclient.css'%}">
-    
-   
-    
+
+
+
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
@@ -34,25 +34,26 @@
 
 
 <body>
- 
+
     <div class="wrapper">
         <div class="profilebox">
             <button class="edit"><i class="far fa-edit"></i><a
                     href="{% url 'client-edit-profile' customer.id%}">Edit</a></button>
 
-            <button type="button" class="edit delete" >
+            <button type="button" class="edit delete">
                 <a href="#delete_{{customer.id}}" type="button" class="deletelink" data-target="gotoLink">
                     Delete
                 </a>
             </button>
 
-            
 
-            <a href="{%url 'client-profile' %}"> <img class="profilepic" img src="{% static 'images/profilepic.jpg' %}" alt="profile_image"></img></a>
+
+            <a href="{%url 'client-profile' %}"> <img class="profilepic" img src="{% static 'images/profilepic.jpg' %}"
+                    alt="profile_image"></img></a>
 
             <h2 class="name">{{customer.name}}</h2>
             <h4 class="contact">Contact info: <span class="number">{{customer.phone}}</span></h4>
-            
+
             {% if customer.isEmailVerified%}
             <h4 class="contact">Email: <span class="number">{{customer.email}} <h6> Verified</h6></span></h4>
             {%else%}
@@ -60,7 +61,7 @@
             {%endif%}
         </div>
 
-     
+
 
         <div id="delete_{{customer.id}}" class="overlay">
             <div class="popup">
@@ -68,8 +69,8 @@
                 <div class="content">
                     <h3>Are you sure you want to Delete your account?</h3>
 
-                    <a  class="link1 confirm" href="/client/delete-account/{{customer.id}}">Delete</a>
-                   
+                    <a class="link1 confirm" href="/client/delete-account/{{customer.id}}">Delete</a>
+
                     <button class="link2 cancel"><a href="#">Cancel</a></button>
                 </div>
             </div>
@@ -99,14 +100,14 @@
             <div class="dash-content">
                 <h2 class="producttop">MY PRODUCTS</h2>
                 <table class="content-item">
-                    <tr >
+                    <tr>
                         <td data-label="productimg">Image</td>
                         <td data-label="campaignname">Title</td>
                         <td data-label="date">Date Created</td>
-                        
+
                         <td data-label="isapproved">Approval</td>
                         <td>Edit</td>
-                        
+
                     </tr>
                     {% for test in tests%}
                     <tr class="tbody">
@@ -125,8 +126,8 @@
                         </td>
 
                     </tr>
-                   {% endfor %}
-                    
+                    {% endfor %}
+
                 </table>
             </div>
         </div>
@@ -139,11 +140,11 @@
     {% endif%}
 
     <script>
-       (".deletelink").click(function () {
-        var id = $(this).attr("id").split("_")[1]
+        (".deletelink").click(function () {
+            var id = $(this).attr("id").split("_")[1]
 
-        $('#delete_${id}').show();
-    })
+            $('#delete_${id}').show();
+        })
 
     </script>
 

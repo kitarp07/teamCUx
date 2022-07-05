@@ -20,23 +20,24 @@
             <td data-label="Phone no.">{{user.phone}}</td>
             <!-- <td data-label="Tests Created">5</td> -->
 
-            <td> <a href="#popup1_{{user.id}}" class="managetester">Delete</a> </td>
+            <td> <a href="#popup1_{{user.id}}" class="managetester"><button>Delete</button></a> </td>
 
         </tr>
+        <div id="popup1_{{user.id}}" class="overlay" data-target="gotoLink">
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <h3>Are you sure you want to delete {{user.name}} from the database?</h3>
+                    <button class="link1 confirm"><a href="#">Confirm</a></button>
+                    <button class="link2 cancel"><a href="#">Cancel</a></button>
+                </div>
+            </div>
+        </div>
         {% endfor %}
 
     </table>
 </div>
-<div id="popup1" class="overlay">
-    <div class="popup">
-        <a class="close" href="#">&times;</a>
-        <div class="content">
-            <h3>Are you sure you want to delete {{user.name}} from the database?</h3>
-            <button class="link1 confirm"><a href="#">Confirm</a></button>
-            <button class="link2 cancel"><a href="#">Cancel</a></button>
-        </div>
-    </div>
-</div>
+
 
 <script>
     (".managetester").click(function () {

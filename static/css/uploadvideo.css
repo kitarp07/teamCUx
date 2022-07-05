@@ -142,10 +142,10 @@ div.formC>form>input {
 }
 
 .formC form select {
-    width: 12rem;
-    height: 2rem;
-    border-radius: 5px;
+    padding: 5px;
+    width: 50%;
     margin-bottom: 20px;
+    border-radius: 8px;
 }
 
 .bottom {
