@@ -126,7 +126,7 @@ def client_login_view(request):
        
         elif user.groups.all()[0].name == 'client':
             login(request, user)
-            return redirect('client-dash')
+            return redirect('sentbytester')
            
         else:
             messages.success(request, "Wrong Credentials. Please try again")

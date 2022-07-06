@@ -100,7 +100,7 @@ def tlogin(request):
        
         elif user.groups.all()[0].name == 'tester':
             login(request, user)
-            return redirect('tester-dash')
+            return redirect('testeralltests')
            
         else:
             messages.success(request, "Wrong Credentials. Please try again")
@@ -153,7 +153,7 @@ def activate_user(request, uidb64,token):
 
 def afterlogin_view(request):
     if request.user.is_superuser:
-        return redirect('admindash')
+        return redirect('admintests')
     else:
         messages.error(request, "Invalid login credentials")
         return redirect('admin')  

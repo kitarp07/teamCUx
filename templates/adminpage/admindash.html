@@ -58,7 +58,6 @@
                 <a href="{% url 'admintests' %}"> <button>Manage Tests</button> </a>
                 <a href="{% url 'admintester'%}"><button>Manage Testers</button></a>
                 <a href="{% url 'adminclient'%}"> <button>Manage Clients</button></a>
-                <a href=""><button>My Profile</button></a>
             </div>
         </div>
         {% block adminblock%}
@@ -67,7 +66,7 @@
     </div>
 
 
-    <script src="js/navbar.js" async defer></script>
+    <script src="{% static 'js/navbar.js'%}" async defer></script>
 </body>
 
 </html>

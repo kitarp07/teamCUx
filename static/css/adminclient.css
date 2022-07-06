@@ -69,3 +69,15 @@ table td button {
 table td button:hover {
     transform: scale(1.2)
 }
+
+@media screen and (max-width: 500px) {
+
+    .approve .popup,
+    .delete .popup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        margin-right: 50px;
+    }
+}
