@@ -199,7 +199,7 @@
     font-size: 16px;
     font-family: 500;
     cursor: pointer;
-  
+    
   }
   
   .button_text{
@@ -264,7 +264,7 @@
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
     padding: 0 6rem 20px 6rem;
-    
+   
   }
   
   .card{
@@ -303,12 +303,15 @@
   .infographics img{
     flex:1;
     height: 35em;
-    margin: 4rem 0 1rem 4rem;
+    padding: 4rem 0 0rem 4rem;
+    width: 100%;  
+    height: auto;
     
   }
 
   .info{
-    margin-right: 20px;
+    padding-left: 4rem;
+    padding-top: 5rem;
   }
   
 
@@ -316,7 +319,9 @@
   .infotop{
     color: var(--line);
     font-family: var(--accentfont);
-    margin: 9rem 0 2rem 0;
+    /* margin: 9rem 0 2rem 0; */
+    margin: auto;
+
     font-size: 40px;
   }
   
@@ -343,7 +348,10 @@
     font-size: 16px;
     font-family: 500;
     cursor: pointer;
-  
+    margin-bottom: 3rem;
+    width: 100%;
+   min-width: 50px;  
+   max-width: 300px;
   }
   
   
@@ -388,7 +396,7 @@
   }
   
   
-  @media (max-width: 790px) {
+@media (max-width: 790px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
@@ -454,10 +462,51 @@
   .button{
     display: inline-flex;
     align-items: center;
-    height: 50px;
-    width: 290px;
+    left: 20px;
+  
+  }
+
+  .info{
+    text-align: center;
+    margin: 0rem 2rem 0rem 2rem;
+  }
+
+  .infotop{
+    margin: auto;
+    padding: 0 4rem 0 4rem;
+    font-size: 30px;
+  }
+
+  
+
+  .infobottom{
+    text-align: center;
+    margin: auto;
+    padding-top:2rem ;
+    font-size: 20px;
+  }
+
+
+  
+  .mainsecond{
+    flex-direction: column;
+  }
+
+  .infobutton{
+    margin-bottom: 2rem;
+  }
+
+
+  .footerdes{
+    font-size: 40px;
+  }
+
+  .infobutton{
+    display: inline-flex;
+    height: 40px;
+    width: 220px;
     padding: 0;
-    margin: 2rem 0 0 13rem;
+    margin: 2rem 0 0 0;
     background: var(--bg);
     border-color:var(--accent);
     border-radius: 60px;
@@ -466,22 +515,95 @@
     font-size: 16px;
     font-family: 500;
     cursor: pointer;
+    margin-bottom: 3rem;
+   
+  
+  }
+
+  .card-grid{
+  
+    display: grid;
+    justify-content: center;
+
+
+    
+    
+  }
+
+  .button{
+    display: inline-flex;
+    height: 50px;
+    width: 230px;
+    padding: 0;
+    background: var(--bg);
+    border-color:var(--accent);
+    border-radius: 60px;
+    overflow: hidden;
+    font-family: serif;
+    font-size: 16px;
+    font-family: 500;
+    cursor: pointer;
+    text-align: center;
+   
   
   }
   
-  .mainsecond{
-    flex-direction: column;
+  .button_text{
+    display: inline-flex;
+    align-items: center;
+    padding: 0 10px;
+    color: var(--accent);
+    height: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Samsung Sharp Sans', sans-serif;
+                                                  
+  
+  }
+  
+  .button_icon{
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0 0 30px;
+    color: var(--accent);
+    height: 100%;
+  
+  }
+  
+  .button_icon{
+    font-size: 1.5em;
+    background: var(--bg);
+  }
+  
+  .info{
+    text-align: center;
   }
 
-  
 
+  .infotop{
+    color: var(--line);
+    font-family: var(--accentfont);
+    /* margin: 9rem 0 2rem 0; */
+    margin: auto;
+    margin-top: 1rem;
 
-  .footerdes{
     font-size: 40px;
   }
+
+
   
   
+  .footer{
+    text-align: center;
+
+  }
+  .footerlogo{
+    text-align: center;
+    font-size: 15px;
+  }
   
+  
+
   
   
   }

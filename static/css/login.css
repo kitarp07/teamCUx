@@ -148,29 +148,23 @@
   flex-direction: column;
   width: 50%;
   margin: 5rem 0 0 0;
-
-
 }
-
-
 
 div.login>.loginfield>form>label{
     font-family: var(--accentfont);
     font-size: 20px;
     font-family: var(--accentfont);
-    
-
 }
 
 
 div.login>.loginfield>form>input{
   display: block;
-  max-width: 80%;
-  padding: 0.8rem 5rem;
   color: var(--line);
   background:rgb(255, 255, 255);
   border: 2px solid var(--line);
   border-radius: 10px;  
+  font-size: 500;
+  padding: 8px 1.1rem;
 }
 
 .reset{
