@@ -31,13 +31,17 @@
         
         <div class="formC">
        
-               <form method="post">
-                    <label>Full Name :</label>
-                    <input type="text" name="name" value=" "/>
-                    <label>Email Address :</label>
-                    <input type="text" name="email" value=" "/>
-                    <label>Phone Number :</label>
-                    <input type="text" name="phone" value=" "/>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p> Update profile details</p>
+                <label for="name"> Username</label>
+                <input id="name" value="{{ user.name }}" name="name">
+                <label for="email"> Email</label>
+                <input id="email" value="{{ user.email }}" name="email">
+                <label for="phone"> Phone</label>
+                <input id="phone" value="{{ user.phone }}" name="phone">
+                <label for="password"> Password</label>
+                <input id="password" value="{{ user.password }}" name="password" type="password">
                     
                     
                     <div class="bottom">
@@ -47,9 +51,10 @@
                         <div>
 
                             <div class="selectbuttons">
-                                <div class="btn-group">
+                                <div  type="submit" class="btn-group">
                                     <button>Update Profile</button>
-                                    <button>Delete Profile</button>
+                                    <a class="btn btn-lg text-end px-3 py-2" href="{% url 'deletetester' user.id  %}" style="background-color: #D0D2FF;  border-radius: 20px;color: #513CD2; padding: 0; margin: 0;"> Delete 
+                                    </a>
                                 </div>
                             </div>
                                             

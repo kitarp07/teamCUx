@@ -34,15 +34,28 @@
                 <a href="#" class="nav-link">Contact Us</a>
             </li>
             <li class="logout nav-item">
-                <a href="#" class="nav-link">Log Out</a>
+                <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">Log Out</a>
             </li>
         </ul>
         <div class="dropdown">
-            <a href="{% url 'myprofile' request.user.uxtester.id %}"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png" class="profimg" onclick="profFunction()"></class>
-               
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
+                class="profimg" onclick="profFunction()">
+
             <div id="profDrop" class="profdrop-content">
-                <a href="#">Log out</a>
+                <a href="javascript:{document.getElementById('logout').submit()}">
+                    Logout</a>
             </div>
+            {% if request.user.is_authenticated %}
+
+            <a href="#" class="sign-out"><i class="fa fa-sign-out"></i>{{request.user.username}}</a>
+            <form id="logout" action="{% url 'logout_admin' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden">
+            </form>
+
+            {% else %}
+            <a href="{% url 'login' %}" class="fas fa-user">Login</a>
+            {% endif %}
         </div>
         <div class="hamburger">
             <span class="bar"></span>
@@ -58,22 +71,25 @@
                 <a href="{% url 'testeralltests' %}"> <button>All Tests</button></a>
                 <a href="{% url 'upload-video' %}"><button>Upload Video</button></a>
                 <button>My Profile</button>
-                {% if request.user.is_authenticated %}
-    
-        <a href="javascript:{document.getElementById('logout').submit()}" class="sign-out"><i class="fa fa-sign-out"></i>{{request.user.username}} Logout</a>
-        <form id="logout" action="{% url 'logout_admin' %}" method="POST">
-          {% csrf_token %}
-          <input type="hidden">
-        </form>
-        
-        {% else %}
-        <a href="{% url 'tlogin' %}" class="fas fa-user">Login</a>
-        {% endif %}
-     
+                <!-- {% if request.user.is_authenticated %}
+
+                <a href="javascript:{document.getElementById('logout').submit()}" class="sign-out"><i
+                        class="fa fa-sign-out"></i>{{request.user.username}} Logout</a>
+                <form id="logout" action="{% url 'logout_admin' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden">
+                </form>
+
+                {% else %}
+                <a href="{% url 'tlogin' %}" class="fas fa-user">Login</a>
+                {% endif %} -->
+
+            </div>
         </div>
+
         {% block uploadvideo %}
         {% endblock uploadvideo%}
-        {%block testerdash%}
+        {% block testerdash %}
         <!-- <div class="dash-content">
             <table class="content-item">
                 <tr class="thead">
@@ -93,10 +109,9 @@
                 </tr>
             </table>
         </div> -->
-        {%endblock testerdash%}
-    </div>
+        {% endblock testerdash %}
 
-    <script src="{% static 'js/navbar.js' %}" async defer></script>
+        <script src="{% static 'js/navbar.js' %}" async defer></script>
 </body>
 
 </html>

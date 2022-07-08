@@ -36,34 +36,34 @@
                 <a href="#" class="nav-link">Contact Us</a>
             </li>
             <li class="logout nav-item">
-                <a href="#" class="nav-link">Log Out</a>
+                <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">Log Out</a>
             </li>
         </ul>
         <div class="dropdown">
-            <a href="{% url 'client-profile' %}"> <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
-                    class="profimg" onclick="profFunction()">
-                <div id="profDrop" class="profdrop-content">
-            </a>
-            <!-- <a href="#">Log out</a> -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
+                class="profimg" onclick="profFunction()">
+            <div id="profDrop" class="profdrop-content">
+                <!-- <a href="#">Log out</a> -->
+                <a href="javascript:{document.getElementById('logout').submit()}" class="sign-out"><i
+                        class="fa fa-sign-out"></i>Logout</a>
+            </div>
+            {% if request.user.is_authenticated %}
+
+            <a href="#" class="sign-out"><i class="fa fa-sign-out"></i>{{request.user.username}}</a>
+            <form id="logout" action="{% url 'logout_admin' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden">
+            </form>
+
+            {% else %}
+            <a href="{% url 'login' %}" class="fas fa-user">Login</a>
+            {% endif %}
         </div>
-        {% if request.user.is_authenticated %}
-    
-        <a href="javascript:{document.getElementById('logout').submit()}" class="sign-out"><i class="fa fa-sign-out"></i>{{request.user.username}} Logout</a>
-        <form id="logout" action="{% url 'logout_admin' %}" method="POST">
-          {% csrf_token %}
-          <input type="hidden">
-        </form>
-        
-        {% else %}
-        <a href="{% url 'login' %}" class="fas fa-user">Login</a>
-        {% endif %}
-    </div>
-    <div class="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-    </div>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
     </div>
     <div class="container">
         <div class="nav">
@@ -76,25 +76,6 @@
             </div>
         </div>
         {% block videolink%}
-        <div class="dash-content">
-            <table class="content-item">
-                <tr class="thead">
-                    <th>Campaign Name</th>
-                    <th>Status</th>
-                    <!--       <th>Product Owner</th> -->
-                </tr>
-                <tr class="tbody">
-                    <td data-label="Campaign Name">Hello Pets</td>
-                    <td data-label="Status">Completed</td>
-                    <!--       <td>Brian Miller</td> -->
-                </tr>
-                <tr class="tbody">
-                    <td data-label="Campaign Name">Hello Pets</td>
-                    <td data-label="Status">Completed</td>
-                    <!--       <td>Brian Miller</td> -->
-                </tr>
-            </table>
-        </div>
         {% endblock videolink %}
     </div>
     <script src="{% static 'js/navbar.js' %}" async defer></script>

@@ -12,6 +12,12 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.dropdown .sign-out {
+    text-decoration: none;
+    position: relative;
+    bottom: 1.2rem;
+}
+
 /*------------------ button group--------------------- */
 .nav {
     width: 800px;
