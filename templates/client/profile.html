@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
     <link rel="stylesheet" href="profile.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/clientdash.css' %}">
-    
+
     <title>Profile</title>
-                
+
 </head>
+
 <body>
     <div class="wrapper">
         <div class="profilebox">
             <button class="edit"><i class="far fa-edit"></i>Edit</button>
-        
+
             <img class="profilepic" img src="profilepic.jpg" alt="profile_image"></img>
-            
+
             <h2 class="name">John Doe</h2>
             <h4 class="contact">Contact info: <span class="number">9876543210</span></h4>
         </div>
@@ -33,18 +36,18 @@
                 <h2 class="topic">ABOUT ME</h2>
                 <p class="aboutdes">
                     Lorem, ipsum dolor sit amet consectetur adipisicing
-                    elit. Ex illum ipsum iusto consequatur. Totam, dolorum fugiat, 
-                    debitis facere illo nostrum nesciunt maxime, deserunt enim 
-                    voluptatibus modi natus velit voluptatum. Dicta eritatis 
+                    elit. Ex illum ipsum iusto consequatur. Totam, dolorum fugiat,
+                    debitis facere illo nostrum nesciunt maxime, deserunt enim
+                    voluptatibus modi natus velit voluptatum. Dicta eritatis
                     exercitationem ut quos a placeat obcaecati? Architecto illum!
                     Amet consectetur adipisicing elit. Veritatis exercitationem ut
-                    quos a placeat obcaecati? Architecto illum, atque delectus nemo 
-                    dolorem inventore ab facilis? Dolor placeat vel delectus ipsam 
+                    quos a placeat obcaecati? Architecto illum, atque delectus nemo
+                    dolorem inventore ab facilis? Dolor placeat vel delectus ipsam
                     ullam.
                 </p>
             </div>
 
-        
+
 
             <div class="dash-content">
                 <h2 class="producttop">MY PRODUCTS</h2>
@@ -52,20 +55,22 @@
                     <tr class="tbody">
                         <td data-label="productimg"><img src="profilepic.jpg"></td>
                         <td data-label="campaignname">Hello Pets</td>
-                        <td data-label="editing"><button>Edit</button>  <button>Delete</button></td>
+                        <td data-label="editing"><button>Edit</button> <button>Delete</button></td>
 
                     </tr>
                     <tr class="tbody">
                         <td data-label="productimg"><img src="profilepic.jpg"></td>
                         <td data-label="campaignname">Hello Pets</td>
-                        <td data-label="editing"><button class="edit">Edit</button>  <button class="delete">Delete</button></td>
+                        <td data-label="editing"><button class="edit">Edit</button> <button
+                                class="delete">Delete</button></td>
 
                     </tr>
                 </table>
             </div>
+        </div>
+
     </div>
 
-</div>
-    
 </body>
+
 </html>

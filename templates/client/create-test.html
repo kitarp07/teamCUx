@@ -24,7 +24,7 @@
         <img src="{% static 'images/logo.png' %}" alt="Test MY UXLogo" class="logo">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a herf="#" class="nav-link">Home</a>
+                <a href="{% url 'homepage' %}"  class="nav-link">Home</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">About Us</a>
@@ -62,9 +62,9 @@
         </div>
         <div class="form-field">
 
-            <form method="post" class="fields left" id="form_left">
+            <form method="post" id="form_left">
                 {%csrf_token%}
-                
+                <div class="fields left">
                     <label class="lbl left">Test Campaign</label>
                     <input class="inp left" name="title" id="inp_left">
                     <label class="lbl left">Mention Tasks</label>
@@ -80,11 +80,14 @@
                             src="{% static 'images/arrow 4.png' %}">
                         Proceed to Checkout</button>
                     <button class="next" type="button" id="next">Proceed to Checkout</button>
-                    <!-- </form>
+                </div>
 
-            <form method="post" class="fields right" id="form_right">
+                <!-- </form>
+
+                <form method="post" class="fields right" id="form_right">
                 {%csrf_token%} -->
-                    <!---------------- right side ------------------>
+                <!---------------- right side ------------------>
+                <div class="fields right" id="form_right">
                     <label class="lbl right">Name on Card</label>
                     <input class="inp right" name="nameoncard" id="inp_right">
                     <label class="lbl right">Card Number</label>
@@ -97,9 +100,9 @@
                             src="{% static 'images/submit-2 1.png' %}">Pay and
                         Submit for
                         Review</button>
-            
+                </div>
+            </form>
         </div>
-    </div>
     </div>
     <script src="{% static 'js/navbar.js' %}" async defer></script>
     <script src="{% static 'js/addprod.js' %}" async defer></script>

@@ -24,8 +24,8 @@ from client.views import *
 from pages.views import *
 from Tester.views import *
 urlpatterns = [
-#    path('admin', auth_views.LoginView.as_view(template_name='adminpage/adminlogin.html'), name='admin'),
-   path('admin/', admin.site.urls),
+   path('admin/', auth_views.LoginView.as_view(template_name='adminpage/adminlogin.html'), name='admin'),
+   path('sadmin/', admin.site.urls),
    path('client/register', client_reg_view, name="client-reg" ),
    path('', homepage, name="homepage" ),
    path('',include('Tester.urls')),
@@ -42,20 +42,23 @@ urlpatterns = [
    path('client/sentbytester', sent_by_tester, name='sentbytester'),
    path('client/alltests', alltests, name='alltests'),
    path('client/profile', client_profile, name='client-profile'),
-   path('client/edit-profile/<int:pk>', edit_profile, name='client-edit-profile'),
+   path('client/edit-profile/<int:pk>', client_edit_profile, name='client-edit-profile'),
    path('client/forgetpassword/enteremail', enter_email, name='enter-email'),
    path('client/forgetpassword/clicklink/<uidb64>/<token>', click_link, name="clicklink"),
    path('client/changepassword/<int:pk>', change_password, name="change-password"),
-   path('tester/forgetpassword/enteremail', enter_email, name='tester-enter-email'),
-   path('tester/forgetpassword/clicklink/<uidb64>/<token>', click_link, name="tester-clicklink"),
-   path('tester/changepassword/<int:pk>', change_password, name="tester-change-password"),
+   path('tester/forgetpassword/enteremail', tester_enter_email, name='tester-enter-email'),
+   path('tester/forgetpassword/clicklink/<uidb64>/<token>', tester_click_link, name="tester-clicklink"),
+   path('tester/changepassword/<int:pk>', tester_change_password, name="tester-change-password"),
    
    path('client/rating/<int:pk>', rating, name='rating'),
+   path('client/clientlogout',clientlogout,name='clientlogout'),
    path('client/delete-account/<int:pk>', delete_account, name="delete-account"),
    path('admin/admintester', admintester, name="admintester"),
    path('admin/adminclient', adminclient, name="adminclient"),
    path('admin/admintests', admintests, name="admintests"),
-   path('client/approvetests/<int:pk>', approvetests, name="approvetest")
+   path('client/approvetests/<int:pk>', approvetests, name="approvetest"),
+
+   
 
 
 ] 

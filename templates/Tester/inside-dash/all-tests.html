@@ -8,21 +8,21 @@
             <th>Tasks</th>
             <th>Requirements</th>
             <th>Guidelines</th>
-            <th> Created by</th>
+            <th>Product Owner</th>
         </tr>
         {%for test in tests %}
-        
+
         <tr class="tbody">
             <td data-label="Campaign Name">{{test.title}}</td>
             <td data-label="Status">{{test.mention_tasks}}</td>
             <td data-label="Product Owner">{{test.requirements}}</td>
-            <td>{{test.additional_guidelines}}</td>
-            <td>{{test.created_by.name}}</td>
+            <td data-label="Additional Guidelines">{{test.additional_guidelines}}</td>
+            <td data-label="Product Owner">{{test.created_by.name}}</td>
         </tr>
-       
+
 
         {%endfor%}
-       
+
     </table>
 </div>
 

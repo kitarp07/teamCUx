@@ -171,10 +171,12 @@ function leftsubmit() {
         return false;
     }
 
-    // else if (!regName.test(inp_right)) {
-    //     alert("Please enter full name");
-    //     return false;
-    // }
+    else if (inp_right.value != inp_right.value.match(regName)) {
+        inp_right.value = ""
+        inp_right.style.borderColor = "red";
+        inp_right.placeholder = "Please enter valid name";
+        return false;
+    }
 
     else if (cardnum.value == "") {
         cardnum.style.borderColor = "red";
@@ -182,9 +184,37 @@ function leftsubmit() {
         return false;
     }
 
+    else if (cardnum.value > 9999999999999999) {
+        cardnum.style.borderColor = "red";
+        cardnum.value = "";
+        cardnum.placeholder = "Enter between 15-16 digits";
+        return false;
+    }
+
+    else if (cardnum.value < 100000000000000) {
+        cardnum.style.borderColor = "red";
+        cardnum.value = "";
+        cardnum.placeholder = "Enter between 15-16 digits";
+        return false;
+    }
+
     else if (cvv.value == "") {
         cvv.style.borderColor = "red";
         cvv.placeholder = "Please enter cvv";
+        return false;
+    }
+
+    else if (cvv.value > 9999) {
+        cvv.style.borderColor = "red";
+        cvv.value = "";
+        cvv.placeholder = "Enter between 3-4 digits";
+        return false;
+    }
+
+    else if (cvv.value < 100) {
+        cvv.style.borderColor = "red";
+        cvv.value = "";
+        cvv.placeholder = "Enter between 3-4 digits";
         return false;
     }
 
@@ -198,7 +228,6 @@ function leftsubmit() {
         document.getElementById("checkout").addEventListener("click", (event) => {
             event.preventDefault();
             document.getElementById('form_left').submit();
-            document.getElementById('form_right').submit();
             alert('you have submitted');
         })
     }

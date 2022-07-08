@@ -10,7 +10,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-
 /*------------------ button group--------------------- */
 .nav {
     width: 800px;
@@ -58,12 +57,12 @@ body {
     margin: 25px 90px;
 }
 
-.btn-group button:nth-child(1) {
+.btn-group a:nth-child(1) button {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
-.btn-group button:nth-child(3) {
+.btn-group a:nth-child(3) button {
     border-right: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -81,7 +80,7 @@ body {
 
 /*------------------- table content----------------- */
 table tr th {
-    padding: 10px 40px;
+    padding: 10px 70px;
     font-size: larger;
     font-weight: 300;
     width: 300px;
@@ -107,6 +106,7 @@ table tr td:last-child {
 table {
     display: flex;
     justify-content: center;
+    margin-top: 5rem;
 }
 
 .content-item {
@@ -131,6 +131,10 @@ table {
 
     .nav .btn-group {
         margin-left: 50px;
+        position: relative;
+        bottom: 20px;
+        right: 15px;
+        font-size: small;
     }
 
     .nav .btn-group button {

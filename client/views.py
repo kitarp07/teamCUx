@@ -4,6 +4,7 @@ from tokenize import group
 from unicodedata import name
 import uuid
 
+
 from django.shortcuts import redirect, render
 from Tester.models import UploadVideo
 from client.forms import *
@@ -15,9 +16,11 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 from client.models import UxClient
+from testmyux.settings import LOGIN_REDIRECT_URL
 from .utils import generate_token
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from Tester.models import UxTester
 
 
@@ -55,10 +58,9 @@ def client_reg_view(request):
             pw = form.cleaned_data['password']
             cpw = request.POST.get('cpassword')
             
-            try:
-                user = User.objects.filter(username=name, email=email)
+            if User.objects.filter(username=name).exists() or User.objects.filter(email=email).exists():
                 messages.success(request, "User already exists. Please choose different name and email")
-            except:
+            else:
                 if name != "" and name !=  "" and name != "" and name != "":
                     if pw==cpw:
                         user = User.objects.create_user(name, email, pw)
@@ -124,7 +126,7 @@ def client_login_view(request):
        
         elif user.groups.all()[0].name == 'client':
             login(request, user)
-            return redirect('client-dash')
+            return redirect('sentbytester')
            
         else:
             messages.success(request, "Wrong Credentials. Please try again")
@@ -133,6 +135,7 @@ def client_login_view(request):
 
     return render(request, "client/login.html")
 
+@login_required(login_url='client-login')
 def client_dashoard(request):
     if request.user.is_authenticated:
         user = request.user
@@ -228,8 +231,11 @@ def client_profile(request):
              
             customer = request.user.uxclient
 
+            tests = CreateTests.objects.filter(created_by = customer.id)
+
             context ={
-                 'customer':customer
+                 'customer':customer,
+                 'tests': tests,
              }
             return render(request, "client/clientprofile.html",context)
 
@@ -239,7 +245,7 @@ def client_profile(request):
         messages.success(request, "Wrong Credentials. Please try again")
         return redirect('client-login')
 
-def edit_profile(request, pk):
+def client_edit_profile(request, pk):
     uxclient = UxClient.objects.get(id=pk)
     form = ClientForm(request.POST)
     user = request.user
@@ -264,7 +270,7 @@ def edit_profile(request, pk):
     context = {'form': form, 'uxclient':uxclient}
     return render(request, 'client/edit-profile.html', context)
 
-def send_forget_password_email(request, user):
+def send_forget_password_email_client(request, user):
     subject = "Reset password link"
     if request.method == "POST":
         email = request.POST.get('email')
@@ -294,7 +300,7 @@ def enter_email(request):
         else:
             user = User.objects.get(email=email)
             print (user.username)
-            send_forget_password_email(request, user)
+            send_forget_password_email_client(request, user)
     
 
     return render(request, 'client/forgetpassword/enteremail.html')
@@ -340,9 +346,15 @@ def rating(request, pk):
     video = UploadVideo.objects.get(id=pk)
     if request.method == 'POST':
         video.rating = request.POST.get('rating')
+        video.feedback = request.POST.get('feedback')
         video.save()
         messages.success(request, "Your rating has been submitted")
     return redirect('sentbytester')
+        
+def clientlogout(request):
+    logout(request)
+    messages.add_message(request,messages.SUCCESS,'Sucessfully logged out') 
+    return redirect('login')        
 
 
 def approvetests(request, pk):

@@ -12,25 +12,25 @@
             <th>Manage</th>
         </tr>
         {% for test in tests%}
-        
 
-            <tr class="tbody">
 
-                <td data-label="Campaign Name"><a href="#test_{{test.id}}" class="testdetail">{{test.title}}</a></td> 
-                <td data-label="Owner">{{test.created_by.name}}</td>
-                <!-- <td data-label="Tests Created">5</td> -->
-                {% if test.isApproved %}
-                <td>Approved</td>
+        <tr class="tbody">
 
-                {%else%}
-                <td> <a href="#approve_{{test.id}}" class="approvetest"><button>Approve</button></a> </td>
-                {%endif%}
+            <td data-label="Campaign Name"><a href="#test_{{test.id}}" class="testdetail">{{test.title}}</a></td>
+            <td data-label="Owner">{{test.created_by.name}}</td>
+            <!-- <td data-label="Tests Created">5</td> -->
+            {% if test.isApproved %}
+            <td>Approved</td>
 
-                <td> <a href="#popup1_{{test.id}}" class="managetester"><button>Delete</button></a> </td>
+            {%else%}
+            <td> <a href="#approve_{{test.id}}" class="approvetest"><button>Approve</button></a> </td>
+            {%endif%}
 
-            </tr>
-       
-        <div id="popup1_{{test.id}}" class="overlay" data-target="gotoLink">
+            <td> <a href="#popup1_{{test.id}}" class="managetester"><button>Delete</button></a> </td>
+
+        </tr>
+
+        <div id="popup1_{{test.id}}" class="overlay delete" data-target="gotoLink">
             <div class="popup">
                 <a class="close" href="#">&times;</a>
                 <div class="content">
@@ -41,14 +41,14 @@
             </div>
         </div>
 
-        <div id="approve_{{test.id}}" class="overlay" data-target="gotoLink">
+        <div id="approve_{{test.id}}" class="overlay approve" data-target="gotoLink">
             <div class="popup">
                 <a class="close" href="#">&times;</a>
                 <div class="content">
                     <h3>Are you sure you want to approve this test?</h3>
                     <form action="{% url 'approvetest' test.id%}" method="post">
                         {% csrf_token %}
-                        <button type="submit">Approve </button>
+                        <button class="link1 approve" type="submit">Approve </button>
                     </form>
 
                     <button class="link2 cancel"><a href="#">Cancel</a></button>
@@ -71,8 +71,8 @@
                     <br>
                     Additional Guidelines:
                     {{test.additional_guidelines}}
-                    
-                    
+
+
 
                     <button class="link2 cancel"><a href="#">Cancel</a></button>
                 </div>
@@ -88,17 +88,17 @@
         $('#popup1_${id}').show();
     })
 
-    (".approvetest").click(function () {
-        var id = $(this).attr("id").split("_")[1]
+        (".approvetest").click(function () {
+            var id = $(this).attr("id").split("_")[1]
 
-        $('#approve_${id}').show();
-    })
+            $('#approve_${id}').show();
+        })
 
-    (".testdetail").click(function () {
-        var id = $(this).attr("id").split("_")[1]
+        (".testdetail").click(function () {
+            var id = $(this).attr("id").split("_")[1]
 
-        $('#test_${id}').show();
-    })
+            $('#test_${id}').show();
+        })
 
 
 </script>
