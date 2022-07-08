@@ -86,7 +86,11 @@ DATABASES = {
 
         'USER': 'postgres',
 
+<<<<<<< HEAD
         'PASSWORD': 'kitarp1234',
+=======
+        'PASSWORD': '1234',
+>>>>>>> e49232411e1941c635e0be57dcb69629d1271ec3
 
         'HOST': 'localhost',
 
