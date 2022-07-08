@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{% static 'css/tregister.css' %}">
     <link rel="stylesheet" href="{% static 'css/Homepage.css' %}">
 </head>
+{% for message in messages%}
+{{message}}
+{%endfor%}
 
 <body>
     <header>
@@ -66,9 +69,7 @@
             </form>
         </div>
     </div>
-    {% for message in messages%}
-    {{message}}
-    {%endfor%}
+    
 
     <script src="/static/js/tregister.js" async defer></script>
 </body>

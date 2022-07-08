@@ -22,7 +22,7 @@ from django.http import HttpResponseRedirect
 from testmyux.decoraters import tester_user_group
 
 
-def send_activation_email(user, request):
+def send_activation_email_tester(user, request):
     current_site = get_current_site(request)
     email_subject = 'Activate your account'
     email_body = render_to_string('Tester/activate.html', {
@@ -69,7 +69,7 @@ def tester_reg_view(request):
                         client = form.save(commit=False) # save info but dont commit change to database
                         client.user = user
                         client.save()
-                        send_activation_email(user,request)
+                        send_activation_email_tester(user,request)
                         messages.success(request, "Please check your email for email verification")
                         return redirect('tlogin')
                     else:
