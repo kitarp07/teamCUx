@@ -82,15 +82,15 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'newname',
+        'NAME': 'testmyux_db',
 
         'USER': 'postgres',
 
-        'PASSWORD': 'root',
+        'PASSWORD': 'kitarp1234',
 
         'HOST': 'localhost',
 
-        'PORT': '4321',
+        # 'PORT': '4321',
 
     }
 

@@ -58,6 +58,11 @@ urlpatterns = [
    path('admin/admintests', admintests, name="admintests"),
    path('client/approvetests/<int:pk>', approvetests, name="approvetest"),
 
+   path('tux/aboutus', aboutus, name='aboutus'),
+   path('tux/contactus', contactus, name='contactus'),
+
+   path('gotodashboard', gotodashboard, name='gotodashboard')
+
    
 
 
