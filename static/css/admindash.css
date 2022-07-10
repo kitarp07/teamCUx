@@ -36,14 +36,16 @@ body {
 
 .btn-group {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
-.btn-group button:nth-child(1) {
+.btn-group a:nth-child(1) button {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
-.btn-group button:nth-child(4) {
+.btn-group a:nth-child(3) button {
     border-right: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -102,6 +104,8 @@ table {
 
     .nav .btn-group {
         margin-left: 5px;
+        position: relative;
+        right: 25%;
     }
 
     .nav .btn-group button {

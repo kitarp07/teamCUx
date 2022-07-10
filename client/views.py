@@ -111,12 +111,11 @@ def verify_email(request, uidb64, token):
 
 
 def client_login_view(request):
-   
-    
 
     if request.method == 'POST':
         email = request.POST.get('email')
         passw = request.POST.get('password')
+        request.session.set_expiry(0)
         
         user = authenticate(request, username=email, password=passw)
 
@@ -126,7 +125,7 @@ def client_login_view(request):
        
         elif user.groups.all()[0].name == 'client':
             login(request, user)
-            return redirect('client-dash')
+            return redirect('sentbytester')
            
         else:
             messages.success(request, "Wrong Credentials. Please try again")
@@ -184,6 +183,8 @@ def create_test(request):
 
                 )
 
+                messages.success(request, "Test has been created and sent for approval.")
+
     return render(request, "client/create-test.html")
 
 def email_verified_page(request):
@@ -231,8 +232,11 @@ def client_profile(request):
              
             customer = request.user.uxclient
 
+            tests = CreateTests.objects.filter(created_by = customer.id)
+
             context ={
-                 'customer':customer
+                 'customer':customer,
+                 'tests': tests,
              }
             return render(request, "client/clientprofile.html",context)
 
@@ -242,7 +246,7 @@ def client_profile(request):
         messages.success(request, "Wrong Credentials. Please try again")
         return redirect('client-login')
 
-def edit_profile(request, pk):
+def client_edit_profile(request, pk):
     uxclient = UxClient.objects.get(id=pk)
     form = ClientForm(request.POST)
     user = request.user
@@ -258,6 +262,7 @@ def edit_profile(request, pk):
             user.email = request.POST.get('email')
             user.save()
             uxclient.save()
+            messages.success(request, "Details have been updated.")
             return redirect('client-profile')
            
     else:
@@ -326,6 +331,8 @@ def change_password(request, pk):
             user.set_password(password)
             user.save()
             customer.save()
+            messages.success(request, 'Password has been updated')
+
             return redirect('client-login')
     return render(request, "client/forgetpassword/changepassword.html")
 
@@ -343,6 +350,7 @@ def rating(request, pk):
     video = UploadVideo.objects.get(id=pk)
     if request.method == 'POST':
         video.rating = request.POST.get('rating')
+        video.feedback = request.POST.get('feedback')
         video.save()
         messages.success(request, "Your rating has been submitted")
     return redirect('sentbytester')
@@ -350,7 +358,7 @@ def rating(request, pk):
 def clientlogout(request):
     logout(request)
     messages.add_message(request,messages.SUCCESS,'Sucessfully logged out') 
-    return redirect('login')        
+    return redirect('client-login')        
 
 
 def approvetests(request, pk):

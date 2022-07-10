@@ -39,11 +39,13 @@ urlpatterns = [
    path('client/email-verified', email_verified_page, name='email-verified' ),
    path('tester/email-verified', email_verified_page, name='tester-email-verified' ),
    path('tester/alltests', view_all_tests, name= "testeralltests"),
+   path('tester/availabletests', view_available_tests, name='testeravailabletest'),
+
    path('client/sentbytester', sent_by_tester, name='sentbytester'),
    path('client/alltests', alltests, name='alltests'),
    path('client/profile', client_profile, name='client-profile'),
-   path('client/edit-profile/<int:pk>', edit_profile, name='client-edit-profile'),
-   path('client/forgetpassword/enteremail', enter_email, name='client-enter-email'),
+   path('client/edit-profile/<int:pk>', client_edit_profile, name='client-edit-profile'),
+   path('client/forgetpassword/enteremail', enter_email, name='enter-email'),
    path('client/forgetpassword/clicklink/<uidb64>/<token>', click_link, name="clicklink"),
    path('client/changepassword/<int:pk>', change_password, name="change-password"),
    path('tester/forgetpassword/enteremail', tester_enter_email, name='tester-enter-email'),
@@ -56,7 +58,14 @@ urlpatterns = [
    path('admin/admintester', admintester, name="admintester"),
    path('admin/adminclient', adminclient, name="adminclient"),
    path('admin/admintests', admintests, name="admintests"),
-   path('client/approvetests/<int:pk>', approvetests, name="approvetest")
+   path('client/approvetests/<int:pk>', approvetests, name="approvetest"),
+
+   path('tux/aboutus', aboutus, name='aboutus'),
+   path('tux/contactus', contactus, name='contactus'),
+
+   path('gotodashboard', gotodashboard, name='gotodashboard')
+
+   
 
 
 ] 
