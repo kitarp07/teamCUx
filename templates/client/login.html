@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	
+
 	<link rel="stylesheet" type="text/css"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
@@ -16,13 +16,9 @@
 
 
 	<link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
-<<<<<<< HEAD
-	<link rel="stylesheet" href="{% static 'css/login.css' %}">
-=======
 	<link rel="stylesheet" href="{% static 'css/Tlogin.css' %}">
 	<link rel="stylesheet" href="{% static 'css/newtlogin.css' %}">
 	<link rel="stylesheet" href="{% static 'css/Homepage.css' %}">
->>>>>>> 8067da3a94c0f69d6661c1d6e2dd5283900dde21
 	<title>Homepage</title>
 
 </head>
@@ -83,17 +79,17 @@
 
 
 		</div>
-	
-		
+
+
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    {% for message in messages %}
+		{% for message in messages %}
 
-    <script>
-        swal('{{message}}')
+		<script>
+			swal('{{message}}')
 
-    </script>
-    {% endfor %}
+		</script>
+		{% endfor %}
 	</div>
 
 
