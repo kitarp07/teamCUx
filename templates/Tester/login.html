@@ -79,19 +79,18 @@
 		
 	</div>
 	</form>
-	{% for message in messages %}
-	<script>
-		var url = 'client/login/'
-		alert('{{message}}')
-		if ('{{message}}' == 'Wrong Credentials. Please try again') {
-			window.location.href = "{%url 'tlogin'%}"
+	
 
-		}
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    {% for message in messages %}
 
+    <script>
+        swal('{{message}}')
+		window.location.href = "{%url 'tlogin'%}"
 
-	</script>
-	{% endfor %}
+    </script>
+    {% endfor %}
 </div>
 
 

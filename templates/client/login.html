@@ -81,21 +81,15 @@
 		</div>
 		</form>
 		
-		{% for message in messages %}
-	<script>
-		// var url = 'client/login/'
-		// alert('{{message}}')
-		// if ('{{message}}' == 'Wrong Credentials. Please try again') {
-		// 	window.location.href = "{%url 'client-login'%}"
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-		// }
-		swal('{{message}}')
-		window.location.href = "{%url 'client-login'%}"
+    {% for message in messages %}
 
+    <script>
+        swal('{{message}}')
 
-
-	</script>
-		{% endfor %}
+    </script>
+    {% endfor %}
 	</div>
 
 
@@ -106,6 +100,7 @@
 	</div>
 
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </body>
 
 
