@@ -87,6 +87,7 @@ def tlogin(request):
     if request.method=='POST':
         email=request.POST.get('email')
         password=request.POST.get('password')  
+        
 
         user=authenticate(request,username=email,password=password)
 
@@ -99,6 +100,7 @@ def tlogin(request):
             messages.success(request, "Wrong Credentials. Please try again")
        
         elif user.groups.all()[0].name == 'tester':
+            request.session.set_expiry(0)
             login(request, user)
             return redirect('testeralltests')
            
@@ -219,8 +221,7 @@ def edit_profile(request,pk):
         'userForm': userForm,
         'user':user
     })
-    return render(request, 'Tester/testerdash.html')   
-
+    
 
 def tester_email_verified(request):
     return render(request, "EmailVerified/EmailVerified.html")
@@ -250,6 +251,8 @@ def tester_upload_video(request):
                     paymentreceived =2,
                     )
 
+                messages.success(request, "Video link has been uploaded")
+
             
         
         context = {
@@ -269,6 +272,11 @@ def view_all_tests(request):
     tests = CreateTests.objects.all()
     context = {"tests": tests}
     return render(request, "Tester/inside-dash/all-tests.html", context)
+
+def view_available_tests(request):
+    tests = CreateTests.objects.all()
+    context = {"tests": tests}
+    return render(request, "Tester/inside-dash/availaibletests.html", context)
 
 def send_forget_password_email_tester(request, user):
     subject = "Reset password link"

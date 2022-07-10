@@ -111,12 +111,11 @@ def verify_email(request, uidb64, token):
 
 
 def client_login_view(request):
-   
-    
 
     if request.method == 'POST':
         email = request.POST.get('email')
         passw = request.POST.get('password')
+        request.session.set_expiry(0)
         
         user = authenticate(request, username=email, password=passw)
 
@@ -183,6 +182,8 @@ def create_test(request):
                     amountpaid = 10
 
                 )
+
+                messages.success(request, "Test has been created and sent for approval.")
 
     return render(request, "client/create-test.html")
 
@@ -261,6 +262,7 @@ def client_edit_profile(request, pk):
             user.email = request.POST.get('email')
             user.save()
             uxclient.save()
+            messages.success(request, "Details have been updated.")
             return redirect('client-profile')
            
     else:
@@ -329,6 +331,8 @@ def change_password(request, pk):
             user.set_password(password)
             user.save()
             customer.save()
+            messages.success(request, 'Password has been updated')
+
             return redirect('client-login')
     return render(request, "client/forgetpassword/changepassword.html")
 
@@ -354,7 +358,7 @@ def rating(request, pk):
 def clientlogout(request):
     logout(request)
     messages.add_message(request,messages.SUCCESS,'Sucessfully logged out') 
-    return redirect('login')        
+    return redirect('client-login')        
 
 
 def approvetests(request, pk):
