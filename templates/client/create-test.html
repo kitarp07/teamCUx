@@ -106,6 +106,17 @@
     </div>
     <script src="{% static 'js/navbar.js' %}" async defer></script>
     <script src="{% static 'js/addprod.js' %}" async defer></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% for message in messages %}
+
+    <script>
+        swal('{{message}}')
+		
+
+    </script>
+    {% endfor %}
 </body>
 
 </html>

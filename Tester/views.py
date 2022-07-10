@@ -87,6 +87,7 @@ def tlogin(request):
     if request.method=='POST':
         email=request.POST.get('email')
         password=request.POST.get('password')  
+        
 
         user=authenticate(request,username=email,password=password)
 
@@ -99,6 +100,7 @@ def tlogin(request):
             messages.success(request, "Wrong Credentials. Please try again")
        
         elif user.groups.all()[0].name == 'tester':
+            request.session.set_expiry(0)
             login(request, user)
             return redirect('testeralltests')
            
@@ -207,19 +209,25 @@ def testerprofile(request):
 
 
 def edit_profile(request,pk):
-    user =UxTester.objects.get(id=pk)
-    userForm= TesterForm(instance=user)
-    if request.method=='POST':
-        userForm=TesterForm(request.POST,request.FILES, instance=user)
-        if userForm.is_valid():
-            userForm.save()
-            
+    uxtester =UxTester.objects.get(id=pk)
+    user = request.user
+    userForm= TesterForm(request.POST)
+    if user is None:
+        messages.success(request, "Wrong Credentials. Please try again")
+    elif user.groups.all()[0].name == 'tester':
+        if request.method=='POST':
+            uxtester.name = request.POST.get('name')
+            uxtester.email = request.POST.get('email')
+            uxtester.phone = request.POST.get('phone')
+            user.username = request.POST.get('name')
+            user.email = request.POST.get('email')
+            user.save()
+            uxtester.save()
             return redirect('/')
-    return render(request,'Tester/tester-edit-profile.html',{
-        'userForm': userForm,
-        'user':user
-    })
-    return render(request, 'Tester/testerdash.html')   
+    else:
+        messages.success(request, "Wrong Credentials. Please try again")
+    context = {'userform': userForm, 'uxtester':uxtester}
+    return render(request, 'Tester/tester-edit-profile.html', context)   
 
 
 def tester_email_verified(request):
@@ -250,6 +258,8 @@ def tester_upload_video(request):
                     paymentreceived =2,
                     )
 
+                messages.success(request, "Video link has been uploaded")
+
             
         
         context = {
@@ -269,6 +279,11 @@ def view_all_tests(request):
     tests = CreateTests.objects.all()
     context = {"tests": tests}
     return render(request, "Tester/inside-dash/all-tests.html", context)
+
+def view_available_tests(request):
+    tests = CreateTests.objects.all()
+    context = {"tests": tests}
+    return render(request, "Tester/inside-dash/availaibletests.html", context)
 
 def send_forget_password_email_tester(request, user):
     subject = "Reset password link"

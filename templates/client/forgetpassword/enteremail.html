@@ -17,4 +17,15 @@
                 src="{% static 'images/arrow 4.png' %}"></button>
     </form>
 </div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+{% for message in messages %}
+
+<script>
+    swal('{{message}}')
+
+
+</script>
+{% endfor %}
 {% endblock enteremail%}

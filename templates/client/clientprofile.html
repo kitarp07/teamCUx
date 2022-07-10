@@ -134,17 +134,23 @@
 
     </div>
 
-    {% if message in messages%}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    {{message}}
-    {% endif%}
+    {% for message in messages %}
 
     <script>
-        (".deletelink").click(function () {
-            var id = $(this).attr("id").split("_")[1]
+        swal('{{message}}')
 
-            $('#delete_${id}').show();
-        })
+
+    </script>
+    {% endfor %}
+
+    <script>
+            (".deletelink").click(function () {
+                var id = $(this).attr("id").split("_")[1]
+
+                $('#delete_${id}').show();
+            })
 
     </script>
 

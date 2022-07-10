@@ -86,7 +86,7 @@
 
 
 
-{% for message in messages %}
+<!-- {% for message in messages %}
 <script>
     var url = 'client/login/'
     alert('{{message}}')
@@ -95,6 +95,17 @@
 
     }
 
+
+
+</script>
+{% endfor %} -->
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+{% for message in messages %}
+
+<script>
+    swal('{{message}}')
 
 
 </script>
