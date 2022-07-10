@@ -90,6 +90,8 @@ DATABASES = {
 
         'HOST': 'localhost',
 
+        # 'PORT': '4321',
+
     }
 
 }
@@ -139,7 +141,7 @@ STATICFILES_DIRS = [
 
 AUTHENTICATION_BACKENDS = ('client.emailbackend.AuthBackend', )
 
-#EMAIL CONFIG
+# EMAIL CONFIG
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'

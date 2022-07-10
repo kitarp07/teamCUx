@@ -9,16 +9,18 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+	<link rel="stylesheet" href="{% static 'css/newtlogin.css' %}">
 	<link rel="stylesheet" type="text/css"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 
 	<script src="{% static 'js/homepage.js' %}" defer></script>
-
+    
+	<link rel="stylesheet" href="{% static 'css/Tlogin.css' %}">
 
 	<link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
-	<link rel="stylesheet" href="{% static 'css/Tlogin.css' %}">
+	<link rel="stylesheet" href="{% static 'css/Homepage.css' %}">
+
 	<title>Homepage</title>
 
 </head>
@@ -44,47 +46,37 @@
 
 
 
-<div class="login">
+<body>
+    <div class="container">
+        <div class="form">
+            <div class="imgfield">
+                <h2>Tester Login</h2>
+                <!------------ image on the left side --------------->
+                <img src="{% static 'images/secure_login_pdn4 2.png' %}" alt="register image">
+            </div>
 
-	<div class="loginimage">
-		<div class="pagetopic">
-			Tester Login
-		</div>
-		<img src="{% static 'images/loginimage.png' %}">
-	</div>
-
-
-	<div class="loginfield">
-		<form action="{% url 'tlogin' %}" method="POST" enctype="multipart/form-data">
+		<form action="" method="POST" >
 			{% csrf_token%}
-			<label>Email Address</label>
+			<label class="lbl">Email</label>
+			<input class="inp" type="email" name="email" placeholder="e.g. example@domain.com">
+			<label class="lbl">Password</label>
+			<input class="inp" type="password" name="password" placeholder="••••••••">
+		<br>
+			<!---------------- Forgot Password ---------------->
+			<a  href="{% url 'tester-enter-email' %}" style="margin-left: 150px; text-decoration: none;">Forgot Password?</a>
+		 <div class="button-group" style="display: flex;">
+			<!-- <input  type="submit" id="submit_btn" name="login" value="Login" ></input> -->
+			<input  class="loginbutton1" style="margin-top: 30px ;" type="submit" value="Login"  />
+			<span style="padding-top: 38px; padding-left: 30px; padding-right: 20px">Or</span>
+			<a href="{% url 'tregister'%}" style="color:white ; display: flex; text-align:center; justify-content: center; flex-direction: column; " class="loginbutton1" >Register</a>
+		</div>
 
-			<input type="email" name="email" style="margin-top:0.5em; margin-bottom: 0.5em;" />
-			<label>Password</label>
 
-			<input type="password" name="password" svalue="" id="Password">
-
-			<br>
-
-			<div class="password" style="color: black;">
-				<input type="checkbox" onclick="myFunction()"> Show Password
-			</div>
-
-			<input class="loginbutton" type="submit" value="Login" href="#" />
-
-
-			<br>
-			<div>
-				<a class="reset" href="{% url 'tester-enter-email' %}">Forgot Password?</a>
-			</div>
-			<div class="twobuttons">
-				<!-- <button type="submit" id="submit_btn" name="login" value="">Login
-                    </button> -->
+		
 		</form>
 
 
-		<a class=""></a>
-		<a href="{% url 'tregister' %}" class="registerbutton">Register</a>
+		
 	</div>
 	</form>
 	{% for message in messages %}
