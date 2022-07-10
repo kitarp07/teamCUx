@@ -1,0 +1,140 @@
+{% extends 'client/clientdash.html' %}
+{%load static%}
+
+
+{%block videolink%}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Prompt' rel='stylesheet' />
+    <link rel="stylesheet" href="{% static 'css/clientdash.css' %}">
+    <link rel="stylesheet" href="{% static 'css/download.css' %}">
+    <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+
+</head>
+
+
+<div class="dash-content">
+    <table class="content-item">
+        <tr class="thead">
+            <th>Campaign Name</th>
+            <th>Product Owner</th>
+            
+            
+            
+            <!--       <th>Product Owner</th> -->
+        </tr>
+        {% for test in tests%}
+        <tr class="tbody">
+            <td data-label="Campaign Name">{{test.title}}</td>
+            <td data-label="Product Owner">{{test.created_by.name}}</td>
+            
+            <!-- <td data-label="Video Link">
+                <a href=""  class="download videolink"></a>
+             
+            </td> -->
+        
+           
+        </tr>
+
+
+        <div id="delete" class="overlay" >
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <h3>Delete?</h3>
+                    
+                    <button href="/client/delete-account/{{customer.id}}">Delete</button>
+                    <button ><a href="#">Cancel</a></button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        
+
+        <div id="popup1_{{video.id}}" class="overlay" data-target="gotoLink">
+            <div class="popup">
+                <a class="close" href="#">&times;</a>
+                <div class="content">
+                    <h3>Click a link to go to the video</h3>
+                    
+                    <button class="link1"><a target="_blank" href="{{video.video_link}}">Link 1</a></button>
+                    <button class="link2"><a href="#">Link 2</a></button>
+                </div>
+            </div>
+        </div>
+
+       
+        {%endfor%}
+    
+       
+
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% for message in messages %}
+<script>
+    var url = 'client/login/'
+    alert('{{message}}')
+    if ('{{message}}' == 'Wrong Credentials. Please try again') {
+        window.location.href = "{%url 'client-login'%}"
+
+    }
+
+
+
+</script>
+<script>
+    
+    (".videolink").click(function(){
+        var id = $(this).attr("id").split("_")[1]
+        $('#popup1_${id}').show();
+    });
+
+
+    (".rating").click(function(){
+        var id = $(this).attr("id").split("_")[1]
+        $('#popup2_${id}').show();
+    });
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+</script>
+{% endfor %}
+
+
+
+
+{%endblock videolink%}

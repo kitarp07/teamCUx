@@ -1,0 +1,70 @@
+{% load static%}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <header>
+        <nav class="navbar">
+            <div class="brand-title" href="#"><img src="{% static 'images/logo.png' %}" width="150" alt="logo"></div>
+
+            <a href="#" class="toggle-button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+                <ul>
+                    <li><a class="navbar-items" href="{% url 'homepage' %}">Home</a></li>
+                    <li><a class="navbar-items" href="{% url 'contactus' %}">About Us</a></li>
+                    <li><a class="navbar-items" href="{% url 'aboutus' %}">Contact Us</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a class="navbar-items" href="{%url 'gotodashboard' %}">Go to Dashnoard</a></li>
+                    {%else%}
+                    <li><a class="navbar-items" href="{%url 'client-login' %}">Login</a></li>
+                    <li><a class="register" href="{%url 'tlogin' %}">Get Paid to Test</a></li>
+                    {%endif%}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="firsthalf">
+            <img src="{% static 'images/infographics.png' %}" alt="image">
+            <div class="detail">
+                <h3>Get In Touch</h3>
+                <p>You can contact us in the following different ways:</p>
+                <br>
+                <div class="list">
+                    <ul>
+                        <li>Email:testmyux@email.com</li>
+                        <li>Phone: +977 98481234567</li>
+                        <li>Fill Up the contact form below</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Copyright © 2022 | All Rights Reserved </p>
+    </footer>
+    <script src="{% static 'js/navbar.js' %}" async defer></script>
+</body>
+
+</html>

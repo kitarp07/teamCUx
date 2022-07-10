@@ -1,0 +1,43 @@
+{% extends 'Tester/testerdash.html' %}
+{% load static %}
+
+
+{% block uploadvideo%}
+<div>
+    <link rel="stylesheet" href="{% static 'css/uploadvideo.css' %}">
+</div>
+
+<div class="formC">
+
+    <form method="post">
+        {%csrf_token%}
+        <label>Campaign Name:</label>
+
+        <select name="test" required>
+            {% for test in tests%}
+            <option value={{test.id}}>{{test.title}}</option>
+            {% endfor%}
+        </select>
+        <br>
+        <label class="vidlink">Video Link:</label>
+        <input type="text" name="video_link" />
+        <label>Video Link 2 (Optional):</label>
+        <input type="text" />
+        <!-- <input type="submit" class="buttons" value="Upload" /> -->
+        <div class="bottom">
+            <div>
+                <!-- <a class="buttons">Upload</a> -->
+                <input type="submit" class="buttons" value="Upload" />
+
+                <div class="space"></div>
+
+                <a class="buttons">Cancel</a>
+
+            </div>
+    </form>
+
+</div>
+
+
+</div>
+{% endblock uploadvideo%}

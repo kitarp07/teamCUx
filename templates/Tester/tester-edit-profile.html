@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <link rel="stylesheet" href="{% static 'css/tester-edit-profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+
+    <link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
+    <title>Profile</title>
+                
+</head>
+<body>
+ 
+        <h2 class="heading" style="font-weight: bold;">Tester Edit Profile</h2>
+        <div class="selectbuttons">
+            <div class="btn-group">
+                <button>Available Tests</button>
+                <button>All Tests</button>
+                <button>Upload Video</button>
+                <button>My Profile</button>
+
+            </div>
+        </div>
+        
+        <div class="formC">
+       
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p> Update profile details</p>
+                <label for="name"> Username</label>
+                <input id="name" value="{{ uxtester.name }}" name="name">
+                <label for="email"> Email</label>
+                <input id="email" value="{{ uxtester.email }}" name="email">
+                <label for="phone"> Phone</label>
+                <input id="phone" value="{{ uxtester.phone }}" name="phone">
+                
+                    
+                    
+                    <div class="bottom">
+                        <div>                
+                        </div>
+<br>
+                        <div>
+
+                            <div class="selectbuttons">
+                                <div  type="submit" class="btn-group">
+                                    <button>Update Profile</button>
+                                    <a class="btn btn-lg text-end px-3 py-2" href="{% url 'deletetester' user.id  %}" style="background-color: #D0D2FF;  border-radius: 20px;color: #513CD2; padding: 0; margin: 0;"> Delete 
+                                    </a>
+                                </div>
+                            </div>
+                                            
+                        </div>
+                    </div>
+                    		
+               </form>			   
+               
+          </div>
+   
+
+</body>
+</html>

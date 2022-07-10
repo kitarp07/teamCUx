@@ -1,0 +1,90 @@
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Register</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/tregister.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Homepage.css' %}">
+</head>
+{% for message in messages%}
+{{message}}
+{%endfor%}
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="brand-title" href="#"><img src="{% static 'images/logo.png' %}" width="150" alt="logo"></div>
+
+            <a href="#" class="toggle-button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+                <ul>
+                    <li><a class="navbar-items" href="{% url 'homepage'%}">Home</a></li>
+                    <li><a class="navbar-items" href="#">About Us</a></li>
+                    <li><a class="navbar-items" href="#">Contact Us</a></li>
+                    <li><a class="navbar-items" href="{%url 'client-login' %}">Login</a></li>
+                    <li><a class="register" href="{%url 'tlogin' %}">Get Paid to Test</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="form">
+            <div class="imgfield">
+                <h2>Tester Registration</h2>
+                <!------------ image on the left side --------------->
+                <img src="/static/images/secure_login_pdn4 2.png" alt="register image">
+            </div>
+            <form action="{% url 'tregister' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token%}
+                <label class="lbl">Email</label>
+                <input class="inp" type="email" name="email" placeholder="e.g. example@domain.com">
+                <label class="lbl">Phone Number</label>
+                <input class="inp" type="number" name="phone">
+                <label class="lbl">Full Name</label>
+                <input class="inp" type="text" name="name" placeholder="e.g. John Doe">
+                <label class="lbl">Password</label>
+                <input class="inp" type="password" name="password" placeholder="••••••••">
+                <label class="lbl">Confirm Password</label>
+                <input class="inp" type="password" name="cpassword" placeholder="••••••••">
+                <button type="submit" id="submit_btn" name="register" value="Create account" disabled>Register
+                    Now</button>
+                <!---------------- User Agreement ---------------->
+                <agree>
+                    <input type="checkbox" id="terms_and_conditions" value="1" onclick="terms_changed(this)">
+                    By submitting, I agree to terms and conditions.
+                </agree>
+                <a href="{% url 'tlogin' %}">Already have an account? Login</a>
+            </form>
+        </div>
+    </div>
+    
+
+    <script src="/static/js/tregister.js" async defer></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% for message in messages %}
+
+    <script>
+        swal('{{message}}')
+		
+
+    </script>
+    {% endfor %}
+    
+</body>
+
+</html>
+{% endblock %}

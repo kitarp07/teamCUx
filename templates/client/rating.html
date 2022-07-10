@@ -1,0 +1,116 @@
+{% extends 'client/clientdash.html' %}
+{%load static%}
+
+
+{%block videolink%}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Prompt' rel='stylesheet' />
+    <link rel="stylesheet" href="{% static 'css/clientdash.css' %}">
+    <link rel="stylesheet" href="{% static 'css/download.css' %}">
+    <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+</head>
+
+
+<div class="dash-content">
+    <table class="content-item">
+        <tr class="thead">
+            <th>Campaign Name</th>
+            <th>Product Owner</th>
+            <th>Video by</th>
+            <th>Go to Link</th>
+            <th>Review</th>
+            <!--       <th>Product Owner</th> -->
+        </tr>
+        {% for video in videos%}
+        <tr class="tbody">
+            <td data-label="Campaign Name">{{video.test.title}}</td>
+            <td data-label="Product Owner">{{video.client.name}}</td>
+            <td data-label="Video by">{{video.tester.name}}</td>
+            <td data-label="Video Link">
+                <a target="_blank" href="{{video.video_link}}" class="download"></a>
+            </td>
+            <td class="pop" data-label="Feedback">
+                <a href="#popup2" class="feedback"></a>
+            </td>
+           
+            <!--       <td>Brian Miller</td> -->
+        </tr>
+        {%endfor%}
+
+
+    </table>
+</div>
+<div id="popup1" class="overlay">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+            <h3>Click a link to go to the video</h3>
+            <button class="link1"><a href="#">Link 1</a></button>
+            <button class="link2"><a href="#">Link 2</a></button>
+        </div>
+    </div>
+</div>
+
+<div id="popup2" class="overlay feed">
+    <div class="popup">
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+            <form method="post">
+                {%csrf_token%}
+            
+                <h3>Rate</h3>
+                <select name="rating" id="ratedrop" required>
+                    <option value="">Select a Star</option>
+                    <option class="firststar" value="1" onclick="teststarvalue()">1 &#11088;</option>
+                    <option class="secondstar" value="2">2 &#11088;&#11088;</option>
+                    <option class="thirdstar" value="3">3 &#11088;&#11088;&#11088;</option>
+                    <option class="fourthstar" value="4">4 &#11088;&#11088;&#11088;&#11088;</option>
+                    <option class="fifthstar" value="5">5 &#11088;&#11088;&#11088;&#11088;&#11088;</option>
+                </select>
+                <h3>Feedback</h3>
+                <textarea class="comment" cols="40" rows="8" charswidth="23"
+                    placeholder="Enter your feedback here"></textarea>
+                <button class="feedbtn" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- {% for message in messages %}
+<script>
+    var url = 'client/login/'
+    alert('{{message}}')
+    if ('{{message}}' == 'Wrong Credentials. Please try again') {
+        window.location.href = "{%url 'client-login'%}"
+
+    }
+
+
+
+</script>
+{% endfor %} -->
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+{% for message in messages %}
+
+<script>
+    swal('{{message}}')
+
+
+</script>
+{% endfor %}
+
+
+{%endblock videolink%}
+

@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+
+	<script src="{% static 'js/homepage.js' %}" defer></script>
+
+
+	<link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
+<<<<<<< HEAD
+	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+=======
+	<link rel="stylesheet" href="{% static 'css/Tlogin.css' %}">
+	<link rel="stylesheet" href="{% static 'css/newtlogin.css' %}">
+	<link rel="stylesheet" href="{% static 'css/Homepage.css' %}">
+>>>>>>> 8067da3a94c0f69d6661c1d6e2dd5283900dde21
+	<title>Homepage</title>
+
+</head>
+<nav class="navbar" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.19);">
+	<div class="brand-title" href="#"><img src="{% static 'images/logo.png' %}" width="150" alt="logo"></div>
+
+	<a href="#" class="toggle-button">
+		<span class="bar"></span>
+		<span class="bar"></span>
+		<span class="bar"></span>
+	</a>
+	<div class="navbar-links">
+		<ul>
+			<li><a class="navbar-items" href="{% url 'homepage'%}">Home</a></li>
+			<li><a class="navbar-items" href="#">About Us</a></li>
+			<li><a class="navbar-items" href="#">Contact Us</a></li>
+			<li><a class="navbar-items" href="{%url 'client-login' %}">Login</a></li>
+			<li><a class="register" href="{%url 'tlogin' %}">Get Paid to Test</a></li>
+		</ul>
+	</div>
+
+</nav>
+
+
+
+<body>
+	<div class="container">
+		<div class="form">
+			<div class="imgfield">
+				<h2>Client Login</h2>
+				<!------------ image on the left side --------------->
+				<img src="{% static 'images/secure_login_pdn4 2.png' %}" alt="register image">
+			</div>
+
+			<form action="" method="POST">
+				{% csrf_token%}
+				<label class="lbl">Email</label>
+				<input class="inp" type="email" name="email" placeholder="e.g. example@domain.com">
+				<label class="lbl">Password</label>
+				<input class="inp" type="password" name="password" placeholder="••••••••">
+				<br>
+				<!---------------- Forgot Password ---------------->
+				<a href="{% url 'enter-email' %}" style="margin-left: 150px; text-decoration: none;">Forgot
+					Password?</a>
+				<div class="button-group" style="display: flex;">
+					<!-- <input  type="submit" id="submit_btn" name="login" value="Login" ></input> -->
+					<input style="margin-top: 30px;" class="loginbutton1" type="submit" value="Login" />
+					<span style="padding-top: 38px; padding-left: 30px; padding-right: 20px">Or</span>
+					<a href="{% url 'client-reg'%}"
+						style="color:white ; display: flex; text-align:center; justify-content: center; flex-direction: column; "
+						class="loginbutton1">Register</a>
+				</div>
+
+
+
+			</form>
+
+
+
+		</div>
+	
+		
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% for message in messages %}
+
+    <script>
+        swal('{{message}}')
+
+    </script>
+    {% endfor %}
+	</div>
+
+
+
+
+
+
+	</div>
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+
+
+</html>

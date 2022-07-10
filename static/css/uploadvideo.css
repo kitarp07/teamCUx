@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+
+:root {
+    --font-color: rgba(255, 255, 255);
+    --primary: #ffffff;
+    --accent: #513CD2;
+    --line: #000000;
+    --bg: #F2F2F2;
+    --accentfont: 'Samsung Sharp Sans', sans-serif;
+
+}
+
+body {
+    color: var(--line);
+    background-color: var(--bg) !important;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: 'Noto Sans', sans-serif;
+
+}
+
+
+
+/*------------------ button group--------------------- */
+.nav {
+    width: 800px;
+    margin: 100px auto;
+    height: 30px;
+}
+
+
+
+.nav h2 {
+    font-size: 32px;
+    font-family: "Samsung", sans-serif;
+}
+
+.container {
+    padding: 0 2rem 0 2rem;
+    align-items: center;
+    height: auto;
+}
+
+.btn-group {
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.btn-group button {
+    background: #513CD2;
+    border: 1px solid white;
+    color: white;
+    padding: 10px 24px;
+    cursor: pointer;
+    float: left;
+    width: 200px;
+}
+
+
+
+.btn-group button:nth-child(1) {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.btn-group button:nth-child(4) {
+    border-right: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.btn-group:after {
+    content: "";
+    clear: both;
+}
+
+.btn-group button:hover {
+    background: #7479F8;
+}
+
+
+
+
+
+
+/* form */
+
+div.formC {
+    width: 500px;
+    max-width: 86%;
+    min-height: 500px;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    background: var(--base);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    margin: 30px auto;
+    overflow: hidden;
+}
+
+div.formC>.title {
+    text-align: center;
+    margin: 5px 5px 10px;
+}
+
+.subtitle {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+div.formC>form {
+    display: block;
+}
+
+div.formC>form>label {
+    opacity: 80%;
+    font-size: 18px;
+    color: var(--line);
+    font-family: var(--accentfont);
+}
+
+div.formC>form>input {
+    outline: 5px;
+    border: none;
+    display: block;
+    font-size: 18px;
+}
+
+div.formC>form>input {
+    width: 80%;
+    height: 2.5rem;
+    padding: 0 1rem;
+    color: var(--line);
+    background-color: rgb(255, 255, 255);
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    margin: 1rem auto;
+}
+
+.formC form select {
+    padding: 5px;
+    width: 50%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.bottom {
+    font-size: 16px;
+    margin: 30px auto 60px;
+    text-align: center;
+}
+
+.space {
+    width: 20%;
+    height: auto;
+    display: inline-block;
+}
+
+.buttons {
+    background: var(--accent);
+    color: var(--primary);
+    padding: .6rem 1.4rem;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 900px) {
+    div.formC {
+        padding: 1rem 2rem;
+    }
+
+    div.formC>form>button {
+        margin: 2rem 0;
+
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+
+    }
+
+    .btn-group {
+        align-items: center;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 480px) {
+    /*----------- button group----------------- */
+
+    .nav h2 {
+        font-size: 1.5em;
+        padding-left: 20px;
+    }
+
+    .nav .btn-group {
+        margin-left: 5px;
+    }
+
+    .nav .btn-group button {
+        display: flex;
+        width: 90px;
+        flex-wrap: wrap;
+        align-items: center;
+
+    }
+
+
+
+}

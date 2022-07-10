@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <header>
+        <nav class="navbar">
+            <div class="brand-title" href="#"><img src="{% static 'images/logo.png' %}" width="150" alt="logo"></div>
+
+            <a href="#" class="toggle-button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+                <ul>
+                    <li><a class="navbar-items" href="{% url 'homepage' %}">Home</a></li>
+                    <li><a class="navbar-items" href="{% url 'contactus' %}">About Us</a></li>
+                    <li><a class="navbar-items" href="{% url 'aboutus' %}">Contact Us</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a class="navbar-items" href="{%url 'gotodashboard' %}">Go to Dashnoard</a></li>
+                    {%else%}
+                    <li><a class="navbar-items" href="{%url 'client-login' %}">Login</a></li>
+                    <li><a class="register" href="{%url 'tlogin' %}">Get Paid to Test</a></li>
+                    {%endif%}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="firsthalf">
+            <img src="{% static 'images/infographics.png' %}" alt="image">
+            <div class="detail">
+                <h3>Who We Are?</h3>
+                <p>TestMyUX is an online platform that allows website owners to test their websites before, during or
+                    after they have launched it. This platform focuses on connecting website owners with people who are
+                    qualified enough to review a website and think their thoughts out loud while they browse the site.
+                </p>
+            </div>
+        </div>
+        <div class="secondhalf">
+            <div class="detail">
+                <h3>What We Do?</h3>
+                <p>We, as customers, regularly see websites of giant companies like Google, Facebook and more,
+                    misfunctioning or containing broken links. With hundreds of qualified people who can review your
+                    website, go through custom tasks provided by you and check for bugs, you save yourself hundreds and
+                    thousands of dollars that you would else have to either lose or pay a bug bounty specialist to take
+                    care
+                    of.</p>
+            </div>
+            <img src="{% static 'images/thumbsupinfo.png' %}" alt="image">
+        </div>
+    </div>
+    <footer>
+        <p>Copyright © 2022 | All Rights Reserved </p>
+    </footer>
+    <script src="{% static 'js/navbar.js' %}" async defer></script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tester Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/uploadvideo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %} ">
+    <link href="http://fonts.cdnfonts.com/css/samsung-sharp-sans" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="topnav" id="myTopnav">
+        <img src="{% static 'images/TestMyUX Transparent 5.png' %}" alt="Test MY UXLogo" class="logo">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a herf="{% url 'homepage' %}" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Contact Us</a>
+            </li>
+            <li class="logout nav-item">
+                <a href="#" class="nav-link">Log Out</a>
+            </li>
+        </ul>
+        <!-- <div class="dropdown">
+            <img src="#"
+                class="profimg" onclick="profFunction()">
+            <div id="profDrop" class="profdrop-content">
+                <a href="#">Log out</a>
+            </div> -->
+        </div>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="nav">
+            <h2>Tester Dashboard</h2>
+            <div class="btn-group">
+                <button>Available Tests</button>
+                <button>All Tests</button>
+                <button>Upload Video</button>
+                <button>My Profile</button>
+            </div>
+        </div>
+
+       
+        
+
+        <div class="formC">
+       
+               <form>
+                       <label>Campaign Name:</label>
+                       <input type="text"/>
+                       <label>Video Link:</label>
+                       <input type="text"/>
+                       <label>Video Link 2 (Optional):</label>
+                       <input type="text"/>
+                    		
+               </form>
+               <div class="bottom">
+                <div>
+                    <a class="buttons">Upload</a>
+                    
+                    <div class="space"></div>
+          
+                    <a class="buttons">Cancel</a>
+        
+                </div>
+            </div>
+            
+        
+          </div>
+
+
+        
+    </div>
+
+    <script src="{% static 'js/navbar.js' %}" async defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% for message in messages %}
+
+    <script>
+        swal('{{message}}')
+		
+
+    </script>
+    {% endfor %}
+</body>
+
+</html>

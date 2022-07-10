@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tester Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/admindash.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="topnav" id="myTopnav">
+        <img src="{% static 'images/logo.png' %}" alt="Test MY UXLogo" class="logo">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a herf="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Contact Us</a>
+            </li>
+            <li class="logout nav-item">
+                <a href="#" class="nav-link">Log Out</a>
+            </li>
+        </ul>
+        {% if request.user.is_authenticated %}
+    
+        <a href="javascript:{document.getElementById('logout').submit()}" class="sign-out"><i class="fa fa-sign-out"></i>{{request.user.username}} Logout</a>
+        <form id="logout" action="{% url 'logout_admin' %}" method="POST">
+          {% csrf_token %}
+          <input type="hidden">
+        </form>
+        
+        {% else %}
+        <a href="{% url 'tlogin' %}" class="fas fa-user">Login</a>
+        {% endif %}
+     
+        </div>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="nav">
+            <h2>Admin Dashboard</h2>
+            <div class="btn-group">
+                <a href="{% url 'view-customer' %}"></a><button>Manage Tests</button></a>
+                <a href="{% url 'adminclient' %}"><button>Manage Testers</button></a>
+                <button>Manage Clients</button>
+                <button>My Profile</button>
+            </div>
+        </div>
+        <div class="dash-content">
+            <table class="content-item">
+                <tr class="thead">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone no.</th>
+                    <th>Tests Created</th>
+                </tr>
+                {% for c in users%}
+                <tr class="tbody">
+                    <td data-label="Name">{{c.name}}</td>
+                    <td data-label="Email">{{c.email}}</td>
+                    <td data-label="Phone no.">{{c.phone}}</td>
+                    <td data-label="Tests Created">1</td>
+                </tr>
+                {% endfor %}
+            </table>
+            
+        </div>
+    </div>
+
+    <script src="{% static 'js/navbar.js' %}" async defer></script>
+</body>
+
+</html>

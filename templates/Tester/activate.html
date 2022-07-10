@@ -1,0 +1,8 @@
+{% autoescape off %}  
+
+Hi {{user.username}}
+please use the link below to verfy your account 
+
+http://{{domain}}{% url 'activate' uidb64=uid token=token%}
+
+{% endautoescape %}  

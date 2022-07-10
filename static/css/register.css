@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+@font-face {
+    font-family: "Samsung";
+    src: url(../fonts/samsungsharpsans-bold.otf);
+}
+
+
+/*-------- Cancels the arrow key on number input box----------- */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+body {
+    background: #F2F2F2;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form {
+    width: 1500px;
+    /* margin: 80px auto 0 auto; */
+    padding: 80px auto 0 auto;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*---------------- for the image side---------------- */
+.imgfield {
+    float: left;
+    padding-right: 50px;
+}
+
+.form h2 {
+    text-align: center;
+    margin: 80px 0 0 0;
+    font-size: 32px;
+    font-family: "Samsung", sans-serif;
+}
+
+.form img {
+    width: 500px;
+    height: 400px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+
+/*-------------- for the input side-------------- */
+
+.form .lbl {
+    display: block;
+    margin: 10px;
+}
+
+.form .inp {
+    /* padding: 10px 80px; */
+    border-radius: 15px;
+    font-size: larger;
+    padding: 0 10px;
+    width: 300px;
+    height: 35px;
+}
+
+.form button {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #513CD2;
+    color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px 115px;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.form button:disabled {
+    background: #8b8ffc;
+}
+
+.form button:hover {
+    background: #7479F8;
+}
+
+.form agree {
+    margin-top: 15px;
+    display: block;
+    font-size: small;
+}
+
+.form a {
+    justify-content: center;
+    color: black;
+    position: relative;
+    left: 30px;
+    top: 5px;
+}
+
+
+@media screen and (max-width: 480px) {
+    .form {
+        width: 500px;
+        align-items: center;
+        justify-content: center;
+        display: inline;
+    }
+
+    /*---------------- for the image side---------------- */
+    .form img {
+        display: none;
+    }
+
+    .form h2 {
+        justify-content: center;
+        align-items: center;
+        padding-left: 40px;
+    }
+
+    .imgfield {
+        float: none;
+    }
+
+    /*-------------- for the input side-------------- */
+    .form .inp {
+        /* padding: 10px 80px; */
+        border-radius: 15px;
+        padding: 0 10px;
+        width: 300px;
+        height: 35px;
+        margin-left: 20px;
+    }
+
+    .form .lbl {
+        margin-left: 20px;
+    }
+
+    .form button {
+        margin-left: 20px;
+    }
+
+    .form agree {
+        margin-left: 20px;
+    }
+
+    .form a {
+        margin-left: 20px;
+    }
+
+}
