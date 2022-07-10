@@ -82,7 +82,7 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'newname',
+        'NAME': 'testmyux_db',
 
         'USER': 'postgres',
 
@@ -90,7 +90,9 @@ DATABASES = {
 
         'HOST': 'localhost',
 
-        'PORT': '4321',
+
+
+       
 
     }
 

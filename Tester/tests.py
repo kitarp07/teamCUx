@@ -206,28 +206,7 @@ class TestViews(TestCase):
         self.assertEquals(customer.password, 'newpassword')
         self.assertEquals(response.status_code, 302)     
     
-    
-    # def test_logout(self):
-    #     # Log in
-    #     self.client.login(username='XXX', password="XXX")
-
-    #     # Check response code
-    #     response = self.client.get('/admin/')
-    #     self.assertEquals(response.status_code, 302)
-
-    #     # Check 'Log out' in response
-    #     # self.assertTrue('Log out' in response.content)
-
-    #     # Log out
-    #     self.client.logout()
-
-    #     # Check response code
-    #     response = self.client.get('/admin/')
-    #     self.assertEquals(response.status_code, 302)
-
-    #     # Check 'Log in' in response
-    #     self.assertTrue('Log in' in response.content)
-
+   
 class TestURL(SimpleTestCase):
     def test_login(self):
         url=reverse('tlogin')
