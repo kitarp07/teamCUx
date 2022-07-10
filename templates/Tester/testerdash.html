@@ -67,10 +67,10 @@
         <div class="nav">
             <h2>Tester Dashboard</h2>
             <div class="btn-group">
-                <a href="{% url 'testeravailabletest' %}"><button>Available Tests</button></a> 
+                <a href="{% url 'testeravailabletest' %}"><button>Available Tests</button></a>
                 <a href="{% url 'testeralltests' %}"> <button>All Tests</button></a>
                 <a href="{% url 'upload-video' %}"><button>Upload Video</button></a>
-                <button>My Profile</button>
+                <a href="{% url 'myprofile' %}"><button>My Profile</button></a>
                 <!-- {% if request.user.is_authenticated %}
 
                 <a href="javascript:{document.getElementById('logout').submit()}" class="sign-out"><i
