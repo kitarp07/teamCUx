@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,13 +36,12 @@
                 {% csrf_token %}
                 <p> Update profile details</p>
                 <label for="name"> Username</label>
-                <input id="name" value="{{ user.name }}" name="name">
+                <input id="name" value="{{ uxtester.name }}" name="name">
                 <label for="email"> Email</label>
-                <input id="email" value="{{ user.email }}" name="email">
+                <input id="email" value="{{ uxtester.email }}" name="email">
                 <label for="phone"> Phone</label>
-                <input id="phone" value="{{ user.phone }}" name="phone">
-                <label for="password"> Password</label>
-                <input id="password" value="{{ user.password }}" name="password" type="password">
+                <input id="phone" value="{{ uxtester.phone }}" name="phone">
+                
                     
                     
                     <div class="bottom">

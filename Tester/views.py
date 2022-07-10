@@ -209,19 +209,26 @@ def testerprofile(request):
 
 
 def edit_profile(request,pk):
-    user =UxTester.objects.get(id=pk)
-    userForm= TesterForm(instance=user)
-    if request.method=='POST':
-        userForm=TesterForm(request.POST,request.FILES, instance=user)
-        if userForm.is_valid():
-            userForm.save()
-            
+    uxtester =UxTester.objects.get(id=pk)
+    user = request.user
+    userForm= TesterForm(request.POST)
+    if user is None:
+        messages.success(request, "Wrong Credentials. Please try again")
+    elif user.groups.all()[0].name == 'tester':
+        if request.method=='POST':
+            uxtester.name = request.POST.get('name')
+            uxtester.email = request.POST.get('email')
+            uxtester.phone = request.POST.get('phone')
+            user.username = request.POST.get('name')
+            user.email = request.POST.get('email')
+            user.save()
+            uxtester.save()
             return redirect('/')
-    return render(request,'Tester/tester-edit-profile.html',{
-        'userForm': userForm,
-        'user':user
-    })
-    
+    else:
+        messages.success(request, "Wrong Credentials. Please try again")
+    context = {'userform': userForm, 'uxtester':uxtester}
+    return render(request, 'Tester/tester-edit-profile.html', context)   
+
 
 def tester_email_verified(request):
     return render(request, "EmailVerified/EmailVerified.html")

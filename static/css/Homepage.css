@@ -404,10 +404,88 @@ header {
     display: none;
     width: 100%;
   }
-
-  .navbar-links ul {
-    width: 100%;
+  
+  
+  .button{
+    display: inline-flex;
+    height: 50px;
+    width: 290px;
+    padding: 0;
+    margin: 2rem 0 0 4rem;
+    background: var(--bg);
+    border-color:var(--accent);
+    border-radius: 60px;
+    overflow: hidden;
+    font-family: serif;
+    font-size: 16px;
+    font-family: 500;
+    cursor: pointer;
+    
+  }
+  
+  .button_text{
+    display: inline-flex;
+    align-items: center;
+    padding: 0 10px;
+    color: var(--accent);
+    height: 100%;
+    font-weight: bold;
+    font-size: 24px;
+    font-family: 'Samsung Sharp Sans', sans-serif;
+                                                  
+  
+  }
+  
+  .button_icon{
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0 0 30px;
+    color: var(--accent);
+    height: 100%;
+  
+  }
+  
+  .button_icon{
+    font-size: 1.5em;
+    background: var(--bg);
+  }
+  
+  
+  /* <----- header ends ------> */
+  
+  .mainfirst{
+    height: auto;
+    background-color: var(--primary);
+  }
+  
+  .intro{
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+    font-family: var(--accentfont);
+    font-weight: bold;
+    font-size: 40px;
+  }
+  
+  .introdes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0 5rem 0;
+    font-family: var(--accentfont);
+    font-weight: normal;
+    font-size: 30px;
+  }
+  
+  .card-grid{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(350px, 1fr))[auto-fit];
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 0 6rem 20px 6rem;
+   
   }
 
   .navbar-links ul li {
@@ -422,11 +500,139 @@ header {
     display: flex;
   }
 
+  .infographics img{
+    flex:1;
+    height: 35em;
+    padding: 4rem 0 0rem 4rem;
+    width: 100%;  
+    height: auto;
+    
+  }
+
+  .info{
+    padding-left: 4rem;
+    padding-top: 5rem;
+  }
+  
 
 
+  .infotop{
+    color: var(--line);
+    font-family: var(--accentfont);
+    /* margin: 9rem 0 2rem 0; */
+    margin: auto;
 
-  .headline {
-
+    font-size: 40px;
+  }
+  
+  .infobottom{
+    color: var(--line);
+    font-family: var(--accentfont);
+    font-weight: normal;
+    margin: 0 8rem 0 0;
+  
+  }
+  
+  
+  .infobutton{
+    display: inline-flex;
+    height: 50px;
+    width: 290px;
+    padding: 0;
+    margin: 2rem 0 0 0;
+    background: var(--bg);
+    border-color:var(--accent);
+    border-radius: 60px;
+    overflow: hidden;
+    font-family: serif;
+    font-size: 16px;
+    font-family: 500;
+    cursor: pointer;
+    margin-bottom: 3rem;
+    width: 100%;
+   min-width: 50px;  
+   max-width: 300px;
+  }
+  
+  
+  
+  
+  .footer{
+    background: var(--accent);
+  }
+  
+  .footerlogo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    
+  
+    width: 370px;
+    padding: 4rem 0 0 0;
+    font-size: 80px;
+    font-family: var(--accentfont);
+    font-weight: bold;
+    color: var(--primary);
+  }
+  
+  .footerdes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--primary);
+    font-size: 60px;
+    padding: 2rem 0 4rem 0;
+    font-family: var(--accentfont);
+  }
+  
+  .copyright{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--line);
+    color: var(--primary);
+    padding: 1.5rem;
+  }
+  
+  
+@media (max-width: 790px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+  
+    .toggle-button {
+        display: flex;
+    }
+  
+    .navbar-links {
+        display: none;
+        width: 100%;
+    }
+  
+    .navbar-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+  
+    .navbar-links ul li {
+        text-align: center;
+    }
+  
+    .navbar-links ul li a {
+        padding: .5rem 1rem;
+    }
+  
+    .navbar-links.active {
+        display: flex;
+    }
+  
+  
+  
+  
+  .headline{
+  
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -456,10 +662,51 @@ header {
   .button {
     display: inline-flex;
     align-items: center;
-    height: 50px;
-    width: 290px;
+    left: 20px;
+  
+  }
+
+  .info{
+    text-align: center;
+    margin: 0rem 2rem 0rem 2rem;
+  }
+
+  .infotop{
+    margin: auto;
+    padding: 0 4rem 0 4rem;
+    font-size: 30px;
+  }
+
+  
+
+  .infobottom{
+    text-align: center;
+    margin: auto;
+    padding-top:2rem ;
+    font-size: 20px;
+  }
+
+
+  
+  .mainsecond{
+    flex-direction: column;
+  }
+
+  .infobutton{
+    margin-bottom: 2rem;
+  }
+
+
+  .footerdes{
+    font-size: 40px;
+  }
+
+  .infobutton{
+    display: inline-flex;
+    height: 40px;
+    width: 220px;
     padding: 0;
-    margin: 2rem 0 0 13rem;
+    margin: 2rem 0 0 0;
     background: var(--bg);
     border-color: var(--accent);
     border-radius: 60px;
@@ -468,22 +715,98 @@ header {
     font-size: 16px;
     font-family: 500;
     cursor: pointer;
-
+    margin-bottom: 3rem;
+   
+  
   }
 
-  .mainsecond {
-    flex-direction: column;
+  .card-grid{
+  
+    display: grid;
+    justify-content: center;
+
+
+    
+    
+  }
+
+  .button{
+    display: inline-flex;
+    height: 50px;
+    width: 230px;
+    padding: 0;
+    background: var(--bg);
+    border-color:var(--accent);
+    border-radius: 60px;
+    overflow: hidden;
+    font-family: serif;
+    font-size: 16px;
+    font-family: 500;
+    cursor: pointer;
+    text-align: center;
+   
+  
+  }
+  
+  .button_text{
+    display: inline-flex;
+    align-items: center;
+    padding: 0 10px;
+    color: var(--accent);
+    height: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Samsung Sharp Sans', sans-serif;
+                                                  
+  
+  }
+  
+  .button_icon{
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0 0 30px;
+    color: var(--accent);
+    height: 100%;
+  
+  }
+  
+  .button_icon{
+    font-size: 1.5em;
+    background: var(--bg);
+  }
+  
+  .info{
+    text-align: center;
   }
 
 
+  .infotop{
+    color: var(--line);
+    font-family: var(--accentfont);
+    /* margin: 9rem 0 2rem 0; */
+    margin: auto;
+    margin-top: 1rem;
 
-
-  .footerdes {
     font-size: 40px;
   }
 
 
+  
+  
+  .footer{
+    text-align: center;
 
+  }
+  .footerlogo{
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  
 
-
+  
+  
+  }
+  
 }
+  
