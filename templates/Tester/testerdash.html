@@ -33,22 +33,21 @@
             <li class="nav-item">
                 <a href="{% url 'contactus' %}" class="nav-link">Contact Us</a>
             </li>
-            <li style="margin-left: 20px;" class="logout nav-item">
+            <!-- <li style="margin-left: 20px;" class="logout nav-item">
                 <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">Log Out</a>
-            </li>
+            </li> -->
         </ul>
         <div class="dropdown">
-            <a href="{% url 'myprofile' %}"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
-                class="profimg" onclick="profFunction()"></a>
+            <a href="#"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/330px-Image_created_with_a_mobile_phone.png"
+                    class="profimg" onclick="profFunction()"></a>
 
             <div id="profDrop" class="profdrop-content">
                 <a href="javascript:{document.getElementById('logout').submit()}">
                     Logout</a>
             </div>
             {% if request.user.is_authenticated %}
-            <br>
-            
-            <a href="#" class="sign-out"><i class="fa fa-sign-out"></i></a>
+            <a href="#" class="sign-out"><i class="fa fa-sign-out"></i>{{request.user.username}}</a>
             <form id="logout" action="{% url 'logout_admin' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden">
