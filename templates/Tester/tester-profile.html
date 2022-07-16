@@ -63,7 +63,7 @@
     <div class="wrapper">
         <div class="profilebox">
             <button class="edit"><i class="far fa-edit"></i><a
-                    href="{/editprofile/{{ user.id }}">Edit</a></button>
+                    href="{% url 'editprofile' customer.id %}">Edit</a></button>
 
             <button type="button" class="edit delete" >
                 <a href="#delete_{{user.id}}" type="button" class="deletelink" data-target="gotoLink">
