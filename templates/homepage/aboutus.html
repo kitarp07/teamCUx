@@ -14,7 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+<<<<<<< HEAD
     <link rel="stylesheet" href="{% static 'css/Homepage.css' %}">
+=======
+    <link rel="stylesheet" href="{% static 'css/Homepage.css'%}">
+>>>>>>> 48a4cba8b5f6afd6cfe0516edf81c48bcd5cc605
 </head>
 
 <body>
@@ -33,10 +37,10 @@
             <div class="navbar-links">
                 <ul>
                     <li><a class="navbar-items" href="{% url 'homepage' %}">Home</a></li>
-                    <li><a class="navbar-items" href="{% url 'contactus' %}">About Us</a></li>
-                    <li><a class="navbar-items" href="{% url 'aboutus' %}">Contact Us</a></li>
+                    <li><a class="navbar-items" href="{% url 'aboutus' %}">About Us</a></li>
+                    <li><a class="navbar-items" href="{% url 'contactus' %}">Contact Us</a></li>
                     {% if request.user.is_authenticated %}
-                    <li><a class="navbar-items" href="{%url 'gotodashboard' %}">Go to Dashnoard</a></li>
+                    <li><a class="navbar-items" href="{%url 'gotodashboard' %}">Go to Dashboard</a></li>
                     {%else%}
                     <li><a class="navbar-items" href="{%url 'client-login' %}">Login</a></li>
                     <li><a class="register" href="{%url 'tlogin' %}">Get Paid to Test</a></li>

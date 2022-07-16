@@ -46,10 +46,10 @@
             <div class="navbar-links">
                 <ul>
                     <li><a class="navbar-items" href="{% url 'homepage' %}">Home</a></li>
-                    <li><a class="navbar-items" href="{% url 'contactus' %}">About Us</a></li>
-                    <li><a class="navbar-items" href="{% url 'aboutus' %}">Contact Us</a></li>
+                    <li><a class="navbar-items" href="{% url 'aboutus' %}">About Us</a></li>
+                    <li><a class="navbar-items" href="{% url 'contactus' %}">Contact Us</a></li>
                     {% if request.user.is_authenticated %}
-                    <li><a class="navbar-items" href="{%url 'gotodashboard' %}">Go to Dashnoard</a></li>
+                    <li><a class="navbar-items" href="{%url 'gotodashboard' %}">Go to Dashboard</a></li>
                     {%else%}
                     <li><a class="navbar-items" href="{%url 'client-login' %}">Login</a></li>
                     <li><a class="register" href="{%url 'tlogin' %}">Get Paid to Test</a></li>
