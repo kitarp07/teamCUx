@@ -1,1 +1,1 @@
-web: gunicorn teamCUx.wsgi
+web: gunicorn testmyux.wsgi
