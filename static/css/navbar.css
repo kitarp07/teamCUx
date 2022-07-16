@@ -65,8 +65,8 @@ body {
 
 .topnav .dropdown img:hover {
     transform: scale(1.1);
+    
 }
-
 .profdrop-content {
     display: none;
     position: absolute;
@@ -86,6 +86,8 @@ body {
     margin-bottom: 10px;
 }
 
+
+
 .profdrop-content a:hover {
     color: #513CD2;
 }
@@ -95,7 +97,7 @@ body {
 }
 
 .topnav .nav-menu .logout {
-    display: none;
+    
 }
 
 

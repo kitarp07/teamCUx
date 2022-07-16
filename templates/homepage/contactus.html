@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
     <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+    <link rel="stylesheet" href="{% static 'css/Homepage.css' %}">
 </head>
 
 <body>
@@ -32,8 +33,8 @@
             <div class="navbar-links">
                 <ul>
                     <li><a class="navbar-items" href="{% url 'homepage' %}">Home</a></li>
-                    <li><a class="navbar-items" href="{% url 'contactus' %}">About Us</a></li>
-                    <li><a class="navbar-items" href="{% url 'aboutus' %}">Contact Us</a></li>
+                    <li><a class="navbar-items" href="{% url 'aboutus' %}">About Us</a></li>
+                    <li><a class="navbar-items" href="{% url 'contactus' %}">Contact Us</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a class="navbar-items" href="{%url 'gotodashboard' %}">Go to Dashnoard</a></li>
                     {%else%}
