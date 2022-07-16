@@ -22,10 +22,10 @@
         <h2 class="heading" style="font-weight: bold;">Tester Edit Profile</h2>
         <div class="selectbuttons">
             <div class="btn-group">
-                <button>Available Tests</button>
-                <button>All Tests</button>
-                <button>Upload Video</button>
-                <button>My Profile</button>
+                <a href="{% url 'testeravailabletest' %}"><button>Available Tests</button></a>
+                <a href="{% url 'testeralltests' %}"> <button>All Tests</button></a>
+                <a href="{% url 'upload-video' %}"><button>Upload Video</button></a>
+                <a href="{% url 'myprofile' %}"><button>My Profile</button></a>
 
             </div>
         </div>

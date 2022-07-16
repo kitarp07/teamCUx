@@ -24,9 +24,9 @@
 	<h2 class="heading">Client Profile</h2>
 	<div class="selectbuttons">
 		<div class="btn-group">
-			<button>Sent by Testers</button>
-			<button>Tests</button>
-			<button>My Profile</button>
+			<a href="{%url 'sentbytester' %}"><button>Sent by Testers</button> </a>
+			<a href="{%url 'alltests' %}"><button>All Tests</button></a>
+			<a href="{%url 'client-profile' %}"><button>My Profile</button></a>
 		</div>
 	</div>
 	<div class="formC">
@@ -54,14 +54,14 @@
 
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    {% for message in messages %}
+	{% for message in messages %}
 
-    <script>
-        swal('{{message}}')
-		
+	<script>
+		swal('{{message}}')
 
-    </script>
-    {% endfor %}
+
+	</script>
+	{% endfor %}
 
 
 	{% for message in messages %}
