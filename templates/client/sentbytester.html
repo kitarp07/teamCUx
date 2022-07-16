@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sent By Tester</title>
+    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Prompt' rel='stylesheet' />
@@ -53,51 +53,13 @@
             <!--       <td>Brian Miller</td> -->
         </tr>
 
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Review</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{% url 'rating' video.id%}" method="post">
-                            {%csrf_token%}
-
-                            <h3>Rate</h3>
-                            {{video.video_link}}
-                            <select name="rating" id="ratedrop" required>
-                                <option value="">Select a Star</option>
-                                <option class="firststar" value="1" onclick="teststarvalue()">1 &#11088;</option>
-                                <option class="secondstar" value="2">2 &#11088;&#11088;</option>
-                                <option class="thirdstar" value="3">3 &#11088;&#11088;&#11088;</option>
-                                <option class="fourthstar" value="4">4 &#11088;&#11088;&#11088;&#11088;</option>
-                                <option class="fifthstar" value="5">5 &#11088;&#11088;&#11088;&#11088;&#11088;</option>
-                            </select>
-                            <h3>Feedback</h3>
-                            <textarea class="comment" cols="40" rows="8" charswidth="23"
-                                placeholder="Enter your feedback here"></textarea>
-                           
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                        <input type="submit" value="Save changes" />
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+        
 
 
 
 
 
-        <div id="popup1_{{video.id}}" class="overlay vidlink" data-target="gotoLink">
+        <div id="popup1_{{video.id}}" class="overlay" data-target="gotoLink">
             <div class="popup">
                 <a class="close" href="#">&times;</a>
                 <div class="content">
@@ -147,30 +109,7 @@
 
 
 
-<!-- <div id="popup2" class="overlay feed">
-    <div class="popup">
-        <a class="close" href="#">&times;</a>
-        <div class="content">
-            <form method="post">
-                {%csrf_token%}
-                
-                <h3>Rate</h3>
-                <select name="rating" id="ratedrop" required>
-                    <option value="">Select a Star</option>
-                    <option class="firststar" value="1" onclick="teststarvalue()">1 &#11088;</option>
-                    <option class="secondstar" value="2">2 &#11088;&#11088;</option>
-                    <option class="thirdstar" value="3">3 &#11088;&#11088;&#11088;</option>
-                    <option class="fourthstar" value="4">4 &#11088;&#11088;&#11088;&#11088;</option>
-                    <option class="fifthstar" value="5">5 &#11088;&#11088;&#11088;&#11088;&#11088;</option>
-                </select>
-                <h3>Feedback</h3>
-                <textarea class="comment" cols="40" rows="8" charswidth="23"
-                    placeholder="Enter your feedback here"></textarea>
-                <button class="feedbtn" type="submit">Submit</button>
-            </form>
-        </div>
-    </div>
-</div> -->
+
 
 
 
