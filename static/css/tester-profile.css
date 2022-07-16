@@ -40,7 +40,7 @@ h5 {
 }
 
 .card-image {
-    background-image: url(images/image.svg);
+    background-image: url(/images/image.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
