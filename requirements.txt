@@ -12,7 +12,7 @@ configparser==5.2.0
 crayons==0.4.0
 cryptography==36.0.1
 distlib==0.3.4
-Django==3.0.14
+Django==4.0.6
 django-crispy-forms==1.14.0
 filelock==3.4.0
 gunicorn==20.1.0
