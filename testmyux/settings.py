@@ -83,13 +83,13 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'testmyux_db',
+        'NAME': 'dd4b74s6rk46qk',
 
-        'USER': 'postgres',
+        'USER': 'rtnoezqisdhxyp',
 
-        'PASSWORD': 'admin',
+        'PASSWORD': '75a18bbce1a863ddb6ef198c5a043a054f085b130e213ee9ee470e349c5af29b',
 
-        'HOST': 'localhost',
+        'HOST': 'ec2-3-219-52-220.compute-1.amazonaws.com',
 
         
 
