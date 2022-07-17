@@ -105,8 +105,8 @@ def verify_email(request, uidb64, token):
 
         messages.add_message(request, messages.SUCCESS, 'Email verified')
         return redirect ('email-verified')
-
-    return render(request, 'client/verification_failed.html', {"user": user })
+    else:
+        return render(request, 'client/verification_failed.html', {"user": user })
     
 
 
