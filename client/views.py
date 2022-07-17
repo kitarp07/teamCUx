@@ -99,7 +99,7 @@ def verify_email(request, uidb64, token):
         customer = UxClient.objects.get(user=user)
     except Exception as e:
         user = None
-    if user and generate_token.check_token(user, token):
+    if user and generate_token.check_token(customer, token):
         customer.isEmailVerified = True
         customer.save()
 
