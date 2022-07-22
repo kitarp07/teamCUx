@@ -2,6 +2,8 @@ import imp
 from django.shortcuts import redirect, render
 from Tester.models import UxTester
 from client.models import UxClient, CreateTests
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 def homepage(request):
@@ -54,13 +56,20 @@ def deleteTests(request, pk):
 
 def deleteTesters(request, pk):
     tester = UxTester.objects.get(id=pk)   
+    user = User.objects.get(email=tester.email)
     if request.method == 'POST':
+        logout(request)
         tester.delete()
+        user.delete()
+        
         return redirect('admintester')
 
 def deleteClients(request, pk):
     uxclient = UxClient.objects.get(id=pk)   
+    user = User.objects.get(email=uxclient.email)
     if request.method == 'POST':
+        logout(request)
         uxclient.delete()
+        user.delete()
         return redirect('adminclient')
 
