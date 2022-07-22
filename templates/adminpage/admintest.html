@@ -37,7 +37,7 @@
                     <h3>Are you sure you want to delete {{test.title}} from the database?</h3>
                     <form action="{% url 'deletetest' test.id%}" method="post">
                         {% csrf_token %}
-                        <button class="link1 confirm">Confirm</button>
+                        <button class="link1 confirm"><a>Confirm</a></button>
                     </form>
                     
                     <button class="link2 cancel"><a href="#">Cancel</a></button>
