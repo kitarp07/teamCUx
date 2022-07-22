@@ -35,12 +35,13 @@ def contactus(request):
     return render(request, 'homepage/contactus.html')
 
 def gotodashboard(request):
-    if request.user.is_authenticated:
-        if request.user.groups.all()[0].name == 'client':
-            return redirect('client-dash')
-        elif request.user.groups.all()[0].name == 'tester':
-            return redirect('tester-dash')
-        else:
+    try:
+        if request.user.is_authenticated:
+            if request.user.groups.all()[0].name == 'client':
+                return redirect('client-dash')
+            elif request.user.groups.all()[0].name == 'tester':
+                return redirect('tester-dash')
+    except:
             return redirect('admintests')
     else:
         return redirect('homepage')
