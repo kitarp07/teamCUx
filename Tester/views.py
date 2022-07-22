@@ -145,7 +145,7 @@ def activate_user(request, uidb64,token):
         customer.is_email_verified=True
         customer.save()    
 
-        messages.add_message(request,messages.SUCCESS,'eMAIL VERIFIED')   
+        messages.add_message(request,messages.SUCCESS,'Email Verified')   
         return redirect('tester-email-verified')
 
 
