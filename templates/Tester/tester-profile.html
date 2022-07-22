@@ -73,7 +73,7 @@
 
             
 
-            <a href="{%url 'client-profile' %}"> <img class="profilepic" img src="{% static 'images/profilepic.jpg' %}" alt="profile_image"></img></a>
+            <a href="{%url 'myprofile' %}"> <img class="profilepic" img src="{% static 'images/profilepic.jpg' %}" alt="profile_image"></img></a>
 
             <h2 class="name">{{user.name}}</h2>
             <h4 class="contact">Contact info: <span class="number">{{user.phone}}</span></h4>
@@ -87,7 +87,7 @@
 
      
 
-        <div id="delete_{{customer.id}}" class="overlay">
+        <div id="delete_{{user.id}}" class="overlay">
             <div class="popup">
                 <a class="close" href="#">&times;</a>
                 <div class="content">
