@@ -58,7 +58,7 @@ def deleteTesters(request, pk):
     tester = UxTester.objects.get(id=pk)   
     user = User.objects.get(email=tester.email)
     if request.method == 'POST':
-        logout(request)
+        
         tester.delete()
         user.delete()
         
@@ -68,7 +68,7 @@ def deleteClients(request, pk):
     uxclient = UxClient.objects.get(id=pk)   
     user = User.objects.get(email=uxclient.email)
     if request.method == 'POST':
-        logout(request)
+       
         uxclient.delete()
         user.delete()
         return redirect('adminclient')
