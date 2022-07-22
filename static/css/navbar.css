@@ -97,7 +97,7 @@ body {
 }
 
 .topnav .nav-menu .logout {
-    
+    display: none;
 }
 
 
