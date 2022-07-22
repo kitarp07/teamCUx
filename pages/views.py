@@ -44,3 +44,22 @@ def gotodashboard(request):
             return redirect('admintests')
     else:
         return redirect('homepage')
+
+def deleteTests(request, pk):
+    test = CreateTests.objects.get(id=pk)   
+    if request.method == 'POST':
+        test.delete()
+        return redirect('admintests')
+
+def deleteTesters(request, pk):
+    tester = UxTester.objects.get(id=pk)   
+    if request.method == 'POST':
+        tester.delete()
+        return redirect('admintester')
+
+def deleteClients(request, pk):
+    uxclient = UxClient.objects.get(id=pk)   
+    if request.method == 'POST':
+        uxclient.delete()
+        return redirect('adminclient')
+

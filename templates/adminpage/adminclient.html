@@ -28,7 +28,11 @@
                 <a class="close" href="#">&times;</a>
                 <div class="content">
                     <h3>Are you sure you want to delete {{user.name}} from the database?</h3>
-                    <button class="link1 confirm"><a href="#">Confirm</a></button>
+                    <form action="{% url 'deleteclient' user.id%}" method="post">
+                        {% csrf_token %}
+                        <button class="link1 confirm"><a>Confirm</a></button>
+                    </form>
+                    
                     <button class="link2 cancel"><a href="#">Cancel</a></button>
                 </div>
             </div>

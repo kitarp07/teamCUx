@@ -63,7 +63,12 @@ urlpatterns = [
    path('tux/aboutus', aboutus, name='aboutus'),
    path('tux/contactus', contactus, name='contactus'),
 
-   path('gotodashboard', gotodashboard, name='gotodashboard')
+   path('gotodashboard', gotodashboard, name='gotodashboard'),
+
+   path('admintests/deletetest/<int:pk>', deleteTests, name='deletetest'),
+   path('admintests/deletetester/<int:pk>', deleteTesters, name='deletetester'),
+   path('admintests/deleteclient/<int:pk>', deleteClients, name='deleteclient'),
+
 
    
 
